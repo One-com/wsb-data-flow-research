@@ -87,6 +87,7 @@ See more about research itself in [here](https://confluence.one.com/display/WED/
 - Tests: jest
 
 ## Starter kit
+- Webpack / webpack dev server
 - Layout is impelemented using React
 - Handlers are attached
 - D&D handlers are attached to components
