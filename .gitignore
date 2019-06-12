@@ -1,0 +1,18 @@
+# Common
+*.log
+*.diff
+*.orig
+*~
+.idea
+.DS_Store
+.project
+.tmproj
+nbproject
+*.sublime-project
+.npm
+.env
+
+# Project
+node_modules
+dist
+
