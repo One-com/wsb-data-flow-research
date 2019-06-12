@@ -1,0 +1,19 @@
+{
+  "name": "wsb-data-flow-research-app",
+  "version": "0.0.0",
+  "description": "Wsb data flow research app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/One-com/wsb-data-flow-research-app.git"
+  },
+  "author": "One.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/One-com/wsb-data-flow-research-app/issues"
+  },
+  "homepage": "https://github.com/One-com/wsb-data-flow-research-app#readme"
+}
