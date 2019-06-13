@@ -94,5 +94,5 @@ See more about research itself in [here](https://confluence.one.com/display/WED/
 - PP skeleton is created
 
 ## Running on codesandbox.io
-TODO
-
+Create sandbox from git repo using main url.  
+E.g.: https://github.com/One-com/wsb-data-flow-research-app.
