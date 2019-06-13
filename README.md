@@ -34,6 +34,7 @@ See more about research itself in [here](https://confluence.one.com/display/WED/
 - Click to component to add it to workspace
 
 ### Workspace
+- Show template lines
 - Move components to change their positions on the workspace
 - Components should not go beyond template lines
 - Components should expand template width when they touch template lines
