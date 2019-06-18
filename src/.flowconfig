@@ -1,5 +1,8 @@
 [version]
 0.101
 
+[include]
+../specs
+
 [ignore]
 .*\.spec

@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --config webpack/webpack.config.js",
-    "flow": "flow status src"
+    "flow": "flow status src",
+    "flow-typed:base": "flow-typed -r src -l flow-typed",
+    "flow-typed-i": "npm run flow-typed:base install",
+    "flow-typed-cs": "npm run flow-typed:base create-stub"
   },
   "repository": {
     "type": "git",
@@ -24,6 +27,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "flow-bin": "^0.101.0",
+    "flow-typed": "^2.5.2",
     "html-webpack-harddisk-plugin": "^1.0.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.0.0",
@@ -32,8 +36,9 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
-    "@sepo27/redux-di": "file:../MyLib/js/redux-di/sepo27-redux-di-1.0.0-alpha.tgz",
+    "@sepo27/redux-di": "file:../redux-di/sepo27-redux-di-1.0.0-alpha.tgz",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "redux": "^4.0.1"
   }
 }
