@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { WorkspaceGuidelines } from './WorkspaceGuidelines';
-import { BaseComponent } from './BaseComponent';
+import { BaseComponent } from '../workspaceComponents/BaseComponent';
 
 const Style = {
   flex: '1',
@@ -10,11 +10,23 @@ const Style = {
   position: 'relative',
 };
 
-type Props = {};
+export class Workspace extends React.Component<{}> {
+  onMouseMove = (e: SyntheticMouseEvent<*>) => {
+    const
+        // $FlowFixMe
+        rect = e.target.getBoundingClientRect(),
+        left = e.clientX - rect.left,
+        top = e.clientY - rect.top;
 
-export const Workspace = (props: Props) => (
-  <div style={Style}>
-    <BaseComponent>Button component</BaseComponent>
-    <WorkspaceGuidelines width={900} />
-  </div>
-);
+    console.log(`===workspace mouse move: left: ${left} | top: ${top}`);
+  }
+
+  render() {
+    return (
+      <div style={Style} onMouseMove={this.onMouseMove}>
+        <BaseComponent position={{ top: 100, left: 50 }}>Base component</BaseComponent>
+        <WorkspaceGuidelines width={900} />
+      </div>
+    )
+  }
+}

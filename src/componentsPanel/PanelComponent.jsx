@@ -11,10 +11,11 @@ const Style = {
   border: '1px solid gray',
   marginTop: '15px',
   backgroundColor: '#ddd',
+  userSelect: 'none',
 };
 
 type Props = {
-  children: String,
+  children: string,
   onClick: MouseEventHandler,
 };
 
