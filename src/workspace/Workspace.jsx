@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import { WorkspaceMargins } from './WorkspaceMargins';
+import { WorkspaceGuidelines } from './WorkspaceGuidelines';
 
 const Style = {
   flex: '1',
@@ -13,6 +13,6 @@ type Props = {};
 
 export const Workspace = (props: Props) => (
   <section style={Style}>
-    <WorkspaceMargins width={900} />
+    <WorkspaceGuidelines width={900} />
   </section>
 );
