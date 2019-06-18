@@ -32,6 +32,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
+    "@sepo27/redux-di": "file:../MyLib/js/redux-di/sepo27-redux-di-1.0.0-alpha.tgz",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
   }
