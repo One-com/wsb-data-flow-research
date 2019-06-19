@@ -5,7 +5,7 @@ import {
   componentsReducer as reducer,
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
-import { addComponentAction } from '../actions';
+import { addComponentAction, selectComponentAction } from '../actions';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
@@ -55,6 +55,46 @@ describe('componentsReducer', () => {
           top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
           left: baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
         },
+      },
+    ]);
+  });
+
+  it('selects component', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '321',
+      }),
+      state = [com],
+      action = selectComponentAction('321');
+
+    expect(reducer(state, action)).toEqual([
+      {
+        ...com,
+        selected: true,
+      }
+    ]);
+  });
+
+  it('deselects other components when selecting one', () => {
+    const
+      com1 = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '1',
+        selected: true,
+      }),
+      com2 = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '2',
+        selected: false,
+      }),
+      state = [com1, com2];
+
+    expect(reducer(state, selectComponentAction('2'))).toEqual([
+      {
+        ...com1,
+        selected: false,
+      },
+      {
+        ...com2,
+        selected: true,
       },
     ]);
   });

@@ -13,3 +13,10 @@ export const
     type: ADD_COMPONENT_ACTION,
     payload: kind,
   });
+
+export const
+  SELECT_COMPONENT_ACTION = 'SELECT_COMPONENT_ACTION',
+  selectComponentAction = (id: string) => ({
+    type: SELECT_COMPONENT_ACTION,
+    payload: id,
+  });

@@ -2,25 +2,27 @@
 
 import * as React from 'react';
 import type { BaseComponentProps } from './types';
+import { getBaseComponentStyle } from './styles';
+import { connectComponent } from '../../common/connectComponent';
+import { selectComponentAction } from '../../workspace/components/actions';
 
-const Style = {
-  position: 'absolute',
-  border: '1px solid gray',
-  cursor: 'default',
-  userSelect: 'none',
-};
+class BaseComponentClass extends React.Component<BaseComponentProps> {
+  onClick = () => this.props.dispatch(selectComponentAction(this.props.state.id));
 
-export class BaseComponent extends React.Component<BaseComponentProps> {
   render() {
-    const { state: { position }, children } = this.props;
+    const { state: { position, selected }, children } = this.props;
 
     return (
       <div
         style={{
-          ...Style,
+          ...getBaseComponentStyle({selected}),
           ...position,
         }}
+        onClick={this.onClick}
       >{children}</div>
     );
   }
 }
+
+// $FlowFixMe: TODO: fix babel doesn't understand <> empty generic
+export const BaseComponent = connectComponent(BaseComponentClass);
