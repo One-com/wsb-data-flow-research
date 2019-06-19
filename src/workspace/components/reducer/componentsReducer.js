@@ -4,7 +4,7 @@ import { initReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsState } from '../types';
 import { ADD_COMPONENT_ACTION } from '../actions';
-import { ComponentsRegistry } from '../../../workspaceComponents/ComponentsRegistry';
+import { ComponentsRegistry } from '../../../components/ComponentsRegistry';
 
 export const ComponentsInitialState: ComponentsState = [];
 

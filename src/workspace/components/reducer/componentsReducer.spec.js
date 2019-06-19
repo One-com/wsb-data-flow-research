@@ -6,8 +6,8 @@ import {
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../specs/assertReducerInitialState';
 import { addComponentAction } from '../actions';
-import { ComponentKind } from '../../../workspaceComponents/ComponentKind';
-import { ComponentsRegistry } from '../../../workspaceComponents/ComponentsRegistry';
+import { ComponentKind } from '../../../components/ComponentKind';
+import { ComponentsRegistry } from '../../../components/ComponentsRegistry';
 
 describe('componentsReducer', () => {
   it('resolves initial state', () => {

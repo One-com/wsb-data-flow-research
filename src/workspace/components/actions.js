@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { ComponentKindT } from '../../workspaceComponents/types';
+import type { ComponentKindT } from '../../components/types';
 
 export type AddComponentAction = {
   type: 'ADD_COMPONENT_ACTION',
