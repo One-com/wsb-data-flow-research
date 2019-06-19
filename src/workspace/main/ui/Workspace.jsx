@@ -1,7 +1,10 @@
 /* @flow */
 
 import React from 'react';
+import {connect} from 'react-redux';
 import { WorkspaceGuidelines } from './WorkspaceGuidelines';
+import type { AppState } from '../../../main/types';
+import { workspaceAppSel } from '../selectors';
 
 const Style = {
   flex: '1',
@@ -9,7 +12,7 @@ const Style = {
   position: 'relative',
 };
 
-export class Workspace extends React.Component<{}> {
+export class WorkspaceCom extends React.Component<{}> {
   onMouseMove = (e: SyntheticMouseEvent<*>) => {
     const
         // $FlowFixMe
@@ -21,6 +24,8 @@ export class Workspace extends React.Component<{}> {
   }
 
   render() {
+    console.log('===Workspace', this.props)
+
     return (
       <div style={Style} onMouseMove={this.onMouseMove}>
         <WorkspaceGuidelines width={900} />
@@ -28,3 +33,10 @@ export class Workspace extends React.Component<{}> {
     )
   }
 }
+
+const mapStateToProps: any = (appState: AppState) => ({
+  workspace: workspaceAppSel(appState),
+});
+
+// $FlowFixMe: TODO
+export const Workspace = connect(mapStateToProps)(WorkspaceCom);

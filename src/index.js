@@ -1,5 +1,27 @@
 import React from 'react';
 import {render} from 'react-dom';
-import {App} from './main/App.jsx';
+import { createAppStore } from './main/createAppStore';
 
-render(<App />, document.getElementById('root'));
+const store = createAppStore();
+
+const renderApp = () => {
+  // const AppCom = require('./modules/core/AppCom').AppCom;
+  const AppProvider = require('./main/AppProvider').AppProvider;
+
+  render(
+    <AppProvider store={store} />,
+    // $FlowFixMe: TODO
+    document.getElementById('root'),
+  );
+};
+
+// $FlowFixMe: TODO
+if (module.hot) {
+  // $FlowFixMe: TODO
+  module.hot.accept('./modules/core/AppCom', () => {
+    console.log('=== Hot reloading the app...');
+    renderApp();
+  });
+}
+
+renderApp();
