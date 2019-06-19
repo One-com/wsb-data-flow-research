@@ -5,7 +5,7 @@ import {
   componentsReducer as reducer,
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
-import { addComponentAction, touchComponentAction } from '../actions';
+import { addComponentAction, newComponentMeasuredAction, touchComponentAction } from '../actions';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
@@ -29,7 +29,7 @@ describe('componentsReducer', () => {
     assertReducerInitialState(reducer, ComponentsInitialState);
   });
 
-  it('adds component', () => {
+  it('adds ghost component', () => {
     bench.stub.uuid.returns('123');
 
     const
@@ -37,98 +37,128 @@ describe('componentsReducer', () => {
       action = addComponentAction(ComponentKind.BUTTON);
 
     expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
-      comRegistry.getInitialState(ComponentKind.BUTTON),
-    ]);
-  });
-
-  it('adds new component with position shift', () => {
-    bench.stub.uuidCycle(2);
-
-    const
-      baseCom = baseComponentStateGen(ComponentKind.BUTTON),
-      state = [baseCom],
-      action = addComponentAction(ComponentKind.BUTTON);
-
-    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
-      comRegistry.getInitialState(ComponentKind.BUTTON),
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
-        position: {
-          top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
-          left: baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
-        },
+        isGhost: true,
       },
     ]);
   });
 
-  it('selects component on touch', () => {
+  it('converts new ghost component to real one when measured', () => {
     const
       com = baseComponentStateGen(ComponentKind.BUTTON, {
-        id: '321',
+        id: '123',
+        isGhost: true,
       }),
       state = [com],
-      action = touchComponentAction('321');
-
+      action = newComponentMeasuredAction('123', {
+        width: 33,
+        height: 55,
+      });
+    
     expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
       {
-        ...com,
-        selected: true,
-      }
-    ]);
-  });
-
-  it('deselects other components when selecting one', () => {
-    const
-      com1 = baseComponentStateGen(ComponentKind.BUTTON, {
-        id: '1',
-        isSelected: true,
-      }),
-      com2 = baseComponentStateGen(ComponentKind.BUTTON, {
-        id: '2',
-        isSelected: false,
-      }),
-      state = [com1, com2];
-
-    expect(reducer(state, touchComponentAction('2'), { mode: WorkspaceMode.IDLE })).toEqual([
-      {
-        ...com1,
-        selected: false,
-      },
-      {
-        ...com2,
-        selected: true,
-      },
-    ]);
-  });
-
-  it('moves selected component', () => {
-    const
-      com = baseComponentStateGen(ComponentKind.BUTTON, {
-        id: '111',
-        position: {
-          top: 50,
-          left: 50,
-        },
-        isSelected: true,
-      }),
-      state = [com],
-      action = moveOverWorkspaceAction({
-        top: 55,
-        left: 60,
-      }),
-      dependencies = {
-        mode: WorkspaceMode.MOVING_COMPONENTS,
-      };
-
-    expect(reducer(state, action, dependencies)).toEqual([
-      {
-        ...com,
-        position: {
-          top: 55,
-          left: 60,
+        ...Object.keys(com).reduce((acc, k) => (
+          k === 'isGhost'
+            ? acc
+            : Object.assign(acc, { [k]: com[k] })
+        ), {}),
+        dimensions: {
+          width: 33,
+          height: 55,
         },
       },
     ]);
   });
+
+  // xit('adds new component with position shift', () => {
+  //   bench.stub.uuidCycle(2);
+  //
+  //   const
+  //     baseCom = baseComponentStateGen(ComponentKind.BUTTON),
+  //     state = [baseCom],
+  //     action = addComponentAction(ComponentKind.BUTTON);
+  //
+  //   expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+  //     comRegistry.getInitialState(ComponentKind.BUTTON),
+  //     {
+  //       ...comRegistry.getInitialState(ComponentKind.BUTTON),
+  //       position: {
+  //         top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+  //         left: baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+  //       },
+  //     },
+  //   ]);
+  // });
+
+  // xit('selects component on touch', () => {
+  //   const
+  //     com = baseComponentStateGen(ComponentKind.BUTTON, {
+  //       id: '321',
+  //     }),
+  //     state = [com],
+  //     action = touchComponentAction('321');
+  //
+  //   expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+  //     {
+  //       ...com,
+  //       selected: true,
+  //     }
+  //   ]);
+  // });
+
+  // xit('deselects other components when selecting one', () => {
+  //   const
+  //     com1 = baseComponentStateGen(ComponentKind.BUTTON, {
+  //       id: '1',
+  //       isSelected: true,
+  //     }),
+  //     com2 = baseComponentStateGen(ComponentKind.BUTTON, {
+  //       id: '2',
+  //       isSelected: false,
+  //     }),
+  //     state = [com1, com2];
+  //
+  //   expect(reducer(state, touchComponentAction('2'), { mode: WorkspaceMode.IDLE })).toEqual([
+  //     {
+  //       ...com1,
+  //       selected: false,
+  //     },
+  //     {
+  //       ...com2,
+  //       selected: true,
+  //     },
+  //   ]);
+  // });
+
+  // xit('moves selected component', () => {
+  //   const
+  //     com = baseComponentStateGen(ComponentKind.BUTTON, {
+  //       id: '111',
+  //       position: {
+  //         top: 50,
+  //         left: 50,
+  //       },
+  //       isSelected: true,
+  //     }),
+  //     state = [com],
+  //     action = moveOverWorkspaceAction({
+  //       top: 55,
+  //       left: 60,
+  //     }),
+  //     dependencies = {
+  //       mode: WorkspaceMode.MOVING_COMPONENTS,
+  //     };
+  //
+  //   expect(reducer(state, action, dependencies)).toEqual([
+  //     {
+  //       ...com,
+  //       position: {
+  //         top: 55,
+  //         left: 60,
+  //       },
+  //     },
+  //   ]);
+  // });
 });
 

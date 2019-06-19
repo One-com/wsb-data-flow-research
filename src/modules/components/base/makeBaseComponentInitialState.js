@@ -11,5 +11,10 @@ export const makeBaseComponentInitialState = (kind: ComponentKindT): BaseCompone
     top: 10,
     left: 10,
   },
+  dimensions: {
+    width: 0,
+    height: 0,
+  },
   isSelected: false,
+  isGhost: true,
 });
