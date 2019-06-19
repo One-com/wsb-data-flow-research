@@ -5,6 +5,8 @@ import {connect} from 'react-redux';
 import { WorkspaceGuidelines } from './WorkspaceGuidelines';
 import type { AppState } from '../../../main/types';
 import { workspaceAppSel } from '../selectors';
+import type { WorkspaceState } from '../types';
+import { WorkspaceComponents } from './WorkspaceComponents';
 
 const Style = {
   flex: '1',
@@ -12,7 +14,11 @@ const Style = {
   position: 'relative',
 };
 
-export class WorkspaceCom extends React.Component<{}> {
+type Props = {
+  state: WorkspaceState;
+};
+
+export class WorkspaceCom extends React.Component<Props> {
   onMouseMove = (e: SyntheticMouseEvent<*>) => {
     const
         // $FlowFixMe
@@ -24,10 +30,11 @@ export class WorkspaceCom extends React.Component<{}> {
   }
 
   render() {
-    console.log('===Workspace', this.props)
+    const { state: { components } } = this.props;
 
     return (
-      <div style={Style} onMouseMove={this.onMouseMove}>
+      <div style={Style}>
+        <WorkspaceComponents components={components} />
         <WorkspaceGuidelines width={900} />
       </div>
     )
@@ -35,7 +42,7 @@ export class WorkspaceCom extends React.Component<{}> {
 }
 
 const mapStateToProps: any = (appState: AppState) => ({
-  workspace: workspaceAppSel(appState),
+  state: workspaceAppSel(appState),
 });
 
 // $FlowFixMe: TODO

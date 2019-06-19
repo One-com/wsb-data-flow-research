@@ -6,3 +6,7 @@
 
 [ignore]
 .*\.spec
+
+[options]
+; TODO: find why not working
+munge_underscores=true

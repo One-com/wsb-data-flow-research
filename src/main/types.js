@@ -1,11 +1,13 @@
 /* @flow */
 
-import type { Store } from 'redux';
+import type { Store, Dispatch } from 'redux';
 import type { WorkspaceState } from '../workspace/main/types';
 
 export type AppState = {
   workspace: WorkspaceState,
 };
+
+export type AppDispatch = Dispatch<*>;
 
 export type AppStore = Store<AppState, *>;
 

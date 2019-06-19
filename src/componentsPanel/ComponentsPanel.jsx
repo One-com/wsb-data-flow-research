@@ -1,7 +1,10 @@
 /* @flow */
 
 import React from 'react';
+import {connect} from 'react-redux';
 import { PanelComponent } from './PanelComponent';
+import { addButtonComponentAction } from '../components/button/actions';
+import type { AppDispatch } from '../main/types';
 
 const Style = {
   display: 'flex',
@@ -13,11 +16,16 @@ const Style = {
   borderRight: '1px solid gray',
 };
 
-type Props = {};
+type Props = {
+  dispatch: AppDispatch,
+};
 
-export const ComponentsPanel = (props: Props) => (
+const ComponentsPanelCom = (props: Props) => (
   <aside style={Style}>
-    <PanelComponent onClick={() => console.log('===Add Button component')}>Button</PanelComponent>
+    <PanelComponent onClick={() => props.dispatch(addButtonComponentAction())}>Button</PanelComponent>
     <PanelComponent onClick={() => console.log('===Add Text component')}>Text</PanelComponent>
   </aside>
 );
+
+// $FlowFixMe
+export const ComponentsPanel = connect()(ComponentsPanelCom);
