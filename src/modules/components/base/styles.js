@@ -1,11 +1,11 @@
 /* @flow */
 
 type Params = {
-  selected: boolean,
+  isSelected: boolean,
 };
 
-export const getBaseComponentStyle = ({selected}: Params) => {
-  const borderColor = selected ? 'greenyellow' : 'gray';
+export const getBaseComponentStyle = ({isSelected}: Params) => {
+  const borderColor = isSelected ? 'greenyellow' : 'gray';
 
   return {
     position: 'absolute',

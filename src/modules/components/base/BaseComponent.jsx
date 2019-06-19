@@ -15,12 +15,12 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
   onMouseUp = () => this.props.dispatch(releaseComponentAction(this.props.state.id));
 
   render() {
-    const { state: { position, selected }, children } = this.props;
+    const { state: { position, isSelected }, children } = this.props;
 
     return (
       <div
         style={{
-          ...getBaseComponentStyle({selected}),
+          ...getBaseComponentStyle({isSelected}),
           ...position,
         }}
         onMouseDown={this.onMouseDown}

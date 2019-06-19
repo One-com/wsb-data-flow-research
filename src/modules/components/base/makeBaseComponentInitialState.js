@@ -11,5 +11,5 @@ export const makeBaseComponentInitialState = (kind: ComponentKindT): BaseCompone
     top: 10,
     left: 10,
   },
-  selected: false,
+  isSelected: false,
 });

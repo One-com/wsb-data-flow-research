@@ -81,11 +81,11 @@ describe('componentsReducer', () => {
     const
       com1 = baseComponentStateGen(ComponentKind.BUTTON, {
         id: '1',
-        selected: true,
+        isSelected: true,
       }),
       com2 = baseComponentStateGen(ComponentKind.BUTTON, {
         id: '2',
-        selected: false,
+        isSelected: false,
       }),
       state = [com1, com2];
 
@@ -109,7 +109,7 @@ describe('componentsReducer', () => {
           top: 50,
           left: 50,
         },
-        selected: true,
+        isSelected: true,
       }),
       state = [com],
       action = moveOverWorkspaceAction({

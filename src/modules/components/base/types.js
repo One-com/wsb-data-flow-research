@@ -9,7 +9,7 @@ export type BaseComponentState = {
   id: string,
   kind: ComponentKindT,
   position: Position,
-  selected: boolean,
+  isSelected: boolean,
 };
 
 export type BaseComponentProps = {
