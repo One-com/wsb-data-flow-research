@@ -1,10 +1,10 @@
 /* @flow */
 
-import type { BaseComponentState } from '../src/modules/components/base/types';
-import type { ComponentKindT } from '../src/modules/components/types';
+import type { BaseComponentState } from '../../src/modules/components/base/types';
+import type { ComponentKindT } from '../../src/modules/components/types';
 import {
   makeBaseComponentInitialState,
-} from '../src/modules/components/base/makeBaseComponentInitialState';
+} from '../../src/modules/components/base/makeBaseComponentInitialState';
 
 type Partial = $Shape<BaseComponentState>;
 
