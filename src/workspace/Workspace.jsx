@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { WorkspaceGuidelines } from './WorkspaceGuidelines';
-import { BaseComponent } from '../../../workspaceComponents/BaseComponent';
 
 const Style = {
   flex: '1',
@@ -24,7 +23,6 @@ export class Workspace extends React.Component<{}> {
   render() {
     return (
       <div style={Style} onMouseMove={this.onMouseMove}>
-        <BaseComponent position={{ top: 100, left: 50 }}>Base component</BaseComponent>
         <WorkspaceGuidelines width={900} />
       </div>
     )

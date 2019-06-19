@@ -7,7 +7,7 @@ import {
 import { assertReducerInitialState } from '../../../../specs/assertReducerInitialState';
 import { addComponentAction } from '../actions';
 import { ComponentKind } from '../../../workspaceComponents/ComponentKind';
-import { ComponentInitialStateMap } from '../../../workspaceComponents/ComponentInitialStateMap';
+import { ComponentsRegistry } from '../../../workspaceComponents/ComponentsRegistry';
 
 describe('componentsReducer', () => {
   it('resolves initial state', () => {
@@ -20,7 +20,7 @@ describe('componentsReducer', () => {
       action = addComponentAction(ComponentKind.BUTTON);
 
     expect(reducer(state, action)).toEqual([
-      ComponentInitialStateMap[ComponentKind.BUTTON],
+      ComponentsRegistry[ComponentKind.BUTTON].initialState,
     ]);
   });
 });

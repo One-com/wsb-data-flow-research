@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import type { Position } from '../common/commonTypes';
+import type { BaseComponentProps } from './types';
 
 const Style = {
   position: 'absolute',
@@ -10,14 +10,9 @@ const Style = {
   userSelect: 'none',
 };
 
-type Props = {
-  position: Position,
-  children: React.Node,
-};
-
-export class BaseComponent extends React.Component<Props> {
+export class BaseComponent extends React.Component<BaseComponentProps> {
   render() {
-    const { position, children } = this.props;
+    const { state: { position }, children } = this.props;
 
     return (
       <div
