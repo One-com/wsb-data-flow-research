@@ -4,10 +4,15 @@ import * as React from 'react';
 import type { BaseComponentProps } from './types';
 import { getBaseComponentStyle } from './styles';
 import { connectComponent } from '../../common/connectComponent';
-import { selectComponentAction } from '../../workspace/components/actions';
+import {
+  releaseComponentAction,
+  touchComponentAction,
+} from '../../workspace/components/actions';
 
 class BaseComponentClass extends React.Component<BaseComponentProps> {
-  onClick = () => this.props.dispatch(selectComponentAction(this.props.state.id));
+  onMouseDown = () => this.props.dispatch(touchComponentAction(this.props.state.id));
+
+  onMouseUp = () => this.props.dispatch(releaseComponentAction(this.props.state.id));
 
   render() {
     const { state: { position, selected }, children } = this.props;
@@ -18,7 +23,8 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
           ...getBaseComponentStyle({selected}),
           ...position,
         }}
-        onClick={this.onClick}
+        onMouseDown={this.onMouseDown}
+        onMouseUp={this.onMouseUp}
       >{children}</div>
     );
   }

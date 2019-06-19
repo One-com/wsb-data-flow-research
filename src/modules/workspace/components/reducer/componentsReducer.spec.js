@@ -5,12 +5,14 @@ import {
   componentsReducer as reducer,
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
-import { addComponentAction, selectComponentAction } from '../actions';
+import { addComponentAction, touchComponentAction } from '../actions';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { TestBench } from '../../../../../specs/bench/TestBench';
+import { moveOverWorkspaceAction } from '../../main/actions';
+import { WorkspaceMode } from '../../mode/WorkspaceMode';
 
 describe('componentsReducer', () => {
   let bench: TestBench;
@@ -34,7 +36,7 @@ describe('componentsReducer', () => {
       state = [...ComponentsInitialState],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
       comRegistry.getInitialState(ComponentKind.BUTTON),
     ]);
   });
@@ -47,7 +49,7 @@ describe('componentsReducer', () => {
       state = [baseCom],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
       comRegistry.getInitialState(ComponentKind.BUTTON),
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
@@ -59,15 +61,15 @@ describe('componentsReducer', () => {
     ]);
   });
 
-  it('selects component', () => {
+  it('selects component on touch', () => {
     const
       com = baseComponentStateGen(ComponentKind.BUTTON, {
         id: '321',
       }),
       state = [com],
-      action = selectComponentAction('321');
+      action = touchComponentAction('321');
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
       {
         ...com,
         selected: true,
@@ -87,7 +89,7 @@ describe('componentsReducer', () => {
       }),
       state = [com1, com2];
 
-    expect(reducer(state, selectComponentAction('2'))).toEqual([
+    expect(reducer(state, touchComponentAction('2'), { mode: WorkspaceMode.IDLE })).toEqual([
       {
         ...com1,
         selected: false,
@@ -95,6 +97,36 @@ describe('componentsReducer', () => {
       {
         ...com2,
         selected: true,
+      },
+    ]);
+  });
+
+  it('moves selected component', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '111',
+        position: {
+          top: 50,
+          left: 50,
+        },
+        selected: true,
+      }),
+      state = [com],
+      action = moveOverWorkspaceAction({
+        top: 55,
+        left: 60,
+      }),
+      dependencies = {
+        mode: WorkspaceMode.MOVING_COMPONENTS,
+      };
+
+    expect(reducer(state, action, dependencies)).toEqual([
+      {
+        ...com,
+        position: {
+          top: 55,
+          left: 60,
+        },
       },
     ]);
   });
