@@ -4,14 +4,14 @@ import {
   ComponentsInitialState,
   componentsReducer as reducer,
 } from './componentsReducer';
-import { assertReducerInitialState } from '../../../../specs/assertReducerInitialState';
+import { assertReducerInitialState } from '../../../../../specs/assertReducerInitialState';
 import { addComponentAction } from '../actions';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { comRegistry } from '../../../components/ComponentsRegistry';
-import { baseComponentStateGen } from '../../../../specs/baseComponentStateGen';
+import { baseComponentStateGen } from '../../../../../specs/baseComponentStateGen';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 
-describe('componentsReducer', () => {
+xdescribe('componentsReducer', () => {
   it('resolves initial state', () => {
     assertReducerInitialState(reducer, ComponentsInitialState);
   });

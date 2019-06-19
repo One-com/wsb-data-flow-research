@@ -25,7 +25,7 @@ class ComponentsRegistryClass {
   }
 
   getInitialState<R = SingleComponentState<>>(kind: ComponentKindT): R {
-    return this.getRecord(kind).initialState;
+    return this.getRecord(kind).initialState();
   }
 
   getUi(kind: ComponentKindT): SingleComponentUi {

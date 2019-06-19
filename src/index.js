@@ -1,12 +1,12 @@
 import React from 'react';
 import {render} from 'react-dom';
-import { createAppStore } from './main/createAppStore';
+import { createAppStore } from './modules/main/createAppStore';
 
 const store = createAppStore();
 
 const renderApp = () => {
   // const AppCom = require('./modules/core/AppCom').AppCom;
-  const AppProvider = require('./main/AppProvider').AppProvider;
+  const AppProvider = require('./modules/main/AppProvider').AppProvider;
 
   render(
     <AppProvider store={store} />,

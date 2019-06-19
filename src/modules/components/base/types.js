@@ -5,6 +5,7 @@ import type { Position } from '../../common/commonTypes';
 import type { ComponentKindT } from '../types';
 
 export type BaseComponentState = {
+  id: string,
   kind: ComponentKindT,
   position: Position,
   selected: boolean,

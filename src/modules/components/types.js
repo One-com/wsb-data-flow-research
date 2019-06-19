@@ -16,7 +16,7 @@ export type ComponentProps<StateShape: Object = Object> = {
 export type SingleComponentUi = React.ComponentType<ComponentProps<>>;
 
 export type ComponentsRegistryRecord = {
-  initialState: SingleComponentState<>,
+  initialState: () => SingleComponentState<>,
   Ui: SingleComponentUi,
 };
 

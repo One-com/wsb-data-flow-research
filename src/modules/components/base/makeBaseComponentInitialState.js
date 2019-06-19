@@ -2,12 +2,14 @@
 
 import type { ComponentKindT } from '../types';
 import type { BaseComponentState } from './types';
+import { uuid } from '../../../lib/uuid';
 
-export const BaseComponentInitialState: $Diff<BaseComponentState, { kind: ComponentKindT }> = {
+export const makeBaseComponentInitialState = (kind: ComponentKindT): BaseComponentState => ({
+  id: uuid(),
+  kind,
   position: {
     top: 10,
     left: 10,
   },
   selected: false,
-};
-
+});
