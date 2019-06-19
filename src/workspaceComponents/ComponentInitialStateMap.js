@@ -11,6 +11,6 @@ const BaseComponentInitialState: $Diff<BaseComponentState, { kind: ComponentKind
   selected: false,
 };
 
-export const ComponentInitialState = {
+export const ComponentInitialStateMap = {
   [ComponentKind.BUTTON]: BaseComponentInitialState,
 };

@@ -1,7 +1,7 @@
 /* @flow */
 
-import type { ComponentsState } from '../workspaceComponents/types';
+import type { WorkspaceState } from '../workspace/types';
 
 export type AppState = {
-  components: ComponentsState,
+  workspace: WorkspaceState,
 };

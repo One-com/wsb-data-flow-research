@@ -10,5 +10,3 @@ export type BaseComponentState = {
   position: Position,
   selected: boolean,
 };
-
-export type ComponentsState = Array<BaseComponentState>;

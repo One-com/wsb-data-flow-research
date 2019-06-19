@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --config webpack/webpack.config.js",
+    "test": "jest src",
     "flow": "flow status src",
     "flow-typed:base": "flow-typed -r src -l flow-typed",
     "flow-typed-i": "npm run flow-typed:base install",

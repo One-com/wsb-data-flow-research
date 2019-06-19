@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { WorkspaceGuidelines } from './WorkspaceGuidelines';
-import { BaseComponent } from '../workspaceComponents/BaseComponent';
+import { BaseComponent } from '../../../workspaceComponents/BaseComponent';
 
 const Style = {
   flex: '1',
