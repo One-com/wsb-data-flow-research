@@ -19,6 +19,6 @@ type Props = {
   onClick: MouseEventHandler,
 };
 
-export const PanelComponent = ({ children, onClick }: Props) => (
+export const LeftPanelComponent = ({ children, onClick }: Props) => (
   <div style={Style} onClick={onClick}>{children}</div>
 );

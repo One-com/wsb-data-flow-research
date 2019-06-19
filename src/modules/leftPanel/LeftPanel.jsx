@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import { PanelComponent } from './PanelComponent';
+import { LeftPanelComponent } from './LeftPanelComponent';
 import { addButtonComponentAction } from '../components/button/actions';
 import type { AppDispatch } from '../main/types';
 
@@ -22,10 +22,10 @@ type Props = {
 
 const ComponentsPanelCom = (props: Props) => (
   <aside style={Style}>
-    <PanelComponent onClick={() => props.dispatch(addButtonComponentAction())}>Button</PanelComponent>
-    <PanelComponent onClick={() => console.log('===Add Text component')}>Text</PanelComponent>
+    <LeftPanelComponent onClick={() => props.dispatch(addButtonComponentAction())}>Button</LeftPanelComponent>
+    <LeftPanelComponent onClick={() => console.log('===Add Text component')}>Text</LeftPanelComponent>
   </aside>
 );
 
 // $FlowFixMe
-export const ComponentsPanel = connect()(ComponentsPanelCom);
+export const LeftPanel = connect()(ComponentsPanelCom);
