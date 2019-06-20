@@ -2,7 +2,7 @@
 
 import type { ComponentKindT } from '../types';
 import type { BaseComponentState } from './types';
-import { uuid } from '../../../lib/uuid';
+import { uuid } from '../../../lib/functions/uuid';
 
 export const makeBaseComponentInitialState = (kind: ComponentKindT): BaseComponentState => ({
   id: uuid(),

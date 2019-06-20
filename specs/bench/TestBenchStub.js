@@ -1,7 +1,7 @@
 /* @flow */
 
 import sinonLib from 'sinon';
-const UuidModule = require('../../src/lib/uuid');
+const UuidModule = require('../../src/lib/functions/uuid');
 
 export class TestBenchStub {
   _sinon;
