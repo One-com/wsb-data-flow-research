@@ -55,7 +55,7 @@ describe('componentsReducer', () => {
         width: 33,
         height: 55,
       });
-    
+
     expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
       {
         ...Object.keys(com).reduce((acc, k) => (
@@ -71,25 +71,25 @@ describe('componentsReducer', () => {
     ]);
   });
 
-  // xit('adds new component with position shift', () => {
-  //   bench.stub.uuidCycle(2);
-  //
-  //   const
-  //     baseCom = baseComponentStateGen(ComponentKind.BUTTON),
-  //     state = [baseCom],
-  //     action = addComponentAction(ComponentKind.BUTTON);
-  //
-  //   expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
-  //     comRegistry.getInitialState(ComponentKind.BUTTON),
-  //     {
-  //       ...comRegistry.getInitialState(ComponentKind.BUTTON),
-  //       position: {
-  //         top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
-  //         left: baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
-  //       },
-  //     },
-  //   ]);
-  // });
+  it('adds new component with position shift', () => {
+    bench.stub.uuidCycle(2);
+
+    const
+      baseCom = baseComponentStateGen(ComponentKind.BUTTON),
+      state = [baseCom],
+      action = addComponentAction(ComponentKind.BUTTON);
+
+    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+      comRegistry.getInitialState(ComponentKind.BUTTON),
+      {
+        ...comRegistry.getInitialState(ComponentKind.BUTTON),
+        position: {
+          top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+          left: baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+        },
+      },
+    ]);
+  });
 
   // xit('selects component on touch', () => {
   //   const

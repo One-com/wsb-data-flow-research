@@ -2,12 +2,16 @@
 
 type Params = {
   isSelected: boolean,
+  isGhost?: boolean,
 };
 
-export const getBaseComponentStyle = ({isSelected}: Params) => {
-  const borderColor = isSelected ? 'greenyellow' : 'gray';
+export const getBaseComponentStyle = ({isGhost, isSelected}: Params) => {
+  const
+    visibility = isGhost ? 'hidden' : 'visible',
+    borderColor = isSelected ? 'greenyellow' : 'gray';
 
   return {
+    visibility,
     position: 'absolute',
     border: `1px solid ${borderColor}`,
     cursor: 'default',

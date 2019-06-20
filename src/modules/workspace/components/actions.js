@@ -22,6 +22,13 @@ export const
     payload: { id, dimensions },
   });
 
+export const
+  SELECT_COMPONENT_ACTION = 'SELECT_COMPONENT_ACTION',
+  selectComponentAction = (id: string) => ({
+    type: SELECT_COMPONENT_ACTION,
+    payload: id,
+  });
+
 // TODO: remove
 export const
   TOUCH_COMPONENT_ACTION = 'TOUCH_COMPONENT_ACTION',
