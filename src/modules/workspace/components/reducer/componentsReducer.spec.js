@@ -9,15 +9,12 @@ import {
   addComponentAction,
   newComponentMeasuredAction,
   selectComponentAction,
-  touchComponentAction,
 } from '../actions';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { TestBench } from '../../../../../specs/bench/TestBench';
-import { moveOverWorkspaceAction } from '../../main/actions';
-import { WorkspaceMode } from '../../mode/WorkspaceMode';
 
 describe('componentsReducer', () => {
   let bench: TestBench;
@@ -41,7 +38,7 @@ describe('componentsReducer', () => {
       state = [...ComponentsInitialState],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+    expect(reducer(state, action)).toEqual([
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         isGhost: true,
@@ -61,7 +58,7 @@ describe('componentsReducer', () => {
         height: 55,
       });
 
-    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+    expect(reducer(state, action)).toEqual([
       {
         ...Object.keys(com).reduce((acc, k) => (
           k === 'isGhost'
@@ -84,7 +81,7 @@ describe('componentsReducer', () => {
       state = [baseCom],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+    expect(reducer(state, action)).toEqual([
       comRegistry.getInitialState(ComponentKind.BUTTON),
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
@@ -104,7 +101,7 @@ describe('componentsReducer', () => {
       state = [com],
       action = selectComponentAction('321');
 
-    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+    expect(reducer(state, action)).toEqual([
       {
         ...com,
         isSelected: true,
@@ -124,7 +121,7 @@ describe('componentsReducer', () => {
       }),
       state = [com1, com2];
 
-    expect(reducer(state, selectComponentAction('2'), { mode: WorkspaceMode.IDLE })).toEqual([
+    expect(reducer(state, selectComponentAction('2'))).toEqual([
       {
         ...com1,
         isSelected: false,

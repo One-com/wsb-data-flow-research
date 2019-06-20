@@ -1,30 +1,23 @@
 /* @flow */
 
-import { diReducer } from '@sepo27/redux-di';
+import { initReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsState } from '../types';
 import {
   ADD_COMPONENT_ACTION,
   NEW_COMPONENT_MEASURED_ACTION,
   SELECT_COMPONENT_ACTION,
-  TOUCH_COMPONENT_ACTION,
 } from '../actions';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
-import type { WorkspaceModeT } from '../../mode/types';
-import { MOVE_OVER_WORKSPACE_ACTION } from '../../main/actions';
-import { WorkspaceMode } from '../../mode/WorkspaceMode';
 import { updateComponentById } from '../../functions/updateComponentById';
 
 export const ComponentsInitialState: ComponentsState = [];
 
-export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diReducer(
+export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = initReducer(
   [],
-  {
-    mode: '.mode',
-  },
   // TODO: action type
-  (components: ComponentsState, action: Object, { mode }: { mode: WorkspaceModeT }) => {
+  (components: ComponentsState, action: Object) => {
     if (action.type === ADD_COMPONENT_ACTION) {
       const
         newComInitialState = comRegistry.getInitialState(action.payload),
@@ -85,26 +78,6 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
 
       return nextComponents;
     }
-
-    // if (action.type === MOVE_OVER_WORKSPACE_ACTION && mode === WorkspaceMode.MOVING_COMPONENTS) {
-    //   let moved = false;
-    //
-    //   const nextComponents = components.reduce((acc, com) => {
-    //     if (com.selected) {
-    //       moved = true;
-    //       return acc.concat({
-    //         ...com,
-    //         position: action.payload,
-    //       });
-    //     }
-    //
-    //     return acc.concat(com);
-    //   }, []);
-    //
-    //   if (moved) {
-    //     return nextComponents;
-    //   }
-    // }
 
     return components;
   },
