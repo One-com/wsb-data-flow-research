@@ -3,7 +3,12 @@
 import { diReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsState } from '../types';
-import { ADD_COMPONENT_ACTION, NEW_COMPONENT_MEASURED_ACTION, TOUCH_COMPONENT_ACTION } from '../actions';
+import {
+  ADD_COMPONENT_ACTION,
+  NEW_COMPONENT_MEASURED_ACTION,
+  SELECT_COMPONENT_ACTION,
+  TOUCH_COMPONENT_ACTION,
+} from '../actions';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import type { WorkspaceModeT } from '../../mode/types';
@@ -55,31 +60,31 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
         },
       });
     }
-    
-    // if (action.type === TOUCH_COMPONENT_ACTION) {
-    //   const { payload: comId } = action;
-    //
-    //   let found = false;
-    //
-    //   const nextComponents = components.reduce((acc, com) => {
-    //     let nextCom;
-    //
-    //     if (com.id === comId) {
-    //       found = true;
-    //       nextCom = {...com, selected: true};
-    //     } else {
-    //       nextCom = {...com, selected: false};
-    //     }
-    //
-    //     return acc.concat(nextCom);
-    //   }, []);
-    //
-    //   if (!found) {
-    //     throw new Error(`Component not found by id: ${comId}`);
-    //   }
-    //
-    //   return nextComponents;
-    // }
+
+    if (action.type === SELECT_COMPONENT_ACTION) {
+      const { payload: comId } = action;
+
+      let found = false;
+
+      const nextComponents = components.reduce((acc, com) => {
+        let nextCom;
+
+        if (com.id === comId) {
+          found = true;
+          nextCom = {...com, isSelected: true};
+        } else {
+          nextCom = {...com, isSelected: false};
+        }
+
+        return acc.concat(nextCom);
+      }, []);
+
+      if (!found) {
+        throw new Error(`Component not found by id: ${comId}`);
+      }
+
+      return nextComponents;
+    }
 
     // if (action.type === MOVE_OVER_WORKSPACE_ACTION && mode === WorkspaceMode.MOVING_COMPONENTS) {
     //   let moved = false;

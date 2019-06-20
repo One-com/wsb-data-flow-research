@@ -5,7 +5,12 @@ import {
   componentsReducer as reducer,
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
-import { addComponentAction, newComponentMeasuredAction, touchComponentAction } from '../actions';
+import {
+  addComponentAction,
+  newComponentMeasuredAction,
+  selectComponentAction,
+  touchComponentAction,
+} from '../actions';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
@@ -91,45 +96,45 @@ describe('componentsReducer', () => {
     ]);
   });
 
-  // xit('selects component on touch', () => {
-  //   const
-  //     com = baseComponentStateGen(ComponentKind.BUTTON, {
-  //       id: '321',
-  //     }),
-  //     state = [com],
-  //     action = touchComponentAction('321');
-  //
-  //   expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
-  //     {
-  //       ...com,
-  //       selected: true,
-  //     }
-  //   ]);
-  // });
+  it('selects component on touch', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '321',
+      }),
+      state = [com],
+      action = selectComponentAction('321');
 
-  // xit('deselects other components when selecting one', () => {
-  //   const
-  //     com1 = baseComponentStateGen(ComponentKind.BUTTON, {
-  //       id: '1',
-  //       isSelected: true,
-  //     }),
-  //     com2 = baseComponentStateGen(ComponentKind.BUTTON, {
-  //       id: '2',
-  //       isSelected: false,
-  //     }),
-  //     state = [com1, com2];
-  //
-  //   expect(reducer(state, touchComponentAction('2'), { mode: WorkspaceMode.IDLE })).toEqual([
-  //     {
-  //       ...com1,
-  //       selected: false,
-  //     },
-  //     {
-  //       ...com2,
-  //       selected: true,
-  //     },
-  //   ]);
-  // });
+    expect(reducer(state, action, { mode: WorkspaceMode.IDLE })).toEqual([
+      {
+        ...com,
+        isSelected: true,
+      }
+    ]);
+  });
+
+  it('deselects other components when selecting one', () => {
+    const
+      com1 = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '1',
+        isSelected: true,
+      }),
+      com2 = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '2',
+        isSelected: false,
+      }),
+      state = [com1, com2];
+
+    expect(reducer(state, selectComponentAction('2'), { mode: WorkspaceMode.IDLE })).toEqual([
+      {
+        ...com1,
+        isSelected: false,
+      },
+      {
+        ...com2,
+        isSelected: true,
+      },
+    ]);
+  });
 
   // xit('moves selected component', () => {
   //   const

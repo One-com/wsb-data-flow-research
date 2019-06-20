@@ -4,7 +4,7 @@ import * as React from 'react';
 import type { BaseComponentProps } from './types';
 import { getBaseComponentStyle } from './styles';
 import { connectComponent } from '../../common/connectComponent';
-import { newComponentMeasuredAction } from '../../workspace/components/actions';
+import { newComponentMeasuredAction, selectComponentAction } from '../../workspace/components/actions';
 import type { ReactElementRef } from '../../common/commonTypes';
 
 class BaseComponentClass extends React.Component<BaseComponentProps> {
@@ -14,6 +14,8 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
     super();
     this.containerRef = React.createRef();
   }
+
+  onClick = () => this.props.dispatch(selectComponentAction(this.props.state.id));
 
   componentDidMount() {
     const { state: { isGhost, id }, dispatch } = this.props;
@@ -35,6 +37,7 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
           ...getBaseComponentStyle({isGhost, isSelected}),
           ...position,
         }}
+        onClick={this.onClick}
         ref={this.containerRef}
       >{children}</div>
     );
