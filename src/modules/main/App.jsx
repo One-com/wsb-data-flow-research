@@ -4,7 +4,7 @@ import React from 'react';
 import { TopBar } from '../topBar/TopBar';
 import { SaveStatus } from '../saveStatus/constants';
 import { AppBottomContainerStyle, AppStyle } from './styles';
-import { ComponentsPanel } from '../componentsPanel/ComponentsPanel';
+import { ComponentsPanel } from '../leftPanel/ComponentsPanel';
 import { Workspace } from '../workspace/Workspace';
 
 export const App = () => (
