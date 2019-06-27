@@ -6,6 +6,7 @@ import { getBaseComponentStyle } from './styles';
 import { connectComponent } from '../../common/connectComponent';
 import { newComponentMeasuredAction, selectComponentAction } from '../../workspace/components/actions';
 import type { ReactElementRef } from '../../common/commonTypes';
+import { Draggable } from '../../draggable/Draggable';
 
 class BaseComponentClass extends React.Component<BaseComponentProps> {
   containerRef: ReactElementRef<'div'>;
@@ -32,14 +33,15 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
     const { state: { position, isGhost, isSelected }, children } = this.props;
 
     return (
-      <div
-        style={{
-          ...getBaseComponentStyle({isGhost, isSelected}),
-          ...position,
-        }}
-        onClick={this.onClick}
-        ref={this.containerRef}
-      >{children}</div>
+      <Draggable
+        position={position}
+      >
+        <div
+          style={getBaseComponentStyle({isGhost, isSelected})}
+          onClick={this.onClick}
+          ref={this.containerRef}
+        >{children}</div>
+      </Draggable>
     );
   }
 }

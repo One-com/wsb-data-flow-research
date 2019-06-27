@@ -6,7 +6,7 @@ import {
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
 import {
-  addComponentAction,
+  addComponentAction, moveComponentAction,
   newComponentMeasuredAction,
   selectComponentAction,
 } from '../actions';
@@ -133,34 +133,31 @@ describe('componentsReducer', () => {
     ]);
   });
 
-  // xit('moves selected component', () => {
-  //   const
-  //     com = baseComponentStateGen(ComponentKind.BUTTON, {
-  //       id: '111',
-  //       position: {
-  //         top: 50,
-  //         left: 50,
-  //       },
-  //       isSelected: true,
-  //     }),
-  //     state = [com],
-  //     action = moveOverWorkspaceAction({
-  //       top: 55,
-  //       left: 60,
-  //     }),
-  //     dependencies = {
-  //       mode: WorkspaceMode.MOVING_COMPONENTS,
-  //     };
-  //
-  //   expect(reducer(state, action, dependencies)).toEqual([
-  //     {
-  //       ...com,
-  //       position: {
-  //         top: 55,
-  //         left: 60,
-  //       },
-  //     },
-  //   ]);
-  // });
+  it('moves selected component', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '111',
+        position: {
+          top: 50,
+          left: 50,
+        },
+        isSelected: true,
+      }),
+      state = [com],
+      action = moveComponentAction('111', {
+        top: 55,
+        left: 60,
+      });
+
+    expect(reducer(state, action)).toEqual([
+      {
+        ...com,
+        position: {
+          top: 55,
+          left: 60,
+        },
+      },
+    ]);
+  });
 });
 

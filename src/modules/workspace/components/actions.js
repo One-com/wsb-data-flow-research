@@ -28,3 +28,10 @@ export const
     type: SELECT_COMPONENT_ACTION,
     payload: id,
   });
+
+export const
+  MOVE_COMPONENT_ACTION = 'MOVE_COMPONENT_ACTION',
+  moveComponentAction = (id: string, position: Position) => ({
+    type: MOVE_COMPONENT_ACTION,
+    payload: {id, position},
+  });

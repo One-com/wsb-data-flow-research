@@ -4,7 +4,7 @@ import { initReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsState } from '../types';
 import {
-  ADD_COMPONENT_ACTION,
+  ADD_COMPONENT_ACTION, MOVE_COMPONENT_ACTION,
   NEW_COMPONENT_MEASURED_ACTION,
   SELECT_COMPONENT_ACTION,
 } from '../actions';
@@ -73,6 +73,31 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = ini
       }, []);
 
       if (!found) {
+        throw new Error(`Component not found by id: ${comId}`);
+      }
+
+      return nextComponents;
+    }
+
+    if (action.type === MOVE_COMPONENT_ACTION) {
+      const {payload: {id: comId, position}} = action;
+
+      let updated = false;
+
+      const nextComponents = components.reduce((acc, com) => {
+        let nextCom;
+
+        if (com.id === comId) {
+          updated = updated || true;
+          nextCom = {...com, position};
+        } else {
+          nextCom = com;
+        }
+
+        return acc.concat(nextCom);
+      }, []);
+
+      if (!updated) {
         throw new Error(`Component not found by id: ${comId}`);
       }
 

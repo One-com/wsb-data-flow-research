@@ -12,7 +12,7 @@ export const getBaseComponentStyle = ({isGhost, isSelected}: Params) => {
 
   return {
     visibility,
-    position: 'absolute',
+    // position: 'absolute',
     border: `1px solid ${borderColor}`,
     cursor: 'default',
     userSelect: 'none',
