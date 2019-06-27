@@ -7,7 +7,6 @@ import type { AppDispatch, AppState } from '../../../main/types';
 import { workspaceAppSel } from '../selectors';
 import type { WorkspaceState } from '../types';
 import { WorkspaceComponents } from './WorkspaceComponents';
-import { moveOverWorkspaceAction } from '../actions';
 
 const Style = {
   flex: '1',
@@ -21,21 +20,11 @@ type Props = {
 };
 
 export class WorkspaceCom extends React.Component<Props> {
-  onMouseMove = (e: SyntheticMouseEvent<*>) => {
-    const
-        // $FlowFixMe
-        rect = e.target.getBoundingClientRect(),
-        left = e.clientX - rect.left,
-        top = e.clientY - rect.top;
-
-    this.props.dispatch(moveOverWorkspaceAction({top, left}));
-  }
-
   render() {
     const { state: { components, margin } } = this.props;
 
     return (
-      <div style={Style} onMouseMove={this.onMouseMove}>
+      <div style={Style}>
         <WorkspaceComponents components={components} />
         <WorkspaceMargin width={margin.width} />
       </div>
