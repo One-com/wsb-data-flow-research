@@ -2,6 +2,7 @@
 
 import type { ComponentKindT } from '../../components/types';
 import type { Dimensions } from '../../common/commonTypes';
+import type {Position} from '../../common/commonTypes';
 
 export type AddComponentAction = {
   type: 'ADD_COMPONENT_ACTION',

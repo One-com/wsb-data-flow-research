@@ -4,9 +4,14 @@ import * as React from 'react';
 import type { BaseComponentProps } from './types';
 import { getBaseComponentStyle } from './styles';
 import { connectComponent } from '../../common/connectComponent';
-import { newComponentMeasuredAction, selectComponentAction } from '../../workspace/components/actions';
+import {
+  moveComponentAction,
+  newComponentMeasuredAction,
+  selectComponentAction,
+} from '../../workspace/components/actions';
 import type { ReactElementRef } from '../../common/commonTypes';
 import { Draggable } from '../../draggable/Draggable';
+import type { DraggableHandler } from '../../draggable/types';
 
 class BaseComponentClass extends React.Component<BaseComponentProps> {
   containerRef: ReactElementRef<'div'>;
@@ -16,7 +21,11 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
     this.containerRef = React.createRef();
   }
 
-  onClick = () => this.props.dispatch(selectComponentAction(this.props.state.id));
+  onStillMouseUp = () => this.props.dispatch(selectComponentAction(this.props.state.id));
+
+  onDrag: DraggableHandler = position => this.props.dispatch(
+    moveComponentAction(this.props.state.id, position),
+  );
 
   componentDidMount() {
     const { state: { isGhost, id }, dispatch } = this.props;
@@ -35,10 +44,11 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
     return (
       <Draggable
         position={position}
+        onDrag={this.onDrag}
+        onStillMouseUp={this.onStillMouseUp}
       >
         <div
           style={getBaseComponentStyle({isGhost, isSelected})}
-          onClick={this.onClick}
           ref={this.containerRef}
         >{children}</div>
       </Draggable>

@@ -6,15 +6,18 @@ import { getDraggableStyle } from './styles';
 import type { DraggableHandler } from './types';
 
 type State = {
-  isDragging: boolean,
+  dragStarted: boolean,
   dragStartDelta: Position,
+  isDragging: boolean,
   position: Position,
 };
 
 type Props = {
   children: React.Node,
   position?: Position,
+  onDragStart?: DraggableHandler,
   onDrag?: DraggableHandler,
+  onStillMouseUp?: MouseEventHandler,
 };
 
 export class Draggable extends React.Component<Props, State> {
@@ -26,45 +29,48 @@ export class Draggable extends React.Component<Props, State> {
     super(props);
 
     this.state = {
-      isDragging: false,
+      dragStarted: false,
       dragStartDelta: { top: 0, left: 0 },
+      isDragging: false,
       position: props.position || { top: 0, left: 0 },
-      propPosition: null,
     };
 
     this.ref = React.createRef();
   }
 
   onMouseDown = (e: SyntheticMouseEvent<*>) => {
-    // $FlowFixMe
-    const rect = e.target.getBoundingClientRect();
-
-    this.setState({
-      isDragging: true,
-      dragStartDelta: {
+    const
+      // $FlowFixMef
+      rect = e.target.getBoundingClientRect(),
+      dragStartDelta = {
         top: e.clientY - rect.top,
         left: e.clientX - rect.left,
-      },
-    })
+      };
+
+    this.setState({
+      dragStarted: true,
+      dragStartDelta,
+    });
+
+    if (this.props.onDragStart) {
+      // $FlowFixMe
+      this.props.onDragStart(this.calculatePosition(e.clientX, e.clientY, dragStartDelta));
+    }
   };
 
   onWindowMouseMove = (e: SyntheticMouseEvent<*>) => {
     const
-      {isDragging, dragStartDelta} = this.state,
+      {dragStarted, dragStartDelta} = this.state,
       {onDrag, position: propPosition} = this.props;
 
-    if (!isDragging || !this.ref.current) return;
+    if (!dragStarted || !this.ref.current) return;
 
-    const
-      target = this.ref.current,
-      // $FlowFixMe
-      parentRect = target.parentNode.getBoundingClientRect(),
-      top = e.clientY - parentRect.top - dragStartDelta.top,
-      left = e.clientX - parentRect.left - dragStartDelta.left,
-      position = {top, left};
+    this.setState({isDragging: true});
+
+    const position = this.calculatePosition(e.clientX, e.clientY, dragStartDelta);
 
     if (onDrag) {
-      onDrag(position, e);
+      onDrag(position);
     }
 
     if (!propPosition) {
@@ -78,7 +84,27 @@ export class Draggable extends React.Component<Props, State> {
     }
   };
 
+  onMouseUp = (e: SyntheticMouseEvent<*>) => {
+    this.setState({dragStarted: false});
+
+    if (this.props.onStillMouseUp && !this.state.isDragging) {
+      // $FlowFixMe
+      this.props.onStillMouseUp(e);
+    }
+  };
+
   getPosition = () => this.props.position || this.state.position;
+
+  calculatePosition = (clientX: number, clientY: number, dragStartDelta: Position): Position => {
+    const
+      target = this.ref.current,
+      // $FlowFixMe
+      parentRect = target.parentNode.getBoundingClientRect(),
+      top = clientY - parentRect.top - dragStartDelta.top,
+      left = clientX - parentRect.left - dragStartDelta.left;
+
+    return {top, left};
+  };
 
   componentDidMount(): void {
     window.addEventListener('mousemove', this.onWindowMouseMove);
@@ -94,6 +120,7 @@ export class Draggable extends React.Component<Props, State> {
       <div
         style={getDraggableStyle({position})}
         onMouseDown={this.onMouseDown}
+        onMouseUp={this.onMouseUp}
         ref={this.ref}
       >
         {children}
