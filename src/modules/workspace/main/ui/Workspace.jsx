@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import { WorkspaceGuidelines } from './WorkspaceGuidelines';
+import { WorkspaceMargin } from '../../margin/ui/WorkspaceMargin';
 import type { AppDispatch, AppState } from '../../../main/types';
 import { workspaceAppSel } from '../selectors';
 import type { WorkspaceState } from '../types';
@@ -32,12 +32,12 @@ export class WorkspaceCom extends React.Component<Props> {
   }
 
   render() {
-    const { state: { components } } = this.props;
+    const { state: { components, margin } } = this.props;
 
     return (
       <div style={Style} onMouseMove={this.onMouseMove}>
         <WorkspaceComponents components={components} />
-        <WorkspaceGuidelines width={900} />
+        <WorkspaceMargin width={margin.width} />
       </div>
     )
   }

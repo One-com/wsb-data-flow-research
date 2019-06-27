@@ -19,7 +19,7 @@ type Props = {
   width: number,
 };
 
-export const WorkspaceGuidelines = ({ width }: Props) => (
+export const WorkspaceMargin = ({ width }: Props) => (
   <div
     style={{
       ...Style,
