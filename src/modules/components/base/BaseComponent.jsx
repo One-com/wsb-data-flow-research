@@ -5,6 +5,7 @@ import type { BaseComponentProps } from './types';
 import { getBaseComponentStyle } from './styles';
 import { connectComponent } from '../../common/connectComponent';
 import {
+  deselectComponentAction,
   moveComponentAction,
   newComponentMeasuredAction,
   selectComponentAction,
@@ -27,6 +28,11 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
     moveComponentAction(this.props.state.id, position),
   );
 
+  onWindowMouseDown = (e: SyntheticMouseEvent<*>) => {
+    e.stopPropagation();
+    this.props.dispatch(deselectComponentAction(this.props.state.id));
+  };
+
   componentDidMount() {
     const { state: { isGhost, id }, dispatch } = this.props;
     if (isGhost && this.containerRef.current) {
@@ -36,6 +42,8 @@ class BaseComponentClass extends React.Component<BaseComponentProps> {
         height: Math.round(height),
       }));
     }
+
+    window.addEventListener('mousedown', this.onWindowMouseDown);
   }
 
   render() {

@@ -6,7 +6,7 @@ import {
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
 import {
-  addComponentAction, moveComponentAction,
+  addComponentAction, deselectComponentAction, moveComponentAction,
   newComponentMeasuredAction,
   selectComponentAction,
 } from '../actions';
@@ -129,6 +129,23 @@ describe('componentsReducer', () => {
       {
         ...com2,
         isSelected: true,
+      },
+    ]);
+  });
+
+  it('deselects component', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '1',
+        isSelected: true,
+      }),
+      state = [com],
+      action = deselectComponentAction('1');
+
+    expect(reducer(state, action)).toEqual([
+      {
+        ...com,
+        isSelected: false,
       },
     ]);
   });

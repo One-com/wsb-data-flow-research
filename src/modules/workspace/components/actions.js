@@ -31,6 +31,13 @@ export const
   });
 
 export const
+  DESELECT_COMPONENT_ACTION = 'DESELECT_COMPONENT_ACTION',
+  deselectComponentAction = (id: string) => ({
+    type: DESELECT_COMPONENT_ACTION,
+    payload: id,
+  });
+
+export const
   MOVE_COMPONENT_ACTION = 'MOVE_COMPONENT_ACTION',
   moveComponentAction = (id: string, position: Position) => ({
     type: MOVE_COMPONENT_ACTION,

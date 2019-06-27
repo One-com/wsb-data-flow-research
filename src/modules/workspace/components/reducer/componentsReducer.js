@@ -4,13 +4,14 @@ import { initReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsState } from '../types';
 import {
-  ADD_COMPONENT_ACTION, MOVE_COMPONENT_ACTION,
+  ADD_COMPONENT_ACTION, DESELECT_COMPONENT_ACTION, MOVE_COMPONENT_ACTION,
   NEW_COMPONENT_MEASURED_ACTION,
   SELECT_COMPONENT_ACTION,
 } from '../actions';
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { updateComponentById } from '../../functions/updateComponentById';
+import { updateComponent } from '../functions/updateComponent';
 
 export const ComponentsInitialState: ComponentsState = [];
 
@@ -102,6 +103,14 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = ini
       }
 
       return nextComponents;
+    }
+
+    if (action.type === DESELECT_COMPONENT_ACTION) {
+      return updateComponent({
+        id: action.payload,
+        patch: {isSelected: false},
+        components,
+      });
     }
 
     return components;
