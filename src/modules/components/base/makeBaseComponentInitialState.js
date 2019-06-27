@@ -4,13 +4,15 @@ import type { ComponentKindT } from '../types';
 import type { BaseComponentState } from './types';
 import { uuid } from '../../../lib/functions/uuid';
 
+export const BaseComponentInitialPosition = {
+  top: 10,
+  left: 10,
+};
+
 export const makeBaseComponentInitialState = (kind: ComponentKindT): BaseComponentState => ({
   id: uuid(),
   kind,
-  position: {
-    top: 10,
-    left: 10,
-  },
+  position: BaseComponentInitialPosition,
   dimensions: {
     width: 0,
     height: 0,

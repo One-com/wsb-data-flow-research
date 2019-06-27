@@ -1,6 +1,6 @@
 /* @flow */
 
-import { initReducer } from '@sepo27/redux-di';
+import { diReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsState } from '../types';
 import {
@@ -14,16 +14,21 @@ import { updateComponentById } from '../functions/updateComponentById';
 
 export const ComponentsInitialState: ComponentsState = [];
 
-export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = initReducer(
+export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diReducer(
   [],
+  {
+    margin: '.margin',
+  },
   // TODO: action type
-  (components: ComponentsState, action: Object) => {
+  (components: ComponentsState, action: Object, {margin}) => {
     if (action.type === ADD_COMPONENT_ACTION) {
       const
         newComInitialState = comRegistry.getInitialState(action.payload),
-        newComPositionShift = components.length
-          ? components.length * NEW_COMPONENT_POSITION_SHIFT_DISTANCE
-          : components.length,
+        newComPositionShift = margin.width + (
+          components.length
+            ? components.length * NEW_COMPONENT_POSITION_SHIFT_DISTANCE
+            : components.length
+        ),
         newComPosition = newComPositionShift
           ? {
             top: newComInitialState.position.top + newComPositionShift,

@@ -15,6 +15,7 @@ import { comRegistry } from '../../../components/ComponentsRegistry';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { TestBench } from '../../../../../specs/bench/TestBench';
+import { BaseComponentInitialPosition } from '../../../components/base/makeBaseComponentInitialState';
 
 describe('componentsReducer', () => {
   let bench: TestBench;
@@ -38,9 +39,13 @@ describe('componentsReducer', () => {
       state = [...ComponentsInitialState],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
+        position: {
+          top: 1000 + BaseComponentInitialPosition.top,
+          left: 1000 + BaseComponentInitialPosition.left,
+        },
         isGhost: true,
       },
     ]);
@@ -58,7 +63,7 @@ describe('componentsReducer', () => {
         height: 55,
       });
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
       {
         ...Object.keys(com).reduce((acc, k) => (
           k === 'isGhost'
@@ -73,6 +78,24 @@ describe('componentsReducer', () => {
     ]);
   });
 
+  it('adds new component inside workspace margin', () => {
+    bench.stub.uuid('1234');
+
+    const
+      state = [...ComponentsInitialState],
+      action = addComponentAction(ComponentKind.BUTTON);
+
+    expect(reducer(state, action, {margin: {width: 900}})).toEqual([
+      {
+        ...comRegistry.getInitialState(ComponentKind.BUTTON),
+        position: {
+          top: 900 + BaseComponentInitialPosition.top,
+          left: 900 + BaseComponentInitialPosition.left,
+        },
+      },
+    ]);
+  });
+
   it('adds new component with position shift', () => {
     bench.stub.uuidCycle(2);
 
@@ -81,13 +104,13 @@ describe('componentsReducer', () => {
       state = [baseCom],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
       comRegistry.getInitialState(ComponentKind.BUTTON),
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         position: {
-          top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
-          left: baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+          top: 1000 + baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+          left: 1000 + baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
         },
       },
     ]);
@@ -101,7 +124,7 @@ describe('componentsReducer', () => {
       state = [com],
       action = selectComponentAction('321');
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
       {
         ...com,
         isSelected: true,
@@ -121,7 +144,7 @@ describe('componentsReducer', () => {
       }),
       state = [com1, com2];
 
-    expect(reducer(state, selectComponentAction('2'))).toEqual([
+    expect(reducer(state, selectComponentAction('2'), {margin: {width: 1000}})).toEqual([
       {
         ...com1,
         isSelected: false,
@@ -142,7 +165,7 @@ describe('componentsReducer', () => {
       state = [com],
       action = deselectComponentAction('1');
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
       {
         ...com,
         isSelected: false,
@@ -166,7 +189,7 @@ describe('componentsReducer', () => {
         left: 60,
       });
 
-    expect(reducer(state, action)).toEqual([
+    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
       {
         ...com,
         position: {
