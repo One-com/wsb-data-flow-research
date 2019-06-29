@@ -13,14 +13,22 @@ export const WorkspaceMarginInitialState: WorkspaceMarginState = {
   isLocked: false,
 };
 
-export const workspaceMarginReducer = combineReducers({
-  width: workspaceMarginWidthReducer,
-  isLocked: initReducer(
-    WorkspaceMarginInitialState.isLocked,
-    (state: boolean, action: Object) => (
-      action.type === TOGGLE_WORKSPACE_MARGIN_LOCK_ACTION
-        ? !state
-        : state
-    ),
+const isLockedReducer = initReducer(
+  WorkspaceMarginInitialState.isLocked,
+  (state: boolean, action: Object) => (
+    action.type === TOGGLE_WORKSPACE_MARGIN_LOCK_ACTION
+      ? !state
+      : state
   ),
-});
+);
+
+export const workspaceMarginReducer = diReducer(
+  WorkspaceMarginInitialState,
+  {
+    wsWidth: '.width',
+  },
+  (state: WorkspaceMarginState, action: Object, {wsWidth}) => ({
+    isLocked: isLockedReducer(state.isLocked, action),
+    width: workspaceMarginWidthReducer(state.width, action, {wsWidth}),
+  }),
+);
