@@ -10,7 +10,7 @@ import { connectComponent } from '../../../../common/connectComponent';
 import { isWorkspaceMarginLockedAppSel } from '../../main/selectors';
 import { calculateWorkspaceMarginValue } from '../functions/calculateWorkspaceMarginValue';
 import { Draggable } from '../../../../draggable/Draggable';
-import { moveLeftWorkspaceMarginHandleAction } from '../actions';
+import { moveLeftWorkspaceMarginHandleAction, moveRightWorkspaceMarginHandleAction } from '../actions';
 
 type Props = {
   isLocked: boolean,
@@ -23,7 +23,15 @@ type Props = {
 
 export class WorkspaceMarginHandleCom extends React.Component<Props> {
   // $FlowFixMe: TODO
-  onDrag = (pos: Position) => this.props.dispatch(moveLeftWorkspaceMarginHandleAction(pos.left));
+  onDrag = (pos: Position) => {
+    const {isLeft, isRight, dispatch} = this.props;
+    
+    if (isLeft) {
+      dispatch(moveLeftWorkspaceMarginHandleAction(pos.left))
+    } else {
+      dispatch(moveRightWorkspaceMarginHandleAction(pos.left));
+    }
+  };
   
   render() {
     const

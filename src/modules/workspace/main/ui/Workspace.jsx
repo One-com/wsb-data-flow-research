@@ -47,6 +47,7 @@ export class WorkspaceCom extends React.Component<Props> {
           : <WorkspaceComponents components={components} />
         }
         <WorkspaceMarginHandle isLeft />
+        <WorkspaceMarginHandle isRight />
       </div>
     )
   }
