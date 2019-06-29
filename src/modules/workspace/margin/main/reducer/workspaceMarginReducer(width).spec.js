@@ -2,6 +2,7 @@
 
 import { WorkspaceMarginInitialState, workspaceMarginReducer as reducer } from './workspaceMarginReducer';
 import { moveLeftWsmHandleAction } from '../../handles/actions';
+import { MIN_WORKSPACE_MARGIN_WIDTH } from '../constants';
 
 describe('workspaceMarginReducer', () => {
   it('increases width by moving left handle left', () => {
@@ -43,6 +44,20 @@ describe('workspaceMarginReducer', () => {
     expect(reducer(state, action, {wsWidth: 1700})).toEqual({
       ...state,
       width: 940,
+    });
+  });
+
+  it('does not decrease width less than min threshold when moving left handle', () => {
+    const
+      state = {
+        ...WorkspaceMarginInitialState,
+        width: 1000,
+      },
+      action = moveLeftWsmHandleAction(530);
+
+    expect(reducer(state, action, {wsWidth: 1700})).toEqual({
+      ...state,
+      width: MIN_WORKSPACE_MARGIN_WIDTH,
     });
   });
 });
