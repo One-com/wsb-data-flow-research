@@ -11,6 +11,7 @@ import {
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { updateComponentById } from '../functions/updateComponentById';
+import { calculateWorkspaceMarginValue } from '../../margin/width/functions/calculateWorkspaceMarginValue';
 
 export const ComponentsInitialState: ComponentsState = [];
 
@@ -21,7 +22,11 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
     margin: '.margin',
   },
   // TODO: action type
-  (components: ComponentsState, action: Object, {wsWidth, margin}: ComponentsDependencies) => {
+  // (components: ComponentsState, action: Object, {wsWidth, margin}: ComponentsDependencies) => {
+  (components: ComponentsState, action: Object, deps: ComponentsDependencies) => {
+    // TODO: wtf ?
+    const {wsWidth, margin} = deps;
+    
     if (action.type === ADD_COMPONENT_ACTION) {
       const
         newComInitialState = comRegistry.getInitialState(action.payload),
@@ -67,7 +72,16 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
     }
 
     if (action.type === MOVE_COMPONENT_ACTION) {
-      const {payload: {id: comId, position}} = action;
+      const
+        {payload: {id: comId, position: inPosition}} = action,
+        margin = calculateWorkspaceMarginValue(deps.margin.width, wsWidth),
+        left = deps.margin.isLocked
+          ? Math.max(inPosition.left, margin)
+          : inPosition.left,
+        position = {
+          top: inPosition.top,
+          left,
+        };
 
       return updateComponentById({
         id: comId,

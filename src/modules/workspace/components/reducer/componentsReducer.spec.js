@@ -180,22 +180,48 @@ describe('componentsReducer', () => {
       com = baseComponentStateGen(ComponentKind.BUTTON, {
         id: '111',
         position: {
-          top: 50,
-          left: 50,
+          top: 250,
+          left: 250,
         },
       }),
       state = [com],
       action = moveComponentAction('111', {
-        top: 55,
-        left: 60,
+        top: 255,
+        left: 260,
       });
 
-    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, {wsWidth: 1100, margin: {isLocked: false, width: 1000}})).toEqual([
+      {
+        ...com,
+        position: {
+          top: 255,
+          left: 260,
+        },
+      },
+    ]);
+  });
+
+  it('stops moving component at margin left edge when is locked', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '321',
+        position: {
+          top: 50,
+          left: 400,
+        },
+      }),
+      state = [com],
+      action = moveComponentAction('321', {
+        top: 55,
+        left: 300,
+      });
+
+    expect(reducer(state, action, {wsWidth: 1700, margin: {isLocked: true, width: 1000}})).toEqual([
       {
         ...com,
         position: {
           top: 55,
-          left: 60,
+          left: 350,
         },
       },
     ]);
