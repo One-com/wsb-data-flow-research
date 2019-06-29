@@ -11,4 +11,4 @@ type Options = {
 export const connectComponent = <Props: Object = Object>(
   Component: React.ComponentType<Props & {dispatch: AppDispatch}>,
   options?: Options = {},
-): React.ComponentType<Props> => connect(options.mapStateToProps)(Component);
+): React.ComponentType<$Diff<Props, Props>> => connect(options.mapStateToProps)(Component);

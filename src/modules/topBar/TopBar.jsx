@@ -10,6 +10,7 @@ import {
 import { SaveButton } from './SaveButton';
 import { UndoButton } from './UndoButton';
 import { RedoButton } from './RedoButton';
+import { MarginLockButton } from './MarginLockButton';
 
 type Props = {
   saveStatus: SaveStatusT,
@@ -24,6 +25,9 @@ export class TopBar extends React.Component<Props> {
         style={TopBarContainerStyle}
       >
         <div style={TopBarInnerContainerStyle}>
+          <div>
+            <MarginLockButton />
+          </div>
           <div style={TopBarRightContainerStyle}>
             <UndoButton />
             <RedoButton />
