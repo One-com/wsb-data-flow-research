@@ -2,7 +2,7 @@
 
 import { diReducer } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
-import type { ComponentsAction, ComponentsState } from '../types';
+import type { ComponentsAction, ComponentsDependencies, ComponentsState } from '../types';
 import {
   ADD_COMPONENT_ACTION, DESELECT_COMPONENT_ACTION, MOVE_COMPONENT_ACTION,
   NEW_COMPONENT_MEASURED_ACTION,
@@ -17,24 +17,22 @@ export const ComponentsInitialState: ComponentsState = [];
 export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diReducer(
   [],
   {
+    wsWidth: '.width',
     margin: '.margin',
   },
   // TODO: action type
-  (components: ComponentsState, action: Object, {margin}) => {
+  (components: ComponentsState, action: Object, {wsWidth, margin}: ComponentsDependencies) => {
     if (action.type === ADD_COMPONENT_ACTION) {
       const
         newComInitialState = comRegistry.getInitialState(action.payload),
-        newComPositionShift = margin.width + (
-          components.length
-            ? components.length * NEW_COMPONENT_POSITION_SHIFT_DISTANCE
-            : components.length
-        ),
-        newComPosition = newComPositionShift
-          ? {
-            top: newComInitialState.position.top + newComPositionShift,
-            left: newComInitialState.position.left + newComPositionShift,
-          }
-          : newComInitialState.position;
+        newComPositionShift = components.length
+          ? components.length * NEW_COMPONENT_POSITION_SHIFT_DISTANCE
+          : 0,
+        newComPositionLeftShift = newComPositionShift + (wsWidth - margin.width) / 2,
+        newComPosition = {
+          top: newComInitialState.position.top + newComPositionShift,
+          left: newComInitialState.position.left + newComPositionLeftShift,
+        };
 
       return [
         ...components,

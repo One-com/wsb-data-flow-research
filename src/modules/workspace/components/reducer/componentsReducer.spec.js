@@ -6,7 +6,9 @@ import {
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
 import {
-  addComponentAction, deselectComponentAction, moveComponentAction,
+  addComponentAction,
+  deselectComponentAction,
+  moveComponentAction,
   newComponentMeasuredAction,
   selectComponentAction,
 } from '../actions';
@@ -39,12 +41,12 @@ describe('componentsReducer', () => {
       state = [...ComponentsInitialState],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, {wsWidth: 1700, margin: {width: 1000}})).toEqual([
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         position: {
-          top: 1000 + BaseComponentInitialPosition.top,
-          left: 1000 + BaseComponentInitialPosition.left,
+          top: BaseComponentInitialPosition.top,
+          left: 350 + BaseComponentInitialPosition.left,
         },
         isGhost: true,
       },
@@ -78,19 +80,19 @@ describe('componentsReducer', () => {
     ]);
   });
 
-  it('adds new component inside workspace margin', () => {
+  it('adds new component within workspace margin', () => {
     bench.stub.uuid('1234');
 
     const
       state = [...ComponentsInitialState],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action, {margin: {width: 900}})).toEqual([
+    expect(reducer(state, action, {wsWidth: 1700, margin: {width: 1000}})).toEqual([
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         position: {
-          top: 900 + BaseComponentInitialPosition.top,
-          left: 900 + BaseComponentInitialPosition.left,
+          top: BaseComponentInitialPosition.top,
+          left: 350 + BaseComponentInitialPosition.left,
         },
       },
     ]);
@@ -104,13 +106,13 @@ describe('componentsReducer', () => {
       state = [baseCom],
       action = addComponentAction(ComponentKind.BUTTON);
 
-    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, {wsWidth: 1700, margin: {width: 900}})).toEqual([
       comRegistry.getInitialState(ComponentKind.BUTTON),
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         position: {
-          top: 1000 + baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
-          left: 1000 + baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+          top: baseCom.position.top + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
+          left: 400 + baseCom.position.left + NEW_COMPONENT_POSITION_SHIFT_DISTANCE,
         },
       },
     ]);
