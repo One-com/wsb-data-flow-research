@@ -226,5 +226,35 @@ describe('componentsReducer', () => {
       },
     ]);
   });
+
+  it('stops moving component at margin right edge when is locked', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '3',
+        position: {
+          top: 50,
+          left: 400,
+        },
+        dimensions: {
+          width: 70,
+          height: 40,
+        },
+      }),
+      state = [com],
+      action = moveComponentAction('3', {
+        top: 60,
+        left: 1400,
+      });
+
+    expect(reducer(state, action, {wsWidth: 1700, margin: {isLocked: true, width: 1000}})).toEqual([
+      {
+        ...com,
+        position: {
+          top: 60,
+          left: 1280,
+        },
+      },
+    ]);
+  });
 });
 

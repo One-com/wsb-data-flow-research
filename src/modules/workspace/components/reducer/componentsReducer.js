@@ -54,6 +54,7 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
 
       return updateComponentById({
         id,
+        // $FlowFixMe
         partial: {
           dimensions,
           isGhost: undefined,
@@ -74,18 +75,29 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
     if (action.type === MOVE_COMPONENT_ACTION) {
       const
         {payload: {id: comId, position: inPosition}} = action,
-        margin = calculateWorkspaceMarginValue(deps.margin.width, wsWidth),
-        left = deps.margin.isLocked
-          ? Math.max(inPosition.left, margin)
-          : inPosition.left,
-        position = {
-          top: inPosition.top,
-          left,
-        };
+        margin = calculateWorkspaceMarginValue(deps.margin.width, wsWidth);
 
       return updateComponentById({
         id: comId,
-        partial: {position},
+        partial: com => {
+          const
+            maxLeft = margin + deps.margin.width - com.dimensions.width,
+            left = deps.margin.isLocked
+              ? Math.min(
+                Math.max(inPosition.left, margin),
+                maxLeft,
+              )
+              : inPosition.left,
+            position = {
+              top: inPosition.top,
+              left,
+            };
+          
+          return {
+            ...com,
+            position,
+          };
+        },
         components
       });
     }

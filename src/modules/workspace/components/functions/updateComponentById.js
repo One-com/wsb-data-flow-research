@@ -35,7 +35,7 @@ type Patch = $Shape<SingleComponentState<*>>;
 
 type Params = {
   id: string,
-  partial: Patch,
+  partial: Patch | Function, // TODO: more precise type; & rename
   components: Components,
   otherComPartial?: Patch,
 };
@@ -47,7 +47,7 @@ export const updateComponentById = ({id, partial, components, otherComPartial}: 
     let nextCom;
 
     if (com.id === id) {
-      nextCom = updateCom(com, partial);
+      nextCom = typeof partial === 'function' ? partial(com) : updateCom(com, partial);
       found = found || true;
     } else {
       nextCom = otherComPartial ? updateCom(com, otherComPartial) : com;
