@@ -19,11 +19,14 @@ export class MarginLockButtonCom extends React.Component<Props> {
   render() {
     const
       {isMarginLocked} = this.props,
-      icon = isMarginLocked ? '&#128275;' : '&#128274;';
+      icon = isMarginLocked ? '&#128274;' : '&#128275;',
+      title = `Workspace margin ${isMarginLocked ? 'locked' : 'unlocked'}`;
 
     return (
       <ActiveTopBarButton
         active={isMarginLocked}
+        isMutable={false}
+        title={title}
         onClick={this.onClick}
       >
         <HtmlEntity>{icon}</HtmlEntity>
@@ -36,6 +39,7 @@ const mapStateToProps = (appState: AppState) => ({
   isMarginLocked: isWorkspaceMarginLockedAppSel(appState),
 });
 
-export const MarginLockButton = connectComponent<Props>(MarginLockButtonCom, {
+// $FlowFixMe: TODO babel issue
+export const MarginLockButton = connectComponent(MarginLockButtonCom, {
   mapStateToProps,
 });
