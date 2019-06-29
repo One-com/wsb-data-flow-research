@@ -1,7 +1,7 @@
 /* @flow */
 
 import * as React from 'react';
-import { FlexCenterStyle } from '../common/commonStyles';
+import { FlexCenterStyle } from '../common/styles/commonStyles';
 
 const Style = {
   ...FlexCenterStyle,
