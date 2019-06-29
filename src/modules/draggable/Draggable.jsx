@@ -13,11 +13,12 @@ type State = {
 };
 
 type Props = {
-  children: React.Node,
+  children?: React.Node,
   position?: Position,
   onDragStart?: DraggableHandler,
   onDrag?: DraggableHandler,
   onStillMouseUp?: MouseEventHandler,
+  style?: Object,
 };
 
 export class Draggable extends React.Component<Props, State> {
@@ -113,12 +114,12 @@ export class Draggable extends React.Component<Props, State> {
 
   render() {
     const
-      {children} = this.props,
+      {children, style} = this.props,
       position = this.getPosition();
 
     return (
       <div
-        style={getDraggableStyle({position})}
+        style={getDraggableStyle({position, style})}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
         ref={this.ref}
