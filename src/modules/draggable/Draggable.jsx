@@ -81,7 +81,7 @@ export class Draggable extends React.Component<Props, State> {
 
   onWindowMouseUp = () => {
     if (this.state.isDragging) {
-      this.setState({isDragging: false});
+      this.setState({isDragging: false, dragStarted: false});
     }
   };
 
