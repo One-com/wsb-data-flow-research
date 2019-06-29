@@ -175,7 +175,7 @@ describe('componentsReducer', () => {
     ]);
   });
 
-  it('moves selected component', () => {
+  it('moves component', () => {
     const
       com = baseComponentStateGen(ComponentKind.BUTTON, {
         id: '111',
@@ -183,7 +183,6 @@ describe('componentsReducer', () => {
           top: 50,
           left: 50,
         },
-        isSelected: true,
       }),
       state = [com],
       action = moveComponentAction('111', {
