@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {connect} from 'react-redux';
-import { WorkspaceMargin } from '../../margin/ui/WorkspaceMargin';
+import { WorkspaceMargin } from '../../margin/main/ui/WorkspaceMargin';
 import type { AppDispatch, AppState } from '../../../main/types';
 import { workspaceAppSel } from '../selectors';
 import type { WorkspaceState } from '../types';

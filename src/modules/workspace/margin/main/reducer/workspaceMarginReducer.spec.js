@@ -1,6 +1,6 @@
 /* @flow */
 
-import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
+import { assertReducerInitialState } from '../../../../../../specs/assertions/assertReducerInitialState';
 import { WorkspaceMarginInitialState, workspaceMarginReducer as reducer } from './workspaceMarginReducer';
 import { toggleWorkspaceMarginAction } from '../actions';
 

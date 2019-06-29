@@ -3,10 +3,10 @@
 import React from 'react';
 import { ActiveTopBarButton } from './ActiveTopBarButton';
 import type { AppDispatch, AppState } from '../main/types';
-import { isWorkspaceMarginLockedAppSel } from '../workspace/margin/selectors';
+import { isWorkspaceMarginLockedAppSel } from '../workspace/margin/main/selectors';
 import { connectComponent } from '../common/connectComponent';
 import { HtmlEntity } from '../common/ui/HtmlEntity';
-import { toggleWorkspaceMarginAction } from '../workspace/margin/actions';
+import { toggleWorkspaceMarginAction } from '../workspace/margin/main/actions';
 
 type Props = {
   isMarginLocked: boolean,

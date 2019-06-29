@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { ComponentsState } from '../components/types';
-import type { WorkspaceMarginState } from '../margin/types';
+import type { WorkspaceMarginState } from '../margin/main/types';
 import type { WorkspaceWidthState } from '../width/types';
 import type { WorkspaceStatusState } from '../status/types';
 
