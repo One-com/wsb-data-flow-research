@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import {connect} from 'react-redux';
-import { WorkspaceMargin } from '../../margin/main/ui/WorkspaceMargin';
 import type { AppDispatch, AppState } from '../../../main/types';
 import { workspaceAppSel } from '../selectors';
 import type { WorkspaceState } from '../types';
@@ -11,6 +10,7 @@ import { WorkspaceStatus } from '../../status/constants';
 import { WorkspaceLoading } from './WorkspaceLoading';
 import type { ReactElementRef } from '../../../common/commonTypes';
 import { setWorkspaceWidthAction } from '../../width/actions';
+import { WorkspaceMarginHandle } from '../../margin/width/ui/WorkspaceMarginHandle';
 
 const Style = {
   flex: '1',
@@ -46,7 +46,7 @@ export class WorkspaceCom extends React.Component<Props> {
           ? <WorkspaceLoading />
           : <WorkspaceComponents components={components} />
         }
-        <WorkspaceMargin width={margin.width} />
+        <WorkspaceMarginHandle left />
       </div>
     )
   }

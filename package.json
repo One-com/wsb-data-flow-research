@@ -42,12 +42,13 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
-    "@sepo27/redux-di": "file:../../MyLib/js/redux-di/sepo27-redux-di-1.0.0-alpha.tgz",
+    "@sepo27/redux-di": "git+https://github.com/sepo27/redux-di.git#15-refactor-1.0.0-combine-reducers-poc",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
+    "redux-di": "^2.0.0",
     "uuid": "^3.3.2"
   }
 }

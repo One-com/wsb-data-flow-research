@@ -1,6 +1,6 @@
 /* @flow */
 
-import { MIN_WORKSPACE_MARGIN_WIDTH } from '../main/constants';
+import { MIN_WORKSPACE_MARGIN_WIDTH } from '../constants';
 
 type Params = {
   width: number,
