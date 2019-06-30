@@ -72,5 +72,6 @@ module.exports = {
     // hotOnly: true,
     port: 3200,
     stats: 'minimal',
+    disableHostCheck: true,   // That solved it
   },
 };

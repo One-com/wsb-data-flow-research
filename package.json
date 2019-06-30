@@ -4,7 +4,7 @@
   "description": "Wsb data flow research app",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --config webpack/webpack.config.js",
+    "start": "webpack-dev-server --progress --config webpack/webpack.config.js --host 0.0.0.0",
     "test": "jest src",
     "flow": "flow status src",
     "flow-restart": "flow stop src && npm run flow",
