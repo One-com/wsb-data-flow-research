@@ -7,6 +7,13 @@ import { isWorkspaceMarginLockedAppSel } from '../workspace/margin/main/selector
 import { connectComponent } from '../common/connectComponent';
 import { HtmlEntity } from '../common/ui/HtmlEntity';
 import { toggleWorkspaceMarginAction } from '../workspace/margin/main/actions';
+import { FlexCenterStyle } from '../common/styles/commonStyles';
+
+const Style = {
+  ...FlexCenterStyle,
+  width: '18px',
+  height: '18px',
+};
 
 type Props = {
   isMarginLocked: boolean,
@@ -15,7 +22,7 @@ type Props = {
 
 export class MarginLockButtonCom extends React.Component<Props> {
   onClick = () => this.props.dispatch(toggleWorkspaceMarginAction());
-  
+
   render() {
     const
       {isMarginLocked} = this.props,
@@ -27,6 +34,7 @@ export class MarginLockButtonCom extends React.Component<Props> {
         active={isMarginLocked}
         isMutable={false}
         title={title}
+        style={Style}
         onClick={this.onClick}
       >
         <HtmlEntity>{icon}</HtmlEntity>
