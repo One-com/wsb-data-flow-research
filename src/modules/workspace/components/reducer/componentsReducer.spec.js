@@ -256,5 +256,75 @@ describe('componentsReducer', () => {
       },
     ]);
   });
+
+  it('stops moving component at workspace left edge when margin is not locked', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '321',
+        position: {
+          top: 50,
+          left: 400,
+        },
+      }),
+      state = [com],
+      deps = {
+        wsWidth: 1700,
+        margin: {
+          isLocked: false,
+          width: 1000,
+        },
+      },
+      action = moveComponentAction('321', {
+        top: 65,
+        left: -15,
+      });
+
+    expect(reducer(state, action, deps)).toEqual([
+      {
+        ...com,
+        position: {
+          top: 65,
+          left: 0,
+        },
+      },
+    ]);
+  });
+
+  it('stops moving component at workspace right edge when margin is not locked', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '3',
+        position: {
+          top: 50,
+          left: 400,
+        },
+        dimensions: {
+          width: 50,
+          height: 40,
+        },
+      }),
+      state = [com],
+      deps = {
+        wsWidth: 1700,
+        margin: {
+          isLocked: false,
+          width: 1000,
+        },
+      },
+      action = moveComponentAction('3', {
+        top: 63,
+        left: 1700,
+      });
+
+    expect(reducer(state, action, deps)).toEqual([
+      {
+        ...com,
+        position: {
+          top: 63,
+          left: 1650,
+        },
+      },
+    ]);
+  });
 });
 

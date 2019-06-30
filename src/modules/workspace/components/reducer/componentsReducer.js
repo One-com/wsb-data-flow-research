@@ -26,7 +26,7 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
   (components: ComponentsState, action: Object, deps: ComponentsDependencies) => {
     // TODO: wtf ?
     const {wsWidth, margin} = deps;
-    
+
     if (action.type === ADD_COMPONENT_ACTION) {
       const
         newComInitialState = comRegistry.getInitialState(action.payload),
@@ -87,12 +87,18 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
                 Math.max(inPosition.left, margin),
                 maxLeft,
               )
-              : inPosition.left,
+              : Math.max(
+                Math.min(
+                  inPosition.left,
+                  wsWidth - com.dimensions.width,
+                ),
+                0,
+              ),
             position = {
               top: inPosition.top,
               left,
             };
-          
+
           return {
             ...com,
             position,
