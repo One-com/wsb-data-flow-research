@@ -39,8 +39,10 @@ export const workspaceReducer = (state: WorkspaceState, action: Object) => {
         ),
         nextMarginWidth = wsWidth - 2 * minMargin;
 
-      // $FlowFixMe: TODO
-      nextState = rAssocPath([Lit.margin, Lit.width], nextMarginWidth, nextState);
+      if (nextMarginWidth > nextState.margin.width) {
+        // $FlowFixMe: TODO
+        nextState = rAssocPath([Lit.margin, Lit.width], nextMarginWidth, nextState);
+      }
     }
   }
 
