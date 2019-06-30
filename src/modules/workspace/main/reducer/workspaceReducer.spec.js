@@ -16,7 +16,7 @@ describe('workspaceReducer', () => {
     WorkspaceInitialState = reducer(undefined, dummyTestAction());
   })
 
-  xit('moves margin by left edge along with components when not locked', () => {
+  it('moves margin by left edge along with components when not locked', () => {
     const
       com = baseComponentStateGen(ComponentKind.BUTTON, {
         id: '321',
