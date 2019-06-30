@@ -5,4 +5,5 @@ export const Lit = {
   margin: 'margin',
   isLocked: 'isLocked',
   width: 'width',
+  components: 'components',
 };
