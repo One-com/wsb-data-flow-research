@@ -37,7 +37,10 @@ export const workspaceReducer = (state: WorkspaceState, action: Object) => {
           },
           wsWidth,
         ),
-        nextMarginWidth = wsWidth - 2 * minMargin;
+        nextMarginWidth = Math.min(
+          wsWidth - 2 * minMargin,
+          wsWidth,
+        );
 
       if (nextMarginWidth > nextState.margin.width) {
         // $FlowFixMe: TODO

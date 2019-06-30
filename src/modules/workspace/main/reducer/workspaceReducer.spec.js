@@ -100,6 +100,48 @@ describe('workspaceReducer', () => {
     });
   });
 
+  xit('does not move margin beyond workspace width when moved by component', () => {
+    const
+      com = baseComponentStateGen(ComponentKind.BUTTON, {
+        id: '321',
+        position: {
+          top: 70,
+          left: 400,
+        },
+      }),
+      deps = {
+        wsWidth: 1700,
+        margin: {isLocked: true, width: 1000},
+      },
+      action = moveComponentAction('321', {
+        top: 67,
+        left: -10,
+      });
+
+    let state = rAssocPath([Lit.width], 1700, WorkspaceInitialState);
+    state = rAssocPath([Lit.margin, Lit.isLocked], false, state);
+    state = rAssocPath([Lit.margin, Lit.width], 1000, state);
+    state = rAssocPath([Lit.components], [com], state);
+
+    expect(reducer(state, action, deps)).toEqual({
+      ...WorkspaceInitialState,
+      components: [
+        {
+          ...com,
+          position: {
+            top: 67,
+            left: 0,
+          },
+        },
+      ],
+      width: 1700,
+      margin: {
+        ...WorkspaceInitialState.margin,
+        width: 1700,
+      },
+    });
+  });
+
   it('moves margin by right edge along with components when not locked', () => {
     const
       com = baseComponentStateGen(ComponentKind.BUTTON, {
