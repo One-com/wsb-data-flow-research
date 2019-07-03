@@ -1,9 +1,13 @@
 /* @flow */
 
 import { assertReducerInitialState } from '../../../../specs/assertions/assertReducerInitialState';
-import { WorkspaceStatusInitialState, workspaceStatusReducer as reducer } from './workspaceStatusReducer';
+import { WorkspaceStatusInitialState } from './workspaceStatusReducer';
 import { setWorkspaceWidthAction } from '../width/actions';
 import { WorkspaceStatus } from './constants';
+import { testReducer } from '../../../../specs/testReducer';
+import { workspaceStatusAppSel } from './selectors';
+
+const reducer = testReducer(workspaceStatusAppSel());
 
 describe('workspaceStatusReducer', () => {
   it('resolves initial state', () => {

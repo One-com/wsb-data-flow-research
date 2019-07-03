@@ -6,4 +6,5 @@ export const Lit = {
   isLocked: 'isLocked',
   width: 'width',
   components: 'components',
+  status: 'status',
 };
