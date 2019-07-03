@@ -6,10 +6,11 @@ import {
   makeBaseComponentInitialState,
 } from '../../src/modules/components/base/makeBaseComponentInitialState';
 
-type Partial = $Shape<BaseComponentState>;
+export type BaseComponentStatePartial = $Shape<BaseComponentState>;
 
-export const baseComponentStateGen = (kind: ComponentKindT, partial: Partial): BaseComponentState => ({
-  ...makeBaseComponentInitialState(kind),
-  ...partial,
-  kind,
-});
+export const baseComponentStateGen = (kind: ComponentKindT, partial: BaseComponentStatePartial): BaseComponentState =>
+  ({
+    ...makeBaseComponentInitialState(kind),
+    ...partial,
+    kind,
+  });
