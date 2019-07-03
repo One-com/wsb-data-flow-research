@@ -15,4 +15,4 @@ nbproject
 # Project
 node_modules
 dist
-
+src/.flow-sandbox.js
