@@ -4,10 +4,13 @@ import {assocPath as rAssocPath} from 'ramda';
 import { baseComponentStateGen } from '../../../../../specs/generators/baseComponentStateGen';
 import { ComponentKind } from '../../../components/ComponentKind';
 import { moveComponentAction } from '../../components/actions';
-import {workspaceReducer as reducer} from './workspaceReducer';
 import type { WorkspaceState } from '../types';
 import { dummyTestAction } from '../../../../../specs/actions';
 import { Lit } from '../../../common/Lit';
+import { testReducer } from '../../../../../specs/testReducer';
+import { workspaceAppSel } from '../selectors';
+
+const reducer = testReducer(workspaceAppSel());
 
 describe('workspaceReducer', () => {
   let WorkspaceInitialState: WorkspaceState;
@@ -25,10 +28,6 @@ describe('workspaceReducer', () => {
           left: 400,
         },
       }),
-      deps = {
-        wsWidth: 1700,
-        margin: {isLocked: true, width: 1000},
-      },
       action = moveComponentAction('321', {
         top: 67,
         left: 320,
@@ -39,7 +38,7 @@ describe('workspaceReducer', () => {
     state = rAssocPath([Lit.margin, Lit.width], 1000, state);
     state = rAssocPath([Lit.components], [com], state);
 
-    expect(reducer(state, action, deps)).toEqual({
+    expect(reducer(state, action)).toEqual({
       ...WorkspaceInitialState,
       components: [
         {
@@ -67,10 +66,6 @@ describe('workspaceReducer', () => {
           left: 400,
         },
       }),
-      deps = {
-        wsWidth: 1700,
-        margin: {isLocked: true, width: 1000},
-      },
       action = moveComponentAction('321', {
         top: 67,
         left: 420,
@@ -81,7 +76,7 @@ describe('workspaceReducer', () => {
     state = rAssocPath([Lit.margin, Lit.width], 1000, state);
     state = rAssocPath([Lit.components], [com], state);
 
-    expect(reducer(state, action, deps)).toEqual({
+    expect(reducer(state, action)).toEqual({
       ...WorkspaceInitialState,
       components: [
         {
@@ -155,10 +150,6 @@ describe('workspaceReducer', () => {
           width: 50,
         },
       }),
-      deps = {
-        wsWidth: 1700,
-        margin: {isLocked: true, width: 1000},
-      },
       action = moveComponentAction('321', {
         top: 77,
         left: 1400,
@@ -169,7 +160,7 @@ describe('workspaceReducer', () => {
     state = rAssocPath([Lit.margin, Lit.width], 1000, state);
     state = rAssocPath([Lit.components], [com], state);
 
-    expect(reducer(state, action, deps)).toEqual({
+    expect(reducer(state, action)).toEqual({
       ...WorkspaceInitialState,
       components: [
         {
