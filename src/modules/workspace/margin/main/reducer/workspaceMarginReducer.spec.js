@@ -3,6 +3,7 @@
 import { assertReducerInitialState } from '../../../../../../specs/assertions/assertReducerInitialState';
 import { WorkspaceMarginInitialState, workspaceMarginReducer as reducer } from './workspaceMarginReducer';
 import { toggleWorkspaceMarginAction } from '../actions';
+import { workspaceWidthAppSel } from '../../../width/selectors';
 
 describe('workspaceMarginReducer', () => {
   // TODO: this assertion should be able to accept dependencies
@@ -16,9 +17,12 @@ describe('workspaceMarginReducer', () => {
         ...WorkspaceMarginInitialState,
         isLocked: false,
       },
-      action = toggleWorkspaceMarginAction();
-    
-    expect(reducer(state, action, {'width.wsWidth': 1700})).toEqual({
+      action = toggleWorkspaceMarginAction(),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+      };
+
+    expect(reducer(state, action, deps)).toEqual({
       ...state,
       isLocked: true,
     });
@@ -30,9 +34,12 @@ describe('workspaceMarginReducer', () => {
         ...WorkspaceMarginInitialState,
         isLocked: true,
       },
-      action = toggleWorkspaceMarginAction();
-    
-    expect(reducer(state, action, {'width.wsWidth': 1700})).toEqual({
+      action = toggleWorkspaceMarginAction(),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+      };
+
+    expect(reducer(state, action, deps)).toEqual({
       ...state,
       isLocked: false,
     });
