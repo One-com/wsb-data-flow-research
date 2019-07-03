@@ -8,6 +8,7 @@ import { findComponentById } from '../../workspace/components/functions/findComp
 import { PROPERTIES_PANEL_INITIAL_SPACING } from '../constants';
 
 export const PropertiesPanelInitialState: PropertiesPanelState = {
+  show: false,
   componentId: '',
   dimensions: { width: 0, height: 0 },
   position: {top: 0, left: 0},
@@ -26,6 +27,7 @@ export const propertiesPanelReducer = diReducer(
 
       return {
         ...state,
+        show: true,
         componentId,
         dimensions,
         position: {

@@ -6,6 +6,7 @@ import { SaveStatus } from '../saveStatus/constants';
 import { AppBottomContainerStyle, AppStyle } from './styles';
 import { LeftPanel } from '../leftPanel/LeftPanel';
 import { Workspace } from '../workspace/main/ui/Workspace';
+import { PropertiesPanelContainer } from '../propertiesPanel/ui/PropertiesPanelContainer';
 
 export const App = () => (
   <div style={AppStyle}>
@@ -13,6 +14,7 @@ export const App = () => (
     <div style={AppBottomContainerStyle}>
       <LeftPanel />
       <Workspace />
+      <PropertiesPanelContainer />
     </div>
   </div>
 );

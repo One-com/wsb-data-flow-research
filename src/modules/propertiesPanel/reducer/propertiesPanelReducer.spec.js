@@ -41,6 +41,7 @@ describe('propertiesPanelReducer', () => {
       };
 
     expect(reducer(state, action, deps)).toMatchObject({
+      show: true,
       componentId: '123',
       dimensions: {
         width: 200,
