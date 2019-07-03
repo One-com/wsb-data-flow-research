@@ -42,7 +42,7 @@
     "webpack-dev-server": "^3.7.1"
   },
   "dependencies": {
-    "@sepo27/redux-di": "^1.0.0-alpha",
+    "@sepo27/redux-di": "file:../redux-di/sepo27-redux-di-1.0.0-alpha.tgz",
     "ramda": "^0.26.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
