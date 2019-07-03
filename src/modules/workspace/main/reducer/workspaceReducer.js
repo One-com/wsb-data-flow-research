@@ -8,7 +8,6 @@ import { workspaceWidthReducer } from '../../width/workspaceWidthReducer';
 import { workspaceStatusReducer } from '../../status/workspaceStatusReducer';
 import type { WorkspaceState } from '../types';
 import { MOVE_COMPONENT_ACTION } from '../../components/actions';
-import { pathSelector } from '../../../../lib/functions/pathSelector';
 import { Lit } from '../../../common/Lit';
 
 const workspaceReducerFn = combineReducers({
