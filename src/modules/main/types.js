@@ -2,7 +2,6 @@
 
 import type { Store, Dispatch } from 'redux';
 import type { WorkspaceState } from '../workspace/main/types';
-import type { StrPath } from '../common/commonTypes';
 
 export type AppState = {
   workspace: WorkspaceState,
@@ -17,6 +16,6 @@ export type SelectorPath = Array<string | number>;
 export type AppSel<R: any = any> = {
   (appState: AppState): R,
   _path: SelectorPath,
-  toStrPath: () => StrPath,
+  toStrPath: () => SelectorPath,
   spawn: <R>(path: SelectorPath) => AppSel<R>;
 };
