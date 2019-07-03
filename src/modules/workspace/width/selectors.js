@@ -7,4 +7,4 @@ import type { WorkspaceWidthState } from './types';
 
 export const
   // $FlowFixMe
-  workspaceWidthAppSel: AppSel<WorkspaceWidthState> = workspaceAppSel([Lit.width]);
+  workspaceWidthAppSel: AppSel<WorkspaceWidthState> = workspaceAppSel.spawn([Lit.width]);

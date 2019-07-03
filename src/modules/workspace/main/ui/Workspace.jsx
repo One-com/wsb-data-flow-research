@@ -54,7 +54,7 @@ export class WorkspaceCom extends React.Component<Props> {
 }
 
 const mapStateToProps: any = (appState: AppState) => ({
-  state: workspaceAppSel()(appState),
+  state: workspaceAppSel(appState),
 });
 
 // $FlowFixMe: TODO

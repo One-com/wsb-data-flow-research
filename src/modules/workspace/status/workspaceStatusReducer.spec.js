@@ -7,7 +7,7 @@ import { WorkspaceStatus } from './constants';
 import { testReducer } from '../../../../specs/testReducer';
 import { workspaceStatusAppSel } from './selectors';
 
-const reducer = testReducer(workspaceStatusAppSel());
+const reducer = testReducer(workspaceStatusAppSel);
 
 describe('workspaceStatusReducer', () => {
   it('resolves initial state', () => {

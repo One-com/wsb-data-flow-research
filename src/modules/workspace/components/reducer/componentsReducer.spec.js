@@ -48,7 +48,7 @@ describe('componentsReducer', () => {
       action = addComponentAction(ComponentKind.BUTTON),
       deps = {
         [workspaceWidthAppSel]: 1700,
-        [workspaceMarginAppSel()]: {
+        [workspaceMarginAppSel]: {
           width: 1000,
         },
       };
@@ -220,7 +220,7 @@ describe('componentsReducer', () => {
       }),
       deps = {
         [workspaceWidthAppSel]: 1100,
-        [workspaceMarginAppSel()]: {
+        [workspaceMarginAppSel]: {
           isLocked: false,
           width: 1000,
         },
@@ -253,7 +253,7 @@ describe('componentsReducer', () => {
       }),
       deps = {
         [workspaceWidthAppSel]: 1700,
-        [workspaceMarginAppSel()]: {
+        [workspaceMarginAppSel]: {
           isLocked: true,
           width: 1000,
         },
@@ -290,7 +290,7 @@ describe('componentsReducer', () => {
       }),
       deps = {
         [workspaceWidthAppSel]: 1700,
-        [workspaceMarginAppSel()]: {
+        [workspaceMarginAppSel]: {
           isLocked: true,
           width: 1000,
         },
@@ -319,7 +319,7 @@ describe('componentsReducer', () => {
       state = [com],
       deps = {
         [workspaceWidthAppSel]: 1700,
-        [workspaceMarginAppSel()]: {
+        [workspaceMarginAppSel]: {
           isLocked: false,
           width: 1000,
         },
@@ -356,7 +356,7 @@ describe('componentsReducer', () => {
       state = [com],
       deps = {
         [workspaceWidthAppSel]: 1700,
-        [workspaceMarginAppSel()]: {
+        [workspaceMarginAppSel]: {
           isLocked: false,
           width: 1000,
         },

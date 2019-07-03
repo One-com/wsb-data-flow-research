@@ -6,4 +6,4 @@ import { workspaceAppSel } from '../main/selectors';
 import { Lit } from '../../common/Lit';
 
 // $FlowFixMe
-export const workspaceStatusAppSel = (): AppSel<WorkspaceStatusT> => workspaceAppSel([Lit.status]);
+export const workspaceStatusAppSel: AppSel<WorkspaceStatusT> = workspaceAppSel.spawn([Lit.status]);

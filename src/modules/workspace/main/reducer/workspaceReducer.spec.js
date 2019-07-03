@@ -10,7 +10,7 @@ import { Lit } from '../../../common/Lit';
 import { testReducer } from '../../../../../specs/testReducer';
 import { workspaceAppSel } from '../selectors';
 
-const reducer = testReducer(workspaceAppSel());
+const reducer = testReducer(workspaceAppSel);
 
 describe('workspaceReducer', () => {
   let WorkspaceInitialState: WorkspaceState;

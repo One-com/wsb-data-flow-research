@@ -18,4 +18,5 @@ export type AppSel<R: any = any> = {
   (appState: AppState): R,
   _path: SelectorPath,
   toStrPath: () => StrPath,
+  spawn: <R>(path: SelectorPath) => AppSel<R>;
 };
