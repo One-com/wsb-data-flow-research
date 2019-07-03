@@ -4,14 +4,9 @@ import type { ComponentKindT } from '../../components/types';
 import type { Dimensions } from '../../common/commonTypes';
 import type {Position} from '../../common/commonTypes';
 
-export type AddComponentAction = {
-  type: 'ADD_COMPONENT_ACTION',
-  payload: ComponentKindT,
-};
-
 export const
   ADD_COMPONENT_ACTION = 'ADD_COMPONENT_ACTION',
-  addComponentAction = (kind: ComponentKindT): AddComponentAction => ({
+  addComponentAction = (kind: ComponentKindT) => ({
     type: ADD_COMPONENT_ACTION,
     payload: kind,
   });

@@ -15,3 +15,6 @@ export type Dimensions = {
 export type MapT<K, V> = {[k: K]: V};
 
 export type ReactElementRef<ElementType> = {current: null | React.ElementRef<ElementType>};
+
+type FnReturnT<R, F: (...args: Array<any>) => R> = R;
+export type FnReturn<R> = FnReturnT<*, R>;

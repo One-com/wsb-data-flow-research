@@ -21,9 +21,7 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
     wsWidth: '.width',
     margin: '.margin',
   },
-  // TODO: action type
-  // (components: ComponentsState, action: Object, {wsWidth, margin}: ComponentsDependencies) => {
-  (components: ComponentsState, action: Object, deps: ComponentsDependencies) => {
+  (components: ComponentsState, action: ComponentsAction, deps: ComponentsDependencies) => {
     // TODO: wtf ?
     const {wsWidth, margin} = deps;
 
