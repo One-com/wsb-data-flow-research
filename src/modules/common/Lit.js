@@ -7,4 +7,5 @@ export const Lit = {
   width: 'width',
   components: 'components',
   status: 'status',
+  propertiesPanel: 'propertiesPanel',
 };
