@@ -1,9 +1,13 @@
 /* @flow */
 
 import { assertReducerInitialState } from '../../../../../../specs/assertions/assertReducerInitialState';
-import { WorkspaceMarginInitialState, workspaceMarginReducer as reducer } from './workspaceMarginReducer';
+import { WorkspaceMarginInitialState } from './workspaceMarginReducer';
 import { toggleWorkspaceMarginAction } from '../actions';
 import { workspaceWidthAppSel } from '../../../width/selectors';
+import { testReducer } from '../../../../../../specs/testReducer';
+import { workspaceMarginAppSel } from '../selectors';
+
+const reducer = testReducer(workspaceMarginAppSel());
 
 describe('workspaceMarginReducer', () => {
   // TODO: this assertion should be able to accept dependencies
