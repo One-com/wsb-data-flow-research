@@ -15,3 +15,5 @@ export type Dimensions = {
 export type MapT<K, V> = {[k: K]: V};
 
 export type ReactElementRef<ElementType> = {current: null | React.ElementRef<ElementType>};
+
+export type StrPath = string;
