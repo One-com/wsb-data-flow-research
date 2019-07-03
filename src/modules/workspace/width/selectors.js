@@ -1,7 +1,7 @@
 /* @flow */
 
-import type { AppSel } from '../../main/types';
 import { workspaceAppSel } from '../main/selectors';
+import type { AppSel } from '../../main/types';
 import { Lit } from '../../common/Lit';
 import type { WorkspaceWidthState } from './types';
 

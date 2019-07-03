@@ -2,7 +2,6 @@
 
 import {
   ComponentsInitialState,
-  componentsReducer as reducer,
 } from './componentsReducer';
 import { assertReducerInitialState } from '../../../../../specs/assertions/assertReducerInitialState';
 import {
@@ -18,6 +17,13 @@ import { baseComponentStateGen } from '../../../../../specs/generators/baseCompo
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { TestBench } from '../../../../../specs/bench/TestBench';
 import { BaseComponentInitialPosition } from '../../../components/base/makeBaseComponentInitialState';
+import { testReducer } from '../../../../../specs/testReducer';
+import { workspaceComponentsAppSel } from '../selectors';
+import { workspaceWidthAppSel } from '../../width/selectors';
+import { workspaceMarginAppSel } from '../../margin/main/selectors';
+import { workspaceMarginWidthAppSel } from '../../margin/width/selectors';
+
+const reducer = testReducer(workspaceComponentsAppSel);
 
 describe('componentsReducer', () => {
   let bench: TestBench;
@@ -39,9 +45,15 @@ describe('componentsReducer', () => {
 
     const
       state = [...ComponentsInitialState],
-      action = addComponentAction(ComponentKind.BUTTON);
+      action = addComponentAction(ComponentKind.BUTTON),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginAppSel()]: {
+          width: 1000,
+        },
+      };
 
-    expect(reducer(state, action, {wsWidth: 1700, margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         position: {
@@ -85,9 +97,13 @@ describe('componentsReducer', () => {
 
     const
       state = [...ComponentsInitialState],
-      action = addComponentAction(ComponentKind.BUTTON);
+      action = addComponentAction(ComponentKind.BUTTON),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginWidthAppSel]: 1000,
+      };
 
-    expect(reducer(state, action, {wsWidth: 1700, margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
         position: {
@@ -104,9 +120,13 @@ describe('componentsReducer', () => {
     const
       baseCom = baseComponentStateGen(ComponentKind.BUTTON),
       state = [baseCom],
-      action = addComponentAction(ComponentKind.BUTTON);
+      action = addComponentAction(ComponentKind.BUTTON),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginWidthAppSel]: 900,
+      };
 
-    expect(reducer(state, action, {wsWidth: 1700, margin: {width: 900}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       comRegistry.getInitialState(ComponentKind.BUTTON),
       {
         ...comRegistry.getInitialState(ComponentKind.BUTTON),
@@ -124,9 +144,12 @@ describe('componentsReducer', () => {
         id: '321',
       }),
       state = [com],
-      action = selectComponentAction('321');
+      action = selectComponentAction('321'),
+      deps = {
+        [workspaceMarginWidthAppSel]: 1000,
+      };
 
-    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...com,
         isSelected: true,
@@ -144,9 +167,12 @@ describe('componentsReducer', () => {
         id: '2',
         isSelected: false,
       }),
-      state = [com1, com2];
+      state = [com1, com2],
+      deps = {
+        [workspaceMarginWidthAppSel]: 1000,
+      };
 
-    expect(reducer(state, selectComponentAction('2'), {margin: {width: 1000}})).toEqual([
+    expect(reducer(state, selectComponentAction('2'), deps)).toEqual([
       {
         ...com1,
         isSelected: false,
@@ -165,9 +191,12 @@ describe('componentsReducer', () => {
         isSelected: true,
       }),
       state = [com],
-      action = deselectComponentAction('1');
+      action = deselectComponentAction('1'),
+      deps = {
+        [workspaceMarginWidthAppSel]: 1000,
+      };
 
-    expect(reducer(state, action, {margin: {width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...com,
         isSelected: false,
@@ -188,9 +217,16 @@ describe('componentsReducer', () => {
       action = moveComponentAction('111', {
         top: 255,
         left: 260,
-      });
+      }),
+      deps = {
+        [workspaceWidthAppSel]: 1100,
+        [workspaceMarginAppSel()]: {
+          isLocked: false,
+          width: 1000,
+        },
+      };
 
-    expect(reducer(state, action, {wsWidth: 1100, margin: {isLocked: false, width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...com,
         position: {
@@ -214,9 +250,16 @@ describe('componentsReducer', () => {
       action = moveComponentAction('321', {
         top: 55,
         left: 300,
-      });
+      }),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginAppSel()]: {
+          isLocked: true,
+          width: 1000,
+        },
+      };
 
-    expect(reducer(state, action, {wsWidth: 1700, margin: {isLocked: true, width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...com,
         position: {
@@ -244,9 +287,16 @@ describe('componentsReducer', () => {
       action = moveComponentAction('3', {
         top: 60,
         left: 1400,
-      });
+      }),
+      deps = {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginAppSel()]: {
+          isLocked: true,
+          width: 1000,
+        },
+      };
 
-    expect(reducer(state, action, {wsWidth: 1700, margin: {isLocked: true, width: 1000}})).toEqual([
+    expect(reducer(state, action, deps)).toEqual([
       {
         ...com,
         position: {
@@ -268,8 +318,8 @@ describe('componentsReducer', () => {
       }),
       state = [com],
       deps = {
-        wsWidth: 1700,
-        margin: {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginAppSel()]: {
           isLocked: false,
           width: 1000,
         },
@@ -305,8 +355,8 @@ describe('componentsReducer', () => {
       }),
       state = [com],
       deps = {
-        wsWidth: 1700,
-        margin: {
+        [workspaceWidthAppSel]: 1700,
+        [workspaceMarginAppSel()]: {
           isLocked: false,
           width: 1000,
         },
