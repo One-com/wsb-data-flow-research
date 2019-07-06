@@ -13,6 +13,7 @@ export type AppStore = Store<AppState, *>;
 
 export type SelectorPath = Array<string | number>;
 
+// TODO: reuse from 'redux-di'
 export type AppSel<R: any = any> = {
   (appState: AppState): R,
   _path: SelectorPath,
