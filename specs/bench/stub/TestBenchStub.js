@@ -1,11 +1,13 @@
 /* @flow */
 
 import sinonLib from 'sinon';
-const UuidModule = require('../../src/lib/functions/uuid');
+import { TestBenchStubLocalStorage } from './TestBenchStubLocalStorage';
+const UuidModule = require('../../../src/lib/functions/uuid');
 
 export class TestBenchStub {
   #sinon;
   #$uuid;
+  #$ls;
 
   constructor() {
     this.#sinon = sinonLib.createSandbox();
@@ -24,6 +26,13 @@ export class TestBenchStub {
       if (i > n) i = 1;
       return i++;
     })
+  }
+  
+  get ls() {
+    if (!this.#$ls) {
+      this.#$ls = new TestBenchStubLocalStorage(this.#sinon);
+    }
+    return this.#$ls;
   }
 
   restore() {

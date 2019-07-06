@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --config webpack/webpack.config.js --host 0.0.0.0",
-    "test": "jest src",
+    "test": "jest -c jest.config.json src",
     "flow": "flow status src",
     "flow-restart": "flow stop src && npm run flow",
     "flow-typed:base": "flow-typed -r src -l flow-typed",

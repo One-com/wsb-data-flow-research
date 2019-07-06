@@ -1,0 +1,3 @@
+{
+  "setupFiles": ["<rootDir>/specs/jestSetup.js"]
+}
