@@ -4,18 +4,18 @@ import sinonLib from 'sinon';
 const UuidModule = require('../../src/lib/functions/uuid');
 
 export class TestBenchStub {
-  _sinon;
-  _uuid;
+  #sinon;
+  #$uuid;
 
   constructor() {
-    this._sinon = sinonLib.createSandbox();
+    this.#sinon = sinonLib.createSandbox();
   }
 
   get uuid() {
-    if (!this._uuid) {
-      this._uuid = this._sinon.stub(UuidModule, 'uuid');
+    if (!this.#$uuid) {
+      this.#$uuid = this.#sinon.stub(UuidModule, 'uuid');
     }
-    return this._uuid;
+    return this.#$uuid;
   }
 
   uuidCycle(n: number) {
@@ -27,6 +27,6 @@ export class TestBenchStub {
   }
 
   restore() {
-    this._sinon.restore();
+    this.#sinon.restore();
   }
 }
