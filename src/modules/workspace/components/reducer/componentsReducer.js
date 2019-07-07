@@ -12,6 +12,7 @@ import { comRegistry } from '../../../components/ComponentsRegistry';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { updateComponentById } from '../functions/updateComponentById';
 import { calculateWorkspaceMarginValue } from '../../margin/width/functions/calculateWorkspaceMarginValue';
+import { STORAGE_DATA_RECEIVED_ACTION } from '../../../storage/actions';
 
 export const ComponentsInitialState: ComponentsState = [];
 
@@ -112,6 +113,10 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
         partial: {isSelected: false},
         components,
       });
+    }
+
+    if (action.type === STORAGE_DATA_RECEIVED_ACTION && action.payload) {
+      return action.payload.workspace.components;
     }
 
     return components;

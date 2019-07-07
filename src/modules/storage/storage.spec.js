@@ -3,6 +3,8 @@
 import { TestBench } from '../../../specs/bench/TestBench';
 import { STORAGE_KEY } from './constants';
 import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
+import { componentsGen } from '../../../specs/generators/componentsGen';
+import { workspaceComponentsAppSel } from '../workspace/components/selectors';
 
 describe('storage', () => {
   let bench: TestBench;
@@ -23,7 +25,11 @@ describe('storage', () => {
           width: 999,
           isLocked: true,
         },
-        components: [],
+        components: componentsGen([
+          {
+            id: '1',
+          }
+        ]),
       },
     };
 
@@ -37,5 +43,7 @@ describe('storage', () => {
       width: 999,
       isLocked: true,
     });
+
+    (await bench.agent.assert.appState(workspaceComponentsAppSel)).toHaveLength(1);
   });
 });
