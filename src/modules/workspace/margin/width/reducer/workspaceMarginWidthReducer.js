@@ -33,7 +33,7 @@ export const workspaceMarginWidthReducer = diReducer(
       );
     }
 
-    if (action.type === STORAGE_DATA_RECEIVED_ACTION) {
+    if (action.type === STORAGE_DATA_RECEIVED_ACTION && action.payload) {
       return action.payload.workspace.margin.width;
     }
 
