@@ -1,7 +1,7 @@
 /* @flow */
 
 import { reduxLogger } from '../../dev/reduxLogger';
-import { isNonTestEnv } from '../env/isEnv';
+import { isNonTestEnv } from '../../env/isEnv';
 
 const AppMiddlewares = [];
 
