@@ -8,6 +8,10 @@ const getRndTime = () => Math.round(Math.random() * 500);
 class WsbStorage
 {
   getData<R: Object = Object>(): Promise<R | null> {
+    if (isTestEnv()) {
+      return Promise.resolve(this._getDataFromLocalStorage());
+    }
+
     return new Promise(resolve => setTimeout(
       () => {
         const
@@ -16,8 +20,16 @@ class WsbStorage
 
         resolve(data)
       },
-      isTestEnv() ? 0 : getRndTime(),
+      getRndTime(),
     ));
+  }
+
+  _getDataFromLocalStorage() {
+    const
+      dataRaw = localStorage.getItem(STORAGE_KEY),
+      data = dataRaw && JSON.parse(dataRaw) || null;
+
+    return data;
   }
 }
 

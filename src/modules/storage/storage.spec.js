@@ -3,7 +3,6 @@
 import { TestBench } from '../../../specs/bench/TestBench';
 import { STORAGE_KEY } from './constants';
 import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
-import { wsbStorage } from '../../services/wsbStorage';
 
 describe('storage', () => {
   let bench: TestBench;
@@ -17,8 +16,7 @@ describe('storage', () => {
     bench.restore();
   })
 
-  // TODO
-  xit('loads data upon mount', async () => {
+  it('loads data upon mount', async () => {
     const persistedData = {
       workspace: {
         margin: {
