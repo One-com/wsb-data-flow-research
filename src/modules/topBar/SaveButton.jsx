@@ -1,9 +1,9 @@
 /* @flow */
 
 import React from 'react';
-import { SaveStatus } from '../saveStatus/constants';
+import { SaveStatus } from '../save/constants';
 import { ActiveTopBarButton } from './ActiveTopBarButton';
-import type { SaveStatusT } from '../saveStatus/types';
+import type { SaveStatusT } from '../save/types';
 
 const Style = {
   width: '70px',

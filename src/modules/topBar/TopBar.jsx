@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import type { SaveStatusT } from '../saveStatus/types';
+import type { SaveStatusT } from '../save/types';
 import {
   TopBarContainerStyle,
   TopBarInnerContainerStyle,

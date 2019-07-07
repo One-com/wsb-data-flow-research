@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { TopBar } from '../topBar/TopBar';
-import { SaveStatus } from '../saveStatus/constants';
+import { SaveStatus } from '../save/constants';
 import { AppBottomContainerStyle, AppStyle } from './styles';
 import { LeftPanel } from '../leftPanel/LeftPanel';
 import { Workspace } from '../workspace/main/ui/Workspace';
