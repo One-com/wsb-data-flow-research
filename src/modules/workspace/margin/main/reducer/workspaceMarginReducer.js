@@ -7,6 +7,7 @@ import {
   WorkspaceMarginWidthInitialState,
   workspaceMarginWidthReducer,
 } from '../../width/reducer/workspaceMarginWidthReducer';
+import { STORAGE_DATA_RECEIVED_ACTION } from '../../../../storage/actions';
 
 export const WorkspaceMarginInitialState: WorkspaceMarginState = {
   width: WorkspaceMarginWidthInitialState,
@@ -15,11 +16,18 @@ export const WorkspaceMarginInitialState: WorkspaceMarginState = {
 
 const isLockedReducer = initReducer(
   WorkspaceMarginInitialState.isLocked,
-  (state: boolean, action: Object) => (
-    action.type === TOGGLE_WORKSPACE_MARGIN_LOCK_ACTION
-      ? !state
-      : state
-  ),
+  (state: boolean, action: Object) => {
+
+    if (action.type === TOGGLE_WORKSPACE_MARGIN_LOCK_ACTION) {
+      return !state
+    }
+
+    if (action.type === STORAGE_DATA_RECEIVED_ACTION && action.payload) {
+      return action.payload.workspace.margin.isLocked;
+    }
+
+    return state;
+  },
 );
 
 export const workspaceMarginReducer = diReducer(

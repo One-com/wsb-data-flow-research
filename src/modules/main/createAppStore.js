@@ -12,5 +12,6 @@ export const createAppStore = (
 ): AppStore => createStore(
   appReducer,
   preloadedState,
+  // $FlowFixMe
   composeEnhancers(applyMiddleware(...AppMiddlewares)),
 );

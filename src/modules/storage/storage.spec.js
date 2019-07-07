@@ -3,6 +3,7 @@
 import { TestBench } from '../../../specs/bench/TestBench';
 import { STORAGE_KEY } from './constants';
 import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
+import { wsbStorage } from '../../services/wsbStorage';
 
 describe('storage', () => {
   let bench: TestBench;
@@ -16,7 +17,8 @@ describe('storage', () => {
     bench.restore();
   })
 
-  xit('loads data upon mount', () => {
+  // TODO
+  xit('loads data upon mount', async () => {
     const persistedData = {
       workspace: {
         margin: {
@@ -29,11 +31,11 @@ describe('storage', () => {
 
     bench.stub.ls.getItem
       .withArgs(STORAGE_KEY)
-      .returns(persistedData);
+      .returns(JSON.stringify(persistedData));
 
     bench.agent.mountApp();
 
-    bench.agent.assert.appState(workspaceMarginAppSel).toMatchObject({
+    (await bench.agent.assert.appState(workspaceMarginAppSel)).toMatchObject({
       width: 999,
       isLocked: true,
     });
