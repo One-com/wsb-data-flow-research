@@ -5,8 +5,8 @@ import { TestBenchAgent } from './agent/TestBenchAgent';
 import type { AppState } from '../../src/modules/main/types';
 
 export class TestBench {
-  #$agent: TestBenchAgent;
-  
+  #$agent: TestBenchAgent | null = null;
+
   stub: TestBenchStub;
 
   get agent() {

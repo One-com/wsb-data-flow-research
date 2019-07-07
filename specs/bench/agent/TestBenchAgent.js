@@ -8,9 +8,9 @@ import { TestBenchAgentAssert } from './TestBenchAgentAssert';
 export class TestBenchAgent
 {
   #store: AppStore;
-  
+
   action: TestBenchAgentAction;
-  
+
   assert: TestBenchAgentAssert;
 
   constructor(preloadedState?: AppState = {})
@@ -20,7 +20,7 @@ export class TestBenchAgent
     this.assert = new TestBenchAgentAssert(this.#store);
   }
 
-  mount()
+  mountApp()
   {
     this.action.mount();
   }

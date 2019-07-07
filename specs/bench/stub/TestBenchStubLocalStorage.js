@@ -2,13 +2,12 @@
 
 export class TestBenchStubLocalStorage
 {
-  #sinon;
+  getItem: Object;
+  setItem: Object;
 
-  getItem;
-  setItem;
-
-  constructor(sinon)
+  constructor(sinon: Object)
   {
+    // $FlowFixMe
     this.getItem = sinon.stub(_localStorage, 'getItem');
   }
 }

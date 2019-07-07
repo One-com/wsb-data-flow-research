@@ -1,8 +1,13 @@
 /* @flow */
 
 import { reduxLogger } from '../../dev/reduxLogger';
+import { isNonTestEnv } from '../env/isEnv';
 
-export const AppMiddlewares = [
-  // TODO: apply for dev env only
-  reduxLogger(),
-];
+const AppMiddlewares = [];
+
+// TODO: this should be configurable and custom log implementation for test run
+if (isNonTestEnv()) {
+  AppMiddlewares.push(reduxLogger());
+}
+
+export { AppMiddlewares };
