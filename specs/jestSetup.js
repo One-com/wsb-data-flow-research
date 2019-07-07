@@ -1,10 +1,8 @@
 /* @flow */
 
-Object.defineProperty(window, 'localStorage', {
-  value: {
-    getItem() {
-      return 'stuff'
-    },
-  },
-});
-
+global._localStorage = {
+  getItem() {},
+  setItem() {},
+  removeItem() {},
+  clear() {},
+};
