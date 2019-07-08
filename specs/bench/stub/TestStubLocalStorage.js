@@ -1,6 +1,6 @@
 /* @flow */
 
-export class TestBenchStubLocalStorage
+export class TestStubLocalStorage
 {
   getItem: Object;
   setItem: Object;

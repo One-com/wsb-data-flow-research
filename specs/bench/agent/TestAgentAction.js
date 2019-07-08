@@ -1,13 +1,13 @@
 /* @flow */
 
-import { TestBenchAgentStore } from './TestBenchAgentStore';
+import { TestAgentStore } from './TestAgentStore';
 import { mountAppAction } from '../../../src/modules/main/actions';
 
-export class TestBenchAgentAction
+export class TestAgentAction
 {
-  #store: TestBenchAgentStore;
+  #store: TestAgentStore;
 
-  constructor(store: TestBenchAgentStore)
+  constructor(store: TestAgentStore)
   {
     this.#store = store;
   }

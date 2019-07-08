@@ -1,13 +1,13 @@
 /* @flow */
 
-import { TestBenchStub } from './stub/TestBenchStub';
-import { TestBenchAgent } from './agent/TestBenchAgent';
+import { TestStub } from './stub/TestStub';
+import { TestAgent } from './agent/TestAgent';
 import type { AppState } from '../../src/modules/main/types';
 
 export class TestBench {
-  #$agent: TestBenchAgent | null = null;
+  #$agent: TestAgent | null = null;
 
-  stub: TestBenchStub;
+  stub: TestStub;
 
   get agent() {
     if (this.#$agent) return this.#$agent;
@@ -15,11 +15,11 @@ export class TestBench {
   }
 
   constructor() {
-    this.stub = new TestBenchStub();
+    this.stub = new TestStub();
   }
 
   mountAppAgent(preloadedState?: AppState = {}) {
-    this.#$agent = new TestBenchAgent(preloadedState);
+    this.#$agent = new TestAgent(preloadedState);
   }
 
   restore() {

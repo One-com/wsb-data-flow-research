@@ -1,13 +1,13 @@
 /* @flow */
 
 import type { AppSel } from '../../../src/modules/main/types';
-import { TestBenchAgentStore } from './TestBenchAgentStore';
+import { TestAgentStore } from './TestAgentStore';
 
-export class TestBenchAgentAssert
+export class TestAgentAssert
 {
-  #store: TestBenchAgentStore;
+  #store: TestAgentStore;
 
-  constructor(store: TestBenchAgentStore)
+  constructor(store: TestAgentStore)
   {
     this.#store = store;
   }

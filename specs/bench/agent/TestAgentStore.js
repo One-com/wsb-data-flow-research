@@ -3,7 +3,7 @@
 import type { AppSel, AppState, AppStore } from '../../../src/modules/main/types';
 import { createAppStore } from '../../../src/modules/main/createAppStore';
 
-export class TestBenchAgentStore
+export class TestAgentStore
 {
   #store: AppStore;
   

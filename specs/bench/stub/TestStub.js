@@ -1,12 +1,12 @@
 /* @flow */
 
 import sinonLib from 'sinon';
-import { TestBenchStubLocalStorage } from './TestBenchStubLocalStorage';
+import { TestStubLocalStorage } from './TestStubLocalStorage';
 import type { AppStatePartial } from '../../generators/appStateGen';
 import { appStateGen } from '../../generators/appStateGen';
 const UuidModule = require('../../../src/lib/uuid');
 
-export class TestBenchStub {
+export class TestStub {
   #sinon;
   #$uuid;
   #$ls;
@@ -32,7 +32,7 @@ export class TestBenchStub {
   
   get ls() {
     if (!this.#$ls) {
-      this.#$ls = new TestBenchStubLocalStorage(this.#sinon);
+      this.#$ls = new TestStubLocalStorage(this.#sinon);
     }
     return this.#$ls;
   }
