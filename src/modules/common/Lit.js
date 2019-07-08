@@ -8,4 +8,5 @@ export const Lit = {
   components: 'components',
   status: 'status',
   propertiesPanel: 'propertiesPanel',
+  saveStatus: 'saveStatus',
 };

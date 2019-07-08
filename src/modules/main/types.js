@@ -2,9 +2,11 @@
 
 import type { Store, Dispatch } from 'redux';
 import type { WorkspaceState } from '../workspace/main/types';
+import type { SaveStatusState } from '../save/status/types';
 
 export type AppState = {
   workspace: WorkspaceState,
+  saveStatus: SaveStatusState,
 };
 
 export type AppDispatch = Dispatch<*>;
