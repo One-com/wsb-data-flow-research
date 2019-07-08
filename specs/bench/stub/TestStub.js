@@ -44,6 +44,11 @@ export class TestStub {
         : JSON.stringify(appStateGen(data))
     );
   }
+  
+  setStorageData() {
+    // Just make sure storage is mocked
+    this.ls;
+  }
 
   restore() {
     this.#sinon.restore();

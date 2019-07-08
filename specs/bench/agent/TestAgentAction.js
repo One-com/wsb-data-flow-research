@@ -2,6 +2,7 @@
 
 import { TestAgentStore } from './TestAgentStore';
 import { mountAppAction } from '../../../src/modules/main/actions';
+import { saveAction } from '../../../src/modules/storage/actions';
 
 export class TestAgentAction
 {
@@ -17,4 +18,6 @@ export class TestAgentAction
   }
   
   mount() { this.dispatch(mountAppAction()) }
+  
+  save() { this.dispatch(saveAction()) }
 }

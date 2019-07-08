@@ -5,6 +5,9 @@ import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
 import { componentsGen } from '../../../specs/generators/componentsGen';
 import { workspaceComponentsAppSel } from '../workspace/components/selectors';
 import { getInitialAppState } from '../main/getInitialAppState';
+import { addComponentAction } from '../workspace/components/actions';
+import { ComponentKind } from '../components/ComponentKind';
+import { STORAGE_KEY } from './constants';
 
 describe('storage', () => {
   let bench: TestBench;
@@ -49,5 +52,17 @@ describe('storage', () => {
     });
 
     (await bench.agent.assert.appState(workspaceComponentsAppSel)).toHaveLength(1);
+  });
+
+  it('data is saved', async () => {
+    bench.stub.setStorageData();
+    
+    bench.agent.mountApp();
+    bench.agent.action.dispatch(addComponentAction(ComponentKind.BUTTON));
+    bench.agent.action.save();
+
+    const appState = await bench.agent.store.getState();
+    
+    expect(bench.stub.ls.setItem.calledWith(STORAGE_KEY, JSON.stringify(appState))).toBeTruthy();
   });
 });
