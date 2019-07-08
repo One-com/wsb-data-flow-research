@@ -2,7 +2,7 @@
 
 import sinonLib from 'sinon';
 import { TestBenchStubLocalStorage } from './TestBenchStubLocalStorage';
-const UuidModule = require('../../../src/lib/functions/uuid');
+const UuidModule = require('../../../src/lib/uuid');
 
 export class TestBenchStub {
   #sinon;

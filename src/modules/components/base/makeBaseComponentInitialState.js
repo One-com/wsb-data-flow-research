@@ -2,7 +2,7 @@
 
 import type { ComponentKindT } from '../types';
 import type { BaseComponentState } from './types';
-import { uuid } from '../../../lib/functions/uuid';
+import { uuid } from '../../../lib/uuid';
 
 export const BaseComponentInitialPosition = {
   top: 10,
