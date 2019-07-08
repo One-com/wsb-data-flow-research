@@ -8,9 +8,3 @@ export const
     type: SET_APP_STATE_FROM_STORAGE_ACTION,
     payload: data,
   });
-
-export const
-  SAVE_ACTION = 'SAVE_ACTION',
-  saveAction = () => ({
-    type: SAVE_ACTION,
-  });

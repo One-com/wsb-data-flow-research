@@ -3,7 +3,8 @@
 import type { AppDispatch, AppStore } from '../main/types';
 import { MOUNT_APP_ACTION } from '../main/actions';
 import { wsbStorage } from './wsbStorage';
-import { SAVE_ACTION, setAppStateFromStorageAction } from './actions';
+import { SAVE_ACTION } from '../save/actions';
+import { setAppStateFromStorageAction } from './actions';
 
 export const storageMiddleware = (store: AppStore) => (next: AppDispatch) => (action: Object) => {
   if (action.type === MOUNT_APP_ACTION) {
