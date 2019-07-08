@@ -37,8 +37,12 @@ export class TestBenchStub {
     return this.#$ls;
   }
 
-  getStorageData(data: AppStatePartial) {
-    return this.ls.getItem.returns(JSON.stringify(appStateGen(data)));
+  getStorageData(data: AppStatePartial | null) {
+    return this.ls.getItem.returns(
+      data === null
+        ? null
+        : JSON.stringify(appStateGen(data))
+    );
   }
 
   restore() {

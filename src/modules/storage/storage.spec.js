@@ -1,10 +1,10 @@
 /* @flow */
 
 import { TestBench } from '../../../specs/bench/TestBench';
-import { STORAGE_KEY } from './constants';
 import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
 import { componentsGen } from '../../../specs/generators/componentsGen';
 import { workspaceComponentsAppSel } from '../workspace/components/selectors';
+import { getInitialAppState } from '../main/getInitialAppState';
 
 describe('storage', () => {
   let bench: TestBench;
@@ -17,6 +17,14 @@ describe('storage', () => {
   afterEach(() => {
     bench.restore();
   })
+
+  it('empty storage data results to initial app state', async () => {
+    bench.stub.getStorageData(null);
+
+    bench.agent.mountApp();
+
+    (await bench.agent.assert.appState()).toEqual(getInitialAppState());
+  });
 
   it('data is loaded upon mount', async () => {
     bench.stub.getStorageData({

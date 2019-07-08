@@ -8,7 +8,9 @@ import { setStorageDataAction } from './actions';
 export const storageMiddleware = (store: AppStore) => (next: AppDispatch) => (action: Object) => {
   if (action.type === MOUNT_APP_ACTION) {
     wsbStorage.getData().then(data => {
-      store.dispatch(setStorageDataAction(data));
+      if (data) {
+        store.dispatch(setStorageDataAction(data));
+      }
     });
   }
 

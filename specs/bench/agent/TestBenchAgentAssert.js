@@ -11,7 +11,7 @@ export class TestBenchAgentAssert
     this.#store = store;
   }
 
-  appState(selector: AppSel<*>): Promise<JestExpectType> {
+  appState(selector?: AppSel<*> = s => s): Promise<JestExpectType> {
     return this._getAppState().then(appState => expect(selector(appState)));
   }
 
