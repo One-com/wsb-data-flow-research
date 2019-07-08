@@ -3,13 +3,13 @@
 import type { AppDispatch, AppStore } from '../main/types';
 import { MOUNT_APP_ACTION } from '../main/actions';
 import { wsbStorage } from './wsbStorage';
-import { SAVE_ACTION, setStorageDataAction } from './actions';
+import { SAVE_ACTION, setAppStateFromStorageAction } from './actions';
 
 export const storageMiddleware = (store: AppStore) => (next: AppDispatch) => (action: Object) => {
   if (action.type === MOUNT_APP_ACTION) {
     wsbStorage.get().then(data => {
       if (data) {
-        store.dispatch(setStorageDataAction(data));
+        store.dispatch(setAppStateFromStorageAction(data));
       }
     });
   }

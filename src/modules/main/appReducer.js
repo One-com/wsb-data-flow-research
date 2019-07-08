@@ -7,7 +7,7 @@ import { Lit } from '../common/Lit';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { SET_STORAGE_DATA_ACTION } from '../storage/actions';
+import { SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage/actions';
 import { saveStatusReducer } from '../save/status/saveStatusReducer';
 import { SaveStatus } from '../save/constants';
 
@@ -21,7 +21,7 @@ const appReducerCombined = combineReducers({
 
 // $FlowFixMe
 export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object) => {
-  if (action.type === SET_STORAGE_DATA_ACTION) {
+  if (action.type === SET_APP_STATE_FROM_STORAGE_ACTION) {
     return action.payload;
   }
   

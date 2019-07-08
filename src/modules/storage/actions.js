@@ -3,9 +3,9 @@
 import type { StorageData } from './types';
 
 export const
-  SET_STORAGE_DATA_ACTION = 'SET_STORAGE_DATA_ACTION',
-  setStorageDataAction = (data: StorageData | null) => ({
-    type: SET_STORAGE_DATA_ACTION,
+  SET_APP_STATE_FROM_STORAGE_ACTION = 'SET_APP_STATE_FROM_STORAGE_ACTION',
+  setAppStateFromStorageAction = (data: StorageData | null) => ({
+    type: SET_APP_STATE_FROM_STORAGE_ACTION,
     payload: data,
   });
 
