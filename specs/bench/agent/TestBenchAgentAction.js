@@ -1,13 +1,13 @@
 /* @flow */
 
-import type { AppStore } from '../../../src/modules/main/types';
+import { TestBenchAgentStore } from './TestBenchAgentStore';
 import { mountAppAction } from '../../../src/modules/main/actions';
 
 export class TestBenchAgentAction
 {
-  #store: AppStore;
+  #store: TestBenchAgentStore;
 
-  constructor(store: AppStore)
+  constructor(store: TestBenchAgentStore)
   {
     this.#store = store;
   }

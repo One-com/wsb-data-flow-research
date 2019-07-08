@@ -1,26 +1,18 @@
 /* @flow */
 
-import type { AppSel, AppStore } from '../../../src/modules/main/types';
+import type { AppSel } from '../../../src/modules/main/types';
+import { TestBenchAgentStore } from './TestBenchAgentStore';
 
 export class TestBenchAgentAssert
 {
-  #store: AppStore;
+  #store: TestBenchAgentStore;
 
-  constructor(store: AppStore)
+  constructor(store: TestBenchAgentStore)
   {
     this.#store = store;
   }
 
   appState(selector?: AppSel<*> = s => s): Promise<JestExpectType> {
-    return this._getAppState().then(appState => expect(selector(appState)));
-  }
-
-  _getAppState() {
-    return new Promise(resolve => setTimeout(
-      () => {
-        const appState = this.#store.getState();
-        resolve(appState);
-      },
-    ));
+    return this.#store.getState(selector).then(state => expect(state));
   }
 }

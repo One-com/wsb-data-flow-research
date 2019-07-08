@@ -1,13 +1,13 @@
 /* @flow */
 
-import type { AppState, AppStore } from '../../../src/modules/main/types';
-import { createAppStore } from '../../../src/modules/main/createAppStore';
+import type { AppState } from '../../../src/modules/main/types';
 import { TestBenchAgentAction } from './TestBenchAgentAction';
 import { TestBenchAgentAssert } from './TestBenchAgentAssert';
+import { TestBenchAgentStore } from './TestBenchAgentStore';
 
 export class TestBenchAgent
 {
-  #store: AppStore;
+  store: TestBenchAgentStore;
 
   action: TestBenchAgentAction;
 
@@ -15,9 +15,9 @@ export class TestBenchAgent
 
   constructor(preloadedState?: AppState = {})
   {
-    this.#store = createAppStore(preloadedState);
-    this.action = new TestBenchAgentAction(this.#store);
-    this.assert = new TestBenchAgentAssert(this.#store);
+    this.store = new TestBenchAgentStore(preloadedState);
+    this.action = new TestBenchAgentAction(this.store);
+    this.assert = new TestBenchAgentAssert(this.store);
   }
 
   mountApp()
