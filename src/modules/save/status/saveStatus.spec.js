@@ -39,7 +39,7 @@ describe('saveStatus', () => {
     (await bench.agent.assert.saveStatus()).toBe(SaveStatus.SAVED)
   });
 
-  xit('is SAVED after saving', async () => {
+  it('is SAVED after saving', async () => {
     bench.agent.mountApp();
 
     bench.agent.action.addComponent(ComponentKind.BUTTON);

@@ -7,7 +7,7 @@ import { Lit } from '../common/Lit';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage/actions';
+import { APP_STATE_SAVED_TO_STORAGE_ACTION, SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage/actions';
 import { saveStatusReducer } from '../save/status/saveStatusReducer';
 import { SaveStatus } from '../save/constants';
 
@@ -28,7 +28,13 @@ export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object
   let nextState = appReducerCombined(state, action);
   
   // TODO: this should be just strict equality check ! (seems like redux-di mutates the state is no changes..)
-  if (state && Object.keys(state).length && !rEquals(state, nextState)) {
+  // TODO: this should obviously be refactored ...
+  if (
+    action.type !== APP_STATE_SAVED_TO_STORAGE_ACTION
+    && state
+    && Object.keys(state).length
+    && !rEquals(state, nextState)
+  ) {
     nextState[Lit.saveStatus] = SaveStatus.UNSAVED;
   }
   

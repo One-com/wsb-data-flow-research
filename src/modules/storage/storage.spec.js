@@ -8,6 +8,8 @@ import { getInitialAppState } from '../main/getInitialAppState';
 import { addComponentAction } from '../workspace/components/actions';
 import { ComponentKind } from '../components/ComponentKind';
 import { STORAGE_KEY } from './constants';
+import { Lit } from '../common/Lit';
+import { SaveStatus } from '../save/constants';
 
 describe('storage', () => {
   let bench: TestBench;
@@ -61,8 +63,17 @@ describe('storage', () => {
     bench.agent.action.dispatch(addComponentAction(ComponentKind.BUTTON));
     bench.agent.action.save();
 
-    const appState = await bench.agent.store.getState();
+    const expectedAppStateToSave = await bench.agent.store.getState();
+    expectedAppStateToSave[Lit.saveStatus] = SaveStatus.SAVED;
     
-    expect(bench.stub.ls.setItem.calledWith(STORAGE_KEY, JSON.stringify(appState))).toBeTruthy();
+    // TODO: abstract out to bench
+    const
+      setItemCalls = bench.stub.ls.setItem.getCalls(),
+      [arg1, arg2] = setItemCalls.length && setItemCalls[0]
+        ? setItemCalls[0].args
+        : [null, null];
+    
+    expect(arg1).toEqual(STORAGE_KEY);
+    expect(arg2).toEqual(JSON.stringify(expectedAppStateToSave));
   });
 });
