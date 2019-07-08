@@ -1,7 +1,7 @@
 /* @flow */
 
 export const
-  APP_MOUNT_ACTION = 'APP_MOUNT_ACTION',
-  appMountAction = () => ({
-    type: APP_MOUNT_ACTION,
+  MOUNT_APP_ACTION = 'MOUNT_APP_ACTION',
+  mountAppAction = () => ({
+    type: MOUNT_APP_ACTION,
   });

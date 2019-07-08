@@ -1,7 +1,7 @@
 /* @flow */
 
 import type { AppStore } from '../../../src/modules/main/types';
-import { appMountAction } from '../../../src/modules/main/actions';
+import { mountAppAction } from '../../../src/modules/main/actions';
 
 export class TestBenchAgentAction
 {
@@ -16,5 +16,5 @@ export class TestBenchAgentAction
     this.#store.dispatch(action);
   }
   
-  mount() { this.dispatch(appMountAction()) }
+  mount() { this.dispatch(mountAppAction()) }
 }

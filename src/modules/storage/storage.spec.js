@@ -18,8 +18,8 @@ describe('storage', () => {
     bench.restore();
   })
 
-  it('loads data upon mount', async () => {
-    const persistedData = {
+  it('data is loaded upon mount', async () => {
+    bench.stub.getStorageData({
       workspace: {
         margin: {
           width: 999,
@@ -31,11 +31,7 @@ describe('storage', () => {
           }
         ]),
       },
-    };
-
-    bench.stub.ls.getItem
-      .withArgs(STORAGE_KEY)
-      .returns(JSON.stringify(persistedData));
+    });
 
     bench.agent.mountApp();
 

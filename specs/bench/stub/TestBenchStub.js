@@ -2,6 +2,8 @@
 
 import sinonLib from 'sinon';
 import { TestBenchStubLocalStorage } from './TestBenchStubLocalStorage';
+import type { AppStatePartial } from '../../generators/appStateGen';
+import { appStateGen } from '../../generators/appStateGen';
 const UuidModule = require('../../../src/lib/uuid');
 
 export class TestBenchStub {
@@ -33,6 +35,10 @@ export class TestBenchStub {
       this.#$ls = new TestBenchStubLocalStorage(this.#sinon);
     }
     return this.#$ls;
+  }
+
+  getStorageData(data: AppStatePartial) {
+    return this.ls.getItem.returns(JSON.stringify(appStateGen(data)));
   }
 
   restore() {

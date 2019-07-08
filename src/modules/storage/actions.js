@@ -3,9 +3,9 @@
 import type { StorageData } from './types';
 
 export const
-  STORAGE_DATA_RECEIVED_ACTION = 'STORAGE_DATA_RECEIVED_ACTION',
-  storageDataReceivedAction = (data: StorageData | null) => ({
-    type: STORAGE_DATA_RECEIVED_ACTION,
+  SET_STORAGE_DATA_ACTION = 'SET_STORAGE_DATA_ACTION',
+  setStorageDataAction = (data: StorageData | null) => ({
+    type: SET_STORAGE_DATA_ACTION,
     payload: data,
   });
 

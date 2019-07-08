@@ -7,7 +7,6 @@ import {
   MOVE_RIGHT_WORKSPACE_MARGIN_HANDLE_ACTION,
 } from '../actions';
 import { MIN_WORKSPACE_MARGIN_WIDTH } from '../constants';
-import { STORAGE_DATA_RECEIVED_ACTION } from '../../../../storage/actions';
 
 export const WorkspaceMarginWidthInitialState: WorkspaceMarginWidthState = 1000;
 
@@ -31,10 +30,6 @@ export const workspaceMarginWidthReducer = diReducer(
         Math.min(2 * x - wsWidth, wsWidth),
         MIN_WORKSPACE_MARGIN_WIDTH,
       );
-    }
-
-    if (action.type === STORAGE_DATA_RECEIVED_ACTION && action.payload) {
-      return action.payload.workspace.margin.width;
     }
 
     return width;
