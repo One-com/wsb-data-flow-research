@@ -11,12 +11,15 @@ import { SaveButton } from './SaveButton';
 import { UndoButton } from './UndoButton';
 import { RedoButton } from './RedoButton';
 import { MarginLockButton } from './MarginLockButton';
+import type { AppState } from '../main/types';
+import { saveStatusAppSel } from '../save/selectors';
+import { connectComponent } from '../common/connectComponent';
 
 type Props = {
   saveStatus: SaveStatusT,
 };
 
-export class TopBar extends React.Component<Props> {
+export class TopBarCom extends React.Component<Props> {
   render() {
     const { saveStatus } = this.props;
 
@@ -38,3 +41,11 @@ export class TopBar extends React.Component<Props> {
     );
   }
 }
+
+const mapStateToProps = (appState: AppState) => ({
+  saveStatus: saveStatusAppSel(appState),
+});
+
+export const TopBar = connectComponent(TopBarCom, {
+  mapStateToProps,
+});

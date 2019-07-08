@@ -10,6 +10,7 @@ import type { AppState } from './types';
 import { APP_STATE_SAVED_TO_STORAGE_ACTION, SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage/actions';
 import { saveStatusReducer } from '../save/status/saveStatusReducer';
 import { SaveStatus } from '../save/constants';
+import { SET_WORKSPACE_WIDTH_ACTION } from '../workspace/width/actions';
 
 const appReducerCombined = combineReducers({
   workspace: workspaceReducer,
@@ -31,6 +32,7 @@ export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object
   // TODO: this should obviously be refactored ...
   if (
     action.type !== APP_STATE_SAVED_TO_STORAGE_ACTION
+    && action.type !== SET_WORKSPACE_WIDTH_ACTION
     && state
     && Object.keys(state).length
     && !rEquals(state, nextState)

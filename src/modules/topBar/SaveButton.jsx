@@ -4,6 +4,9 @@ import React from 'react';
 import { SaveStatus } from '../save/constants';
 import { ActiveTopBarButton } from './ActiveTopBarButton';
 import type { SaveStatusT } from '../save/types';
+import { saveAction } from '../save/actions';
+import type { AppDispatch } from '../main/types';
+import { connectComponent } from '../common/connectComponent';
 
 const Style = {
   width: '70px',
@@ -13,12 +16,13 @@ const Style = {
 
 type Props = {
   saveStatus: SaveStatusT,
+  dispatch: AppDispatch,
 };
 
-export class SaveButton extends React.Component<Props> {
+export class SaveButtonCom extends React.Component<Props> {
   onClick = () => {
     if (this.props.saveStatus === SaveStatus.UNSAVED) {
-      console.log('===on save click');
+      this.props.dispatch(saveAction());
     }
   };
 
@@ -36,3 +40,6 @@ export class SaveButton extends React.Component<Props> {
     );
   }
 }
+
+// $FlowFixMe
+export const SaveButton = connectComponent(SaveButtonCom);
