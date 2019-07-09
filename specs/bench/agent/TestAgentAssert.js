@@ -17,7 +17,11 @@ export class TestAgentAssert
   }
 
   actionCalled(actionType: string, expectedShape?: Object) {
-    expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toBeDefined();
+    if (expectedShape) {
+      expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toMatchObject(expectedShape);
+    } else {
+      expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toBeDefined();
+    }
   }
 
   appState(selector?: AppSel<*> = s => s): AssertResult {

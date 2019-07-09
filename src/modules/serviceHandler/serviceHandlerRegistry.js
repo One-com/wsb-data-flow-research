@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { ServiceHandlerRegistryT } from './types';
+import type { ServiceHandlerRegistryNameT, ServiceHandlerRegistryT } from './types';
 
 export const ServiceHandlerRegistryName = {};
 
@@ -10,6 +10,10 @@ export class ServiceHandlerRegistryClass
 
   constructor(list: ServiceHandlerRegistryT) {
     this.#list = list;
+  }
+
+  getService(name: ServiceHandlerRegistryNameT): Object {
+    return this.#list[name];
   }
 }
 

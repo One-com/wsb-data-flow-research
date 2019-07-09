@@ -3,9 +3,11 @@
 import { reduxLogger } from '../../dev/reduxLogger';
 import { isNonTestEnv } from '../../env/isEnv';
 import { storageMiddleware } from '../storage/storageMiddleware';
+import { serviceHandlerMiddleware } from '../serviceHandler/serviceHandlerMiddleware';
 
 const AppMiddlewares = [
   storageMiddleware,
+  serviceHandlerMiddleware,
 ];
 
 // TODO: this should be configurable and custom log implementation for test run

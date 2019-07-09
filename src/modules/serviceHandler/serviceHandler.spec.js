@@ -18,7 +18,7 @@ describe('serviceHandler', () => {
     bench.restore();
   });
 
-  xit('dispatches request action', () => {
+  it('dispatches request action with params', () => {
     class TestService
     {
       getTestStuff() {
@@ -53,11 +53,14 @@ describe('serviceHandler', () => {
         success: 'TEST_SUCCESS_ACTION',
         failure: 'TEST_FAILURE_ACTION',
       },
+      params: ['123'],
     });
 
     bench.agent.mountApp();
     bench.agent.action.dispatch(action);
 
-    bench.agent.assert.actionCalled('TEST_REQUEST_ACTION');
+    bench.agent.assert.actionCalled('TEST_REQUEST_ACTION', {
+      params: ['123'],
+    });
   });
 });

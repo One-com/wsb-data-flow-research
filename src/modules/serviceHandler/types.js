@@ -20,6 +20,7 @@ export type ServiceHandlerActionParams = {|
     success: string,
     failure: string,
   |},
+  params?: Array<any>,
 |};
 
 export type ServiceHandlerAction = $Exact<FnReturn<typeof serviceHandlerAction>>;
