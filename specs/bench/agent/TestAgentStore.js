@@ -7,7 +7,7 @@ import { createAppStore } from '../../../src/modules/main/createAppStore';
 export class TestAgentStore
 {
   #store: AppStore;
-  #dispatchedActions: Array<Action<string>> = [];
+  #$dispatchedActions: Array<Action<string>> = [];
 
   constructor(preloadedState?: AppState = {})
   {
@@ -27,13 +27,15 @@ export class TestAgentStore
     ));
   }
 
+  get dispatchedActions() { return this.#$dispatchedActions }
+
   _storeEnhancer = (createStore: AppStoreCreator): AppStoreCreator => (
     reducer,
     preloadedState,
     enhancer,
   ) => {
     const monitoredReducer = (state, action) => {
-      this.#dispatchedActions.push(action);
+      this.#$dispatchedActions.push(action);
 
       return reducer(state, action);
     }

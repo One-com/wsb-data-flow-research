@@ -15,7 +15,7 @@ export type ServiceHandlerActionParams = {|
     name: ServiceHandlerRegistryNameT,
     method: string,
   |},
-  types: {|
+  actions: {|
     request: string,
     success: string,
     failure: string,

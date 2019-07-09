@@ -16,10 +16,14 @@ export class TestAgentAssert
     this.#store = store;
   }
 
+  actionCalled(actionType: string, expectedShape?: Object) {
+    expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toBeDefined();
+  }
+
   appState(selector?: AppSel<*> = s => s): AssertResult {
     return this.#store.getState(selector).then(state => expect(state));
   }
-  
+
   saveStatus(status: SaveStatusT): AssertResult {
     return this.appState(saveStatusAppSel);
   }
