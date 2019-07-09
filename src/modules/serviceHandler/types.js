@@ -1,22 +1,22 @@
 /* @flow */
 
-import { ServiceHandlerRegistryName } from './serviceHandlerRegistry';
+import { ServiceRegistryName } from './ServiceRegistryIndex';
 import type { FnReturn } from '../common/commonTypes';
-import { serviceHandlerAction } from './actions';
+import { serviceAction } from './actions';
 
-export type ServiceHandlerRegistryNameT = $Values<typeof ServiceHandlerRegistryName>;
+export type ServiceRegistryNameT = $Values<typeof ServiceRegistryName>;
 
-export type ServiceHandlerRegistryT = {
-  [k: ServiceHandlerRegistryNameT]: Object,
+export type ServiceRegistryIndexT = {
+  [k: ServiceRegistryNameT]: Object,
 };
 
-export type ServiceHandlerActionService = {|
-  name: ServiceHandlerRegistryNameT,
+export type ServiceActionService = {|
+  name: ServiceRegistryNameT,
   method: string,
 |};
 
-export type ServiceHandlerActionParams = {|
-  service: ServiceHandlerActionService,
+export type ServiceActionParams = {|
+  service: ServiceActionService,
   actions: {|
     request: string,
     success: string,
@@ -25,9 +25,9 @@ export type ServiceHandlerActionParams = {|
   params?: Array<any>,
 |};
 
-export type InstanceServiceHandlerActionParams = {|
-  ...$Diff<ServiceHandlerActionParams, { service: ServiceHandlerActionService }>,
+export type InstanceServiceActionParams = {|
+  ...$Diff<ServiceActionParams, { service: ServiceActionService }>,
   serviceMethod: string,
 |};
 
-export type ServiceHandlerAction = $Exact<FnReturn<typeof serviceHandlerAction>>;
+export type ServiceAction = $Exact<FnReturn<typeof serviceAction>>;

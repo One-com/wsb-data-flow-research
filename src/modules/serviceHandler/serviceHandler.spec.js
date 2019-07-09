@@ -1,13 +1,11 @@
 /* @flow */
 
 import { TestBench } from '../../../specs/bench/TestBench';
-import { ServiceHandlerRegistryClass } from './serviceHandlerRegistry';
-import { serviceHandlerAction } from './actions';
+import { serviceAction } from './actions';
 
-const ServiceHandlerRegistryModule = require('./serviceHandlerRegistry');
+const ServiceRegistryModule = require('./ServiceRegistryIndex');
 
-// TODO
-xdescribe('serviceHandler', () => {
+describe('serviceHandler', () => {
   let bench: TestBench;
 
   beforeEach(() => {
@@ -30,21 +28,23 @@ xdescribe('serviceHandler', () => {
     const
       tesetService = new TestService(),
       RegistryName = {
+        ...ServiceRegistryModule.ServiceRegistryName,
         TEST_SERVICE: 'testService',
       },
-      Registry = {
+      RegistryIndex = {
+        ...ServiceRegistryModule.ServiceRegistryIndex,
         [RegistryName.TEST_SERVICE]: tesetService,
       };
 
     bench.stub.sinon
-      .stub(ServiceHandlerRegistryModule, 'ServiceHandlerRegistryName')
+      .stub(ServiceRegistryModule, 'ServiceRegistryName')
       .value(RegistryName);
 
     bench.stub.sinon
-      .stub(ServiceHandlerRegistryModule, 'serviceHandlerRegistry')
-      .value(new ServiceHandlerRegistryClass(Registry));
+      .stub(ServiceRegistryModule, 'ServiceRegistryIndex')
+      .value(RegistryIndex);
 
-    const action = serviceHandlerAction({
+    const action = serviceAction({
       service: {
         name: RegistryName.TEST_SERVICE,
         method: tesetService.getTestStuff.name,
@@ -79,21 +79,23 @@ xdescribe('serviceHandler', () => {
     const
       tesetService = new TestService(),
       RegistryName = {
+        ...ServiceRegistryModule.ServiceRegistryName,
         TEST_SERVICE: 'testService',
       },
-      Registry = {
+      RegistryIndex = {
+        ...ServiceRegistryModule.ServiceRegistryIndex,
         [RegistryName.TEST_SERVICE]: tesetService,
       };
 
     bench.stub.sinon
-      .stub(ServiceHandlerRegistryModule, 'ServiceHandlerRegistryName')
+      .stub(ServiceRegistryModule, 'ServiceRegistryName')
       .value(RegistryName);
 
     bench.stub.sinon
-      .stub(ServiceHandlerRegistryModule, 'serviceHandlerRegistry')
-      .value(new ServiceHandlerRegistryClass(Registry));
+      .stub(ServiceRegistryModule, 'ServiceRegistryIndex')
+      .value(RegistryIndex);
 
-    const action = serviceHandlerAction({
+    const action = serviceAction({
       service: {
         name: RegistryName.TEST_SERVICE,
         method: tesetService.getTestStuff.name,
@@ -132,21 +134,23 @@ xdescribe('serviceHandler', () => {
     const
       tesetService = new TestService(),
       RegistryName = {
+        ...ServiceRegistryModule.ServiceRegistryName,
         TEST_SERVICE: 'testService',
       },
-      Registry = {
+      RegistryIndex = {
+        ...ServiceRegistryModule.ServiceRegistryIndex,
         [RegistryName.TEST_SERVICE]: tesetService,
       };
 
     bench.stub.sinon
-      .stub(ServiceHandlerRegistryModule, 'ServiceHandlerRegistryName')
+      .stub(ServiceRegistryModule, 'ServiceRegistryName')
       .value(RegistryName);
 
     bench.stub.sinon
-      .stub(ServiceHandlerRegistryModule, 'serviceHandlerRegistry')
-      .value(new ServiceHandlerRegistryClass(Registry));
+      .stub(ServiceRegistryModule, 'ServiceRegistryIndex')
+      .value(RegistryIndex);
 
-    const action = serviceHandlerAction({
+    const action = serviceAction({
       service: {
         name: RegistryName.TEST_SERVICE,
         method: tesetService.getTestStuff.name,

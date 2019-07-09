@@ -1,11 +1,11 @@
 /* @flow */
 
 import type { AppDispatch, AppStore } from '../main/types';
-import type { ServiceHandlerAction } from './types';
+import type { ServiceAction } from './types';
 import { SERVICE_HANDLER_ACTION } from './actions';
-import { serviceHandlerRegistry } from './serviceHandlerRegistry';
+import { serviceRegistry } from './serviceRegistry';
 
-export const serviceHandlerMiddleware = (store: AppStore) => (next: AppDispatch) => (action: ServiceHandlerAction) => {
+export const serviceHandlerMiddleware = (store: AppStore) => (next: AppDispatch) => (action: ServiceAction) => {
   if (action.type !== SERVICE_HANDLER_ACTION) {
     return next(action);
   }
@@ -17,7 +17,7 @@ export const serviceHandlerMiddleware = (store: AppStore) => (next: AppDispatch)
       params = [],
     } = action;
 
-  const service = serviceHandlerRegistry.getService(serviceInfo.name);
+  const service = serviceRegistry.getService(serviceInfo.name);
 
   store.dispatch({
     type: actions.request,

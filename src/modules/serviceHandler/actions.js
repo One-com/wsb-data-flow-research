@@ -1,20 +1,20 @@
 /* @flow */
 
-import type { InstanceServiceHandlerActionParams, ServiceHandlerActionParams } from './types';
-import { ServiceHandlerRegistryName } from './serviceHandlerRegistry';
+import type { InstanceServiceActionParams, ServiceActionParams } from './types';
+import { ServiceRegistryName } from './ServiceRegistryIndex';
 
 export const
   SERVICE_HANDLER_ACTION = 'SERVICE_HANDLER_ACTION',
-  serviceHandlerAction = (params: ServiceHandlerActionParams) => ({
+  serviceAction = (params: ServiceActionParams) => ({
     type: SERVICE_HANDLER_ACTION,
     ...params,
   });
 
 export const
-  storageAction = ({serviceMethod, ...params}: InstanceServiceHandlerActionParams) =>
-    serviceHandlerAction({
+  storageServiceAction = ({serviceMethod, ...params}: InstanceServiceActionParams) =>
+    serviceAction({
       service: {
-        name: ServiceHandlerRegistryName.STORAGE,
+        name: ServiceRegistryName.STORAGE,
         method: serviceMethod,
       },
       ...params,
