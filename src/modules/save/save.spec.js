@@ -9,7 +9,7 @@ import { addComponentAction } from '../workspace/components/actions';
 import { ComponentKind } from '../components/ComponentKind';
 import { Lit } from '../common/Lit';
 import { SaveStatus } from '../save_deprecated/constants';
-import { STORAGE_KEY } from '../storage_deprecated/constants';
+import { APP_STATE_SAVE_KEY } from './constants';
 
 describe('save', () => {
   let bench: TestBench;
@@ -73,7 +73,7 @@ describe('save', () => {
         ? setItemCalls[0].args
         : [null, null];
 
-    expect(arg1).toEqual(STORAGE_KEY);
+    expect(arg1).toEqual(APP_STATE_SAVE_KEY);
     expect(arg2).toEqual(JSON.stringify(expectedAppStateToSave));
   });
 });

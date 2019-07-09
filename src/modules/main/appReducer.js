@@ -7,10 +7,9 @@ import { Lit } from '../common/Lit';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { APP_STATE_SAVED_TO_STORAGE_ACTION } from '../storage_deprecated/actions';
 import { SaveStatus } from '../save_deprecated/constants';
 import { SET_WORKSPACE_WIDTH_ACTION } from '../workspace/width/actions';
-import { FETCH_APP_STATE_SUCCESS_ACTION } from '../save/actions';
+import { FETCH_APP_STATE_SUCCESS_ACTION, PUT_APP_STATE_SUCCESS_ACTION } from '../save/actions';
 
 const appReducerCombined = combineReducers({
   workspace: workspaceReducer,
@@ -30,7 +29,7 @@ export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object
   // TODO: this should be just strict equality check ! (seems like redux-di mutates the state is no changes..)
   // TODO: this should obviously be refactored ...
   if (
-    action.type !== APP_STATE_SAVED_TO_STORAGE_ACTION
+    action.type !== PUT_APP_STATE_SUCCESS_ACTION
     && action.type !== SET_WORKSPACE_WIDTH_ACTION
     && state
     && Object.keys(state).length
