@@ -9,6 +9,7 @@ import { ComponentKind } from '../../components/ComponentKind';
 import { Lit } from '../../common/Lit';
 import { SaveStatus } from '../../save/status/constants';
 import { APP_STATE_SAVE_KEY } from './constants';
+import { WorkspaceStatus } from '../../workspace/status/constants';
 
 describe('save', () => {
   let bench: TestBench;
@@ -22,7 +23,7 @@ describe('save', () => {
     bench.restore();
   })
 
-  // TODO
+  // TODO: needs app initial state proper generator
   xit('empty data results to initial app state', async () => {
     bench.stub.getStorageData(null);
 
@@ -65,6 +66,7 @@ describe('save', () => {
 
     const expectedAppStateToSave = await bench.agent.store.getState();
     expectedAppStateToSave[Lit.saveStatus] = SaveStatus.SAVED;
+    expectedAppStateToSave[Lit.workspace][Lit.status] = WorkspaceStatus.READY;
 
     // TODO: abstract out to bench
     const

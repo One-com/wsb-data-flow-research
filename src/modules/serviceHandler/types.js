@@ -15,6 +15,8 @@ export type ServiceActionService = {|
   method: string,
 |};
 
+export type ServiceActionArgs = Array<any>;
+
 export type ServiceActionParams = {|
   service: ServiceActionService,
   actions: {|
@@ -22,7 +24,7 @@ export type ServiceActionParams = {|
     success: string,
     failure: string,
   |},
-  params?: Array<any>,
+  params?: ServiceActionArgs,
 |};
 
 export type InstanceServiceActionParams = {|

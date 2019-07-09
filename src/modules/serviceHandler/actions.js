@@ -1,6 +1,6 @@
 /* @flow */
 
-import type { InstanceServiceActionParams, ServiceActionParams } from './types';
+import type { InstanceServiceActionParams, ServiceActionArgs, ServiceActionParams } from './types';
 import { ServiceRegistryName } from './ServiceRegistryIndex';
 
 export const
@@ -9,6 +9,21 @@ export const
     type: SERVICE_HANDLER_ACTION,
     ...params,
   });
+
+export const
+  serviceRequestAction = (type: string, params: ServiceActionArgs) => ({
+    type,
+    params,
+  });
+
+export const
+  serviceResultAction = (
+    input: {
+      type: string,
+      response: Object | string | number | boolean,
+      params?: ServiceActionArgs,
+    }
+  ) => input;
 
 export const
   storageServiceAction = ({serviceMethod, ...params}: InstanceServiceActionParams) =>
