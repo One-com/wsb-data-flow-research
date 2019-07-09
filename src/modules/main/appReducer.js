@@ -7,7 +7,7 @@ import { Lit } from '../common/Lit';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { APP_STATE_SAVED_TO_STORAGE_ACTION, SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage/actions';
+import { APP_STATE_SAVED_TO_STORAGE_ACTION, SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage_deprecated/actions';
 import { saveStatusReducer } from '../save_deprecated/status/saveStatusReducer';
 import { SaveStatus } from '../save_deprecated/constants';
 import { SET_WORKSPACE_WIDTH_ACTION } from '../workspace/width/actions';
