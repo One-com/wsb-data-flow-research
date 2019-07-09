@@ -21,5 +21,8 @@ describe('serviceHandler', () => {
       .value({
         TEST_SERVICE: 'testService',
       });
+
+    bench.mountAppAgent();
+    bench.agent.mountApp();
   });
 });

@@ -1,7 +1,7 @@
 /* @flow */
 
-import { createStore, applyMiddleware, compose, type StoreEnhancer } from 'redux';
-import type { AppState, AppStore } from './types';
+import { createStore, applyMiddleware, compose } from 'redux';
+import type { AppState, AppStore, AppStoreEnhancer } from './types';
 import { appReducer } from './appReducer';
 import { AppMiddlewares } from './AppMiddlewares';
 
@@ -9,7 +9,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const createAppStore = (
   preloadedState?: AppState = {},
-  enhancers?: Array<StoreEnhancer<AppState, Object>> = [],
+  enhancers?: Array<AppStoreEnhancer> = [],
 ): AppStore => createStore(
   appReducer,
   preloadedState,

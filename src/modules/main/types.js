@@ -3,6 +3,7 @@
 import type { Store, Dispatch } from 'redux';
 import type { WorkspaceState } from '../workspace/main/types';
 import type { SaveStatusState } from '../save/status/types';
+import type { StoreCreator, StoreEnhancer } from 'redux';
 
 export type AppState = {
   workspace: WorkspaceState,
@@ -12,6 +13,10 @@ export type AppState = {
 export type AppDispatch = Dispatch<*>;
 
 export type AppStore = Store<AppState, *>;
+
+export type AppStoreEnhancer = StoreEnhancer<AppState, *>;
+
+export type AppStoreCreator = StoreCreator<AppState, *>;
 
 export type SelectorPath = Array<string | number>;
 
