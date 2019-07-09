@@ -1,8 +1,11 @@
 /* @flow */
 
 import type { ServiceHandlerRegistryNameT, ServiceHandlerRegistryT } from './types';
+import { storageService } from '../../services/storageService';
 
-export const ServiceHandlerRegistryName = {};
+export const ServiceHandlerRegistryName = {
+  STORAGE: 'storage',
+};
 
 export class ServiceHandlerRegistryClass
 {
@@ -17,4 +20,6 @@ export class ServiceHandlerRegistryClass
   }
 }
 
-export const serviceHandlerRegistry = new ServiceHandlerRegistryClass({});
+export const serviceHandlerRegistry = new ServiceHandlerRegistryClass({
+  [ServiceHandlerRegistryName.STORAGE]: storageService,
+});
