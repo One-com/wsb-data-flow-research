@@ -15,6 +15,8 @@ export class TestStub {
     this.#sinon = sinonLib.createSandbox();
   }
 
+  get sinon() { return this.#sinon }
+
   get uuid() {
     if (!this.#$uuid) {
       this.#$uuid = this.#sinon.stub(UuidModule, 'uuid');
@@ -29,7 +31,7 @@ export class TestStub {
       return i++;
     })
   }
-  
+
   get ls() {
     if (!this.#$ls) {
       this.#$ls = new TestStubLocalStorage(this.#sinon);
@@ -44,7 +46,7 @@ export class TestStub {
         : JSON.stringify(appStateGen(data))
     );
   }
-  
+
   setStorageData() {
     // Just make sure storage is mocked
     this.ls;
