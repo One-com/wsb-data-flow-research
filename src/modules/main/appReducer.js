@@ -1,12 +1,13 @@
 /* @flow */
 
-import {equals as rEquals} from 'ramda';
-import {combineReducers} from '@sepo27/redux-di';
+import { combineReducers } from '@sepo27/redux-di';
 import type {Reducer} from 'redux';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { FETCH_APP_STATE_SUCCESS_ACTION, PUT_APP_STATE_SUCCESS_ACTION } from '../save/main/actions';
+import { FETCH_APP_STATE_SUCCESS_ACTION } from '../save/main/actions';
+import { Lit } from '../common/Lit';
+import { saveStatusReducer } from '../save/status/saveStatusReducer';
 
 const appReducerCombined = combineReducers({
   workspace: workspaceReducer,
@@ -23,17 +24,11 @@ export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object
 
   let nextState = appReducerCombined(state, action);
 
-  // TODO: this should be just strict equality check ! (seems like redux-di mutates the state is no changes..)
-  // TODO: this should obviously be refactored ...
-  // if (
-  //   action.type !== PUT_APP_STATE_SUCCESS_ACTION
-  //   && action.type !== SET_WORKSPACE_WIDTH_ACTION
-  //   && state
-  //   && Object.keys(state).length
-  //   && !rEquals(state, nextState)
-  // ) {
-  //   nextState[Lit.saveStatus] = SaveStatus.UNSAVED;
-  // }
+  const saveStatusState = state === undefined ? undefined : state[Lit.saveStatus];
+  nextState[Lit.saveStatus] = saveStatusReducer(saveStatusState, action, {
+    prevAppState: state,
+    nextAppState: nextState,
+  });
 
   return nextState;
 };
