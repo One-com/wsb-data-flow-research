@@ -2,7 +2,7 @@
 
 import { TestAgentStore } from './TestAgentStore';
 import { mountAppAction } from '../../../src/modules/main/actions';
-import { saveAction } from '../../../src/modules/save_deprecated/actions';
+import { saveAction } from '../../../src/modules/save/main/actions';
 import type { ComponentKindT } from '../../../src/modules/components/types';
 import { addComponentAction } from '../../../src/modules/workspace/components/actions';
 

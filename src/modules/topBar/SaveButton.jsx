@@ -1,10 +1,10 @@
 /* @flow */
 
 import React from 'react';
-import { SaveStatus } from '../save_deprecated/constants';
+import { SaveStatus } from '../save/status/constants';
 import { ActiveTopBarButton } from './ActiveTopBarButton';
-import type { SaveStatusT } from '../save_deprecated/types';
-import { saveAction } from '../save_deprecated/actions';
+import type { SaveStatusT } from '../save/status/types';
+import { saveAction } from '../save/main/actions';
 import type { AppDispatch } from '../main/types';
 import { connectComponent } from '../common/connectComponent';
 

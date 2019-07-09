@@ -8,7 +8,7 @@ import { workspaceComponentsAppSel } from '../../workspace/components/selectors'
 import { addComponentAction } from '../../workspace/components/actions';
 import { ComponentKind } from '../../components/ComponentKind';
 import { Lit } from '../../common/Lit';
-import { SaveStatus } from '../../save_deprecated/constants';
+import { SaveStatus } from '../../save/status/constants';
 import { APP_STATE_SAVE_KEY } from './constants';
 
 describe('save', () => {

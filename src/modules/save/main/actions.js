@@ -6,6 +6,12 @@ import { APP_STATE_SAVE_KEY } from './constants';
 import type { AppState } from '../../main/types';
 
 export const
+  SAVE_ACTION = 'SAVE_ACTION',
+  saveAction = () => ({
+    type: SAVE_ACTION,
+  });
+
+export const
   FETCH_APP_STATE_REQUEST_ACTION = 'FETCH_APP_STATE_REQUEST_ACTION',
   FETCH_APP_STATE_SUCCESS_ACTION = 'FETCH_APP_STATE_SUCCESS_ACTION',
   FETCH_APP_STATE_FAILURE_ACTION = 'FETCH_APP_STATE_FAILURE_ACTION',

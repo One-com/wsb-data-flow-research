@@ -3,3 +3,5 @@
 import { SaveStatus } from './constants';
 
 export type SaveStatusT = $Values<typeof SaveStatus>;
+
+export type SaveStatusState = SaveStatusT;

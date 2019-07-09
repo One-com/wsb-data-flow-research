@@ -1,7 +1,7 @@
 /* @flow */
 
 import React from 'react';
-import type { SaveStatusT } from '../save_deprecated/types';
+import type { SaveStatusT } from '../save/status/types';
 import {
   TopBarContainerStyle,
   TopBarInnerContainerStyle,
@@ -12,7 +12,7 @@ import { UndoButton } from './UndoButton';
 import { RedoButton } from './RedoButton';
 import { MarginLockButton } from './MarginLockButton';
 import type { AppState } from '../main/types';
-import { saveStatusAppSel } from '../save_deprecated/selectors';
+import { saveStatusAppSel } from '../save/status/selectors';
 import { connectComponent } from '../common/connectComponent';
 
 type Props = {
