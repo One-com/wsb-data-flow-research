@@ -19,11 +19,12 @@ const appReducerCombined = combineReducers({
 // $FlowFixMe
 export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object) => {
   if (action.type === FETCH_APP_STATE_SUCCESS_ACTION && action.response) {
-    return action.response;
+    return {...state, ...action.response};
   }
 
   let nextState = appReducerCombined(state, action);
 
+  // TODO: extend redux-di to handle prev / next deps and access app state
   const saveStatusState = state === undefined ? undefined : state[Lit.saveStatus];
   nextState[Lit.saveStatus] = saveStatusReducer(saveStatusState, action, {
     prevAppState: state,

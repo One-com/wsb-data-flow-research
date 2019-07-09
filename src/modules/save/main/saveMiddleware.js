@@ -13,7 +13,7 @@ export const saveMiddleware = (store: AppStore) => (next: AppDispatch) => (actio
   }
 
   if (action.type === SAVE_ACTION) {
-    const appStateToSave = store.getState();
+    const appStateToSave = {...store.getState()};
     appStateToSave[Lit.saveStatus] = SaveStatus.SAVED;
 
     store.dispatch(putAppStateAction(appStateToSave));

@@ -7,7 +7,11 @@ import { getSavableAppState } from '../main/getSavableAppState';
 
 export const SaveStatusInitialState: SaveStatusState = SaveStatus.SAVED;
 
-export const saveStatusReducer = (state: SaveStatusState | typeof undefined, action: Object, deps: SaveStatusDependencies) => {
+export const saveStatusReducer = (
+  state: SaveStatusState | typeof undefined,
+  action: Object,
+  deps: SaveStatusDependencies,
+) => {
   if (state === undefined) return SaveStatusInitialState;
 
   const { prevAppState, nextAppState } = deps;

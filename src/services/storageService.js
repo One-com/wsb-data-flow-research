@@ -11,7 +11,7 @@ class WsbStorage
   get<R: Object = Object>(key: string): Promise<R | null> {
     return this._promisify(() => {
       const val = this.#storage.getItem(key);
-      return val === null ? null : JSON.parse(val);
+      return val === undefined || val === null ? null : JSON.parse(val);
     });
   }
 

@@ -1,6 +1,5 @@
 /* @flow */
 
-import { getInitialAppState } from '../../main/getInitialAppState';
 import { TestBench } from '../../../../specs/bench/TestBench';
 import { componentsGen } from '../../../../specs/generators/componentsGen';
 import { workspaceMarginAppSel } from '../../workspace/margin/main/selectors';
