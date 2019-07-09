@@ -26,7 +26,7 @@ describe('save', () => {
     (await bench.agent.assert.appState()).toEqual(getInitialAppState());
   });
 
-  xit('data is loaded upon mount', async () => {
+  it('data is loaded upon mount', async () => {
     bench.stub.getStorageData({
       workspace: {
         margin: {

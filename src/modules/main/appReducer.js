@@ -7,23 +7,22 @@ import { Lit } from '../common/Lit';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { APP_STATE_SAVED_TO_STORAGE_ACTION, SET_APP_STATE_FROM_STORAGE_ACTION } from '../storage_deprecated/actions';
-import { saveStatusReducer } from '../save_deprecated/status/saveStatusReducer';
+import { APP_STATE_SAVED_TO_STORAGE_ACTION } from '../storage_deprecated/actions';
 import { SaveStatus } from '../save_deprecated/constants';
 import { SET_WORKSPACE_WIDTH_ACTION } from '../workspace/width/actions';
+import { FETCH_APP_STATE_SUCCESS_ACTION } from '../save/actions';
 
 const appReducerCombined = combineReducers({
   workspace: workspaceReducer,
   propertiesPanel: propertiesPanelReducer,
-  [Lit.saveStatus]: saveStatusReducer,
 }, {
   isRoot: true,
 });
 
 // $FlowFixMe
 export const appReducer: Reducer<AppState, *> = (state: AppState, action: Object) => {
-  if (action.type === SET_APP_STATE_FROM_STORAGE_ACTION) {
-    return action.payload;
+  if (action.type === FETCH_APP_STATE_SUCCESS_ACTION && action.response) {
+    return action.response;
   }
 
   let nextState = appReducerCombined(state, action);

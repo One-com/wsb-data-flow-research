@@ -9,7 +9,10 @@ class WsbStorage
   #storage: Object = localStorage;
 
   get<R: Object = Object>(key: string): Promise<R | null> {
-    return this._promisify(() => this.#storage.getItem(key));
+    return this._promisify(() => {
+      const val = this.#storage.getItem(key);
+      return val === null ? null : JSON.parse(val);
+    });
   }
 
   set(key: string, val: any): Promise<*> {

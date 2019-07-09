@@ -16,6 +16,7 @@ export class ServiceHandlerRegistryClass
   }
 
   getService(name: ServiceHandlerRegistryNameT): Object {
+    console.log('===getService', this.#list)
     return this.#list[name];
   }
 }
