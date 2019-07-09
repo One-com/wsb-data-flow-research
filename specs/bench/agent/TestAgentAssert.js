@@ -17,11 +17,13 @@ export class TestAgentAssert
   }
 
   actionCalled(actionType: string, expectedShape?: Object) {
-    if (expectedShape) {
-      expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toMatchObject(expectedShape);
-    } else {
-      expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toBeDefined();
-    }
+    return this._await(() => {
+      if (expectedShape) {
+        expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toMatchObject(expectedShape);
+      } else {
+        expect(this.#store.dispatchedActions.find(a => a.type === actionType)).toBeDefined();
+      }
+    })
   }
 
   appState(selector?: AppSel<*> = s => s): AssertResult {
@@ -30,5 +32,12 @@ export class TestAgentAssert
 
   saveStatus(status: SaveStatusT): AssertResult {
     return this.appState(saveStatusAppSel);
+  }
+
+  _await(cb?: Function) {
+    return new Promise<*>(resolve => setTimeout(() => {
+      if (cb) cb();
+      resolve();
+    }));
   }
 }

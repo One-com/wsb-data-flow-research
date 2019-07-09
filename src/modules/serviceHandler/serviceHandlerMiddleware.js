@@ -14,7 +14,7 @@ export const serviceHandlerMiddleware = (store: AppStore) => (next: AppDispatch)
     {
       service: serviceInfo,
       actions,
-      params,
+      params = [],
     } = action;
 
   const service = serviceHandlerRegistry.getService(serviceInfo.name);
@@ -23,4 +23,11 @@ export const serviceHandlerMiddleware = (store: AppStore) => (next: AppDispatch)
     type: actions.request,
     params,
   });
+
+  service[serviceInfo.method](...params)
+    .then(response => store.dispatch({
+      type: actions.success,
+      params,
+      response,
+    }));
 };
