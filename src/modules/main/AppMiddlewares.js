@@ -2,7 +2,7 @@
 
 import { reduxLogger } from '../../dev/reduxLogger';
 import { isNonTestEnv } from '../../env/isEnv';
-import { saveMiddleware } from '../save/saveMiddleware';
+import { saveMiddleware } from '../save/main/saveMiddleware';
 import { serviceHandlerMiddleware } from '../serviceHandler/serviceHandlerMiddleware';
 
 const AppMiddlewares = [

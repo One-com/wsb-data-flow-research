@@ -6,7 +6,7 @@ import type {Reducer} from 'redux';
 import { workspaceReducer } from '../workspace/main/reducer/workspaceReducer';
 import { propertiesPanelReducer } from '../propertiesPanel/reducer/propertiesPanelReducer';
 import type { AppState } from './types';
-import { FETCH_APP_STATE_SUCCESS_ACTION, PUT_APP_STATE_SUCCESS_ACTION } from '../save/actions';
+import { FETCH_APP_STATE_SUCCESS_ACTION, PUT_APP_STATE_SUCCESS_ACTION } from '../save/main/actions';
 
 const appReducerCombined = combineReducers({
   workspace: workspaceReducer,

@@ -1,9 +1,9 @@
 /* @flow */
 
-import { storageServiceAction } from '../serviceHandler/actions';
-import { storageService } from '../../services/storageService';
+import { storageServiceAction } from '../../serviceHandler/actions';
+import { storageService } from '../../../services/storageService';
 import { APP_STATE_SAVE_KEY } from './constants';
-import type { AppState } from '../main/types';
+import type { AppState } from '../../main/types';
 
 export const
   FETCH_APP_STATE_REQUEST_ACTION = 'FETCH_APP_STATE_REQUEST_ACTION',

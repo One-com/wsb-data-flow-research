@@ -4,7 +4,7 @@ import sinonLib from 'sinon';
 import { TestStubLocalStorage } from './TestStubLocalStorage';
 import type { AppStatePartial } from '../../generators/appStateGen';
 import { appStateGen } from '../../generators/appStateGen';
-import { APP_STATE_SAVE_KEY } from '../../../src/modules/save/constants';
+import { APP_STATE_SAVE_KEY } from '../../../src/modules/save/main/constants';
 const UuidModule = require('../../../src/lib/uuid');
 
 export class TestStub {

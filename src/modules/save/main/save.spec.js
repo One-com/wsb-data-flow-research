@@ -1,14 +1,14 @@
 /* @flow */
 
-import { getInitialAppState } from '../main/getInitialAppState';
-import { TestBench } from '../../../specs/bench/TestBench';
-import { componentsGen } from '../../../specs/generators/componentsGen';
-import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
-import { workspaceComponentsAppSel } from '../workspace/components/selectors';
-import { addComponentAction } from '../workspace/components/actions';
-import { ComponentKind } from '../components/ComponentKind';
-import { Lit } from '../common/Lit';
-import { SaveStatus } from '../save_deprecated/constants';
+import { getInitialAppState } from '../../main/getInitialAppState';
+import { TestBench } from '../../../../specs/bench/TestBench';
+import { componentsGen } from '../../../../specs/generators/componentsGen';
+import { workspaceMarginAppSel } from '../../workspace/margin/main/selectors';
+import { workspaceComponentsAppSel } from '../../workspace/components/selectors';
+import { addComponentAction } from '../../workspace/components/actions';
+import { ComponentKind } from '../../components/ComponentKind';
+import { Lit } from '../../common/Lit';
+import { SaveStatus } from '../../save_deprecated/constants';
 import { APP_STATE_SAVE_KEY } from './constants';
 
 describe('save', () => {
