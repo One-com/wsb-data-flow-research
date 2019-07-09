@@ -6,7 +6,7 @@ import { componentsGen } from '../../../specs/generators/componentsGen';
 import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
 import { workspaceComponentsAppSel } from '../workspace/components/selectors';
 
-describe('persistence', () => {
+describe('save', () => {
   let bench: TestBench;
 
   beforeEach(() => {
