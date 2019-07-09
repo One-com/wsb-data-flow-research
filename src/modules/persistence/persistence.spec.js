@@ -3,7 +3,7 @@
 import { getInitialAppState } from '../main/getInitialAppState';
 import { TestBench } from '../../../specs/bench/TestBench';
 
-describe('save', () => {
+describe('persistence', () => {
   let bench: TestBench;
 
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('save', () => {
     bench.restore();
   })
 
-  it('empty storage data results to initial app state', async () => {
+  it('empty data results to initial app state', async () => {
     bench.stub.getStorageData(null);
 
     bench.agent.mountApp();
