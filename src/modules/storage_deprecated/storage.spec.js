@@ -11,7 +11,7 @@ import { STORAGE_KEY } from './constants';
 import { Lit } from '../common/Lit';
 import { SaveStatus } from '../save_deprecated/constants';
 
-describe('storage', () => {
+xdescribe('storage', () => {
   let bench: TestBench;
 
   beforeEach(() => {

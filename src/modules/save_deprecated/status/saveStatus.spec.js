@@ -5,7 +5,7 @@ import { SaveStatus } from '../constants';
 import { ComponentKind } from '../../components/ComponentKind';
 import { dummyTestAction } from '../../../../specs/actions';
 
-describe('saveStatus', () => {
+xdescribe('saveStatus', () => {
   let bench: TestBench;
 
   beforeEach(() => {

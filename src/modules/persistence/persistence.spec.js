@@ -2,6 +2,9 @@
 
 import { getInitialAppState } from '../main/getInitialAppState';
 import { TestBench } from '../../../specs/bench/TestBench';
+import { componentsGen } from '../../../specs/generators/componentsGen';
+import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
+import { workspaceComponentsAppSel } from '../workspace/components/selectors';
 
 describe('persistence', () => {
   let bench: TestBench;
@@ -21,5 +24,30 @@ describe('persistence', () => {
     bench.agent.mountApp();
 
     (await bench.agent.assert.appState()).toEqual(getInitialAppState());
+  });
+
+  xit('data is loaded upon mount', async () => {
+    bench.stub.getStorageData({
+      workspace: {
+        margin: {
+          width: 999,
+          isLocked: true,
+        },
+        components: componentsGen([
+          {
+            id: '1',
+          }
+        ]),
+      },
+    });
+
+    bench.agent.mountApp();
+
+    (await bench.agent.assert.appState(workspaceMarginAppSel)).toMatchObject({
+      width: 999,
+      isLocked: true,
+    });
+
+    (await bench.agent.assert.appState(workspaceComponentsAppSel)).toHaveLength(1);
   });
 });

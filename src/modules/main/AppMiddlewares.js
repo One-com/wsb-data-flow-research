@@ -2,11 +2,9 @@
 
 import { reduxLogger } from '../../dev/reduxLogger';
 import { isNonTestEnv } from '../../env/isEnv';
-import { storageMiddleware } from '../storage_deprecated/storageMiddleware';
 import { serviceHandlerMiddleware } from '../serviceHandler/serviceHandlerMiddleware';
 
 const AppMiddlewares = [
-  storageMiddleware,
   serviceHandlerMiddleware,
 ];
 
