@@ -5,6 +5,11 @@ import { TestBench } from '../../../specs/bench/TestBench';
 import { componentsGen } from '../../../specs/generators/componentsGen';
 import { workspaceMarginAppSel } from '../workspace/margin/main/selectors';
 import { workspaceComponentsAppSel } from '../workspace/components/selectors';
+import { addComponentAction } from '../workspace/components/actions';
+import { ComponentKind } from '../components/ComponentKind';
+import { Lit } from '../common/Lit';
+import { SaveStatus } from '../save_deprecated/constants';
+import { STORAGE_KEY } from '../storage_deprecated/constants';
 
 describe('save', () => {
   let bench: TestBench;
@@ -49,5 +54,26 @@ describe('save', () => {
     });
 
     (await bench.agent.assert.appState(workspaceComponentsAppSel)).toHaveLength(1);
+  });
+
+  it('data is saved', async () => {
+    bench.stub.setStorageData();
+
+    bench.agent.mountApp();
+    bench.agent.action.dispatch(addComponentAction(ComponentKind.BUTTON));
+    bench.agent.action.save();
+
+    const expectedAppStateToSave = await bench.agent.store.getState();
+    expectedAppStateToSave[Lit.saveStatus] = SaveStatus.SAVED;
+
+    // TODO: abstract out to bench
+    const
+      setItemCalls = bench.stub.ls.setItem.getCalls(),
+      [arg1, arg2] = setItemCalls.length && setItemCalls[0]
+        ? setItemCalls[0].args
+        : [null, null];
+
+    expect(arg1).toEqual(STORAGE_KEY);
+    expect(arg2).toEqual(JSON.stringify(expectedAppStateToSave));
   });
 });

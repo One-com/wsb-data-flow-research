@@ -16,7 +16,7 @@ class WsbStorage
   }
 
   set(key: string, val: any): Promise<*> {
-    return this._promisify(() => this.#storage.setItem(key, val));
+    return this._promisify(() => this.#storage.setItem(key, JSON.stringify(val)));
   }
 
   _promisify(fn: Function) {
