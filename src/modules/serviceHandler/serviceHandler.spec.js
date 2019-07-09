@@ -116,4 +116,57 @@ describe('serviceHandler', () => {
       },
     });
   });
+
+  it('dispatches failure action with params & response', async () => {
+    class TestService
+    {
+      getTestStuff() {
+        return Promise.reject({
+          ok: false,
+          error: 'Failure :(',
+        });
+      }
+    }
+
+    const
+      tesetService = new TestService(),
+      RegistryName = {
+        TEST_SERVICE: 'testService',
+      },
+      Registry = {
+        [RegistryName.TEST_SERVICE]: tesetService,
+      };
+
+    bench.stub.sinon
+      .stub(ServiceHandlerRegistryModule, 'ServiceHandlerRegistryName')
+      .value(RegistryName);
+
+    bench.stub.sinon
+      .stub(ServiceHandlerRegistryModule, 'serviceHandlerRegistry')
+      .value(new ServiceHandlerRegistryClass(Registry));
+
+    const action = serviceHandlerAction({
+      service: {
+        name: RegistryName.TEST_SERVICE,
+        method: tesetService.getTestStuff.name,
+      },
+      actions: {
+        request: 'TEST_REQUEST_ACTION',
+        success: 'TEST_SUCCESS_ACTION',
+        failure: 'TEST_FAILURE_ACTION',
+      },
+      params: ['111'],
+    });
+
+    bench.agent.mountApp();
+    bench.agent.action.dispatch(action);
+
+    await bench.agent.assert.actionCalled('TEST_FAILURE_ACTION', {
+      params: ['111'],
+      response: {
+        ok: false,
+        error: 'Failure :(',
+      },
+    });
+  });
 });

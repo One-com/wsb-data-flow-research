@@ -29,5 +29,10 @@ export const serviceHandlerMiddleware = (store: AppStore) => (next: AppDispatch)
       type: actions.success,
       params,
       response,
+    }))
+    .catch(response => store.dispatch({
+      type: actions.failure,
+      params,
+      response,
     }));
 };
