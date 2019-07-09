@@ -2,8 +2,8 @@
 
 import type { AppSel } from '../../../src/modules/main/types';
 import { TestAgentStore } from './TestAgentStore';
-import type { SaveStatusT } from '../../../src/modules/save/types';
-import { saveStatusAppSel } from '../../../src/modules/save/selectors';
+import type { SaveStatusT } from '../../../src/modules/save_deprecated/types';
+import { saveStatusAppSel } from '../../../src/modules/save_deprecated/selectors';
 
 type AssertResult = Promise<JestExpectType>;
 

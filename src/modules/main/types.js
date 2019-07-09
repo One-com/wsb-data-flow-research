@@ -2,7 +2,7 @@
 
 import type { Store, Dispatch } from 'redux';
 import type { WorkspaceState } from '../workspace/main/types';
-import type { SaveStatusState } from '../save/status/types';
+import type { SaveStatusState } from '../save_deprecated/status/types';
 import type { StoreCreator, StoreEnhancer } from 'redux';
 
 export type AppState = {
