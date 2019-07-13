@@ -1,6 +1,6 @@
 /* @flow */
 
-import { diReducer } from '@sepo27/redux-di';
+import { diReducer, DiSelector } from '@sepo27/redux-di';
 import type { Reducer } from 'redux';
 import type { ComponentsAction, ComponentsDependencies, ComponentsState } from '../types';
 import {
@@ -19,7 +19,11 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
   [],
   {
     wsWidth: '.width',
-    margin: '.margin',
+    margin: new DiSelector('.margin', {
+      predicate: ({dependency: margin, action}) => (
+        !(action.type === MOVE_COMPONENT_ACTION && !margin.isLocked)
+      ),
+    }),
   },
   (components: ComponentsState, action: ComponentsAction, deps: ComponentsDependencies) => {
     // TODO: wtf ?
