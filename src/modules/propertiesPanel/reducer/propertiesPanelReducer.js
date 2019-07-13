@@ -17,7 +17,9 @@ export const PropertiesPanelInitialState: PropertiesPanelState = {
 export const propertiesPanelReducer = diReducer(
   PropertiesPanelInitialState,
   {
-    components: new DiSelector('@workspace', (ws: WorkspaceState) => ws.components),
+    components: new DiSelector('@workspace', {
+      select: (ws: WorkspaceState) => ws.components,
+    }),
   },
   (state: PropertiesPanelState, action: Object, {components}) => {
     if (action.type === SHOW_PROPERTIES_PANEL_ACTION) {
