@@ -7,15 +7,24 @@ import {
   MOVE_RIGHT_WORKSPACE_MARGIN_HANDLE_ACTION,
 } from '../actions';
 import { MIN_WORKSPACE_MARGIN_WIDTH } from '../constants';
+import type { WorkspaceMarginAction } from '../actions';
 
 export const WorkspaceMarginWidthInitialState: WorkspaceMarginWidthState = 1000;
+
+/**
+ * TODO: export types from redux-di.
+ *
+ * Should be like this:
+ *
+ * export diReducer<WorkspaceMarginWidthState, WorkspaceMarginAction, WorkspaceMarginDependencies>
+ */
 
 export const workspaceMarginWidthReducer = diReducer(
   WorkspaceMarginWidthInitialState,
   {
     wsWidth: '@workspace.width',
   },
-  (width: WorkspaceMarginWidthState, action: Object, {wsWidth}) => {
+  (width: WorkspaceMarginWidthState, action: WorkspaceMarginAction, {wsWidth}) => {
     if (action.type === MOVE_LEFT_WORKSPACE_MARGIN_HANDLE_ACTION) {
       const {payload: left} = action;
       return Math.max(
