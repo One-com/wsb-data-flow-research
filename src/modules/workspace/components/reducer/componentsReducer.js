@@ -11,7 +11,6 @@ import {
 import { comRegistry } from '../../../components/ComponentsRegistry';
 import { NEW_COMPONENT_POSITION_SHIFT_DISTANCE } from './constants';
 import { updateComponentById } from '../functions/updateComponentById';
-import { calculateWorkspaceMarginValue } from '../../margin/width/functions/calculateWorkspaceMarginValue';
 
 export const ComponentsInitialState: ComponentsState = [];
 
@@ -67,42 +66,6 @@ export const componentsReducer: Reducer<ComponentsState, ComponentsAction> = diR
         partial: {isSelected: true},
         otherComPartial: {isSelected: false},
         components,
-      });
-    }
-
-    if (action.type === MOVE_COMPONENT_ACTION) {
-      const
-        {payload: {id: comId, position: inPosition}} = action,
-        margin = calculateWorkspaceMarginValue(deps.margin.width, wsWidth);
-
-      return updateComponentById({
-        id: comId,
-        partial: com => {
-          const
-            maxLeft = margin + deps.margin.width - com.dimensions.width,
-            left = deps.margin.isLocked
-              ? Math.min(
-                Math.max(inPosition.left, margin),
-                maxLeft,
-              )
-              : Math.max(
-                Math.min(
-                  inPosition.left,
-                  wsWidth - com.dimensions.width,
-                ),
-                0,
-              ),
-            position = {
-              top: inPosition.top,
-              left,
-            };
-
-          return {
-            ...com,
-            position,
-          };
-        },
-        components
       });
     }
 
